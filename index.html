@@ -5,9 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Personal Blog</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/11.1.1/marked.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/marked/11.1.1/marked.min.js">
     <style>
-        /* All your existing styles remain exactly the same */
         @import url('https://fonts.cdnfonts.com/css/sf-pro-display');
 
         :root {
@@ -19,40 +18,172 @@
             --glass-border: rgba(255, 255, 255, 0.2);
         }
 
-        /* ... (keeping all your existing styles) ... */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'SF Pro Display', sans-serif;
+            transition: all 0.3s ease;
+        }
 
-        /* Adding styles for individual post view */
-        .single-post {
+        body {
+            background-color: var(--dark-bg);
+            color: var(--dark-fg);
+            background-image: url('/assets/dark-bg.png');
+            background-size: cover;
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+
+        body.light-mode {
+            background-color: var(--light-bg);
+            color: var(--light-fg);
+            background-image: url('/assets/light-bg.jpg');
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header Styles */
+        header {
             backdrop-filter: blur(10px);
             background: var(--glass-bg);
-            padding: 30px;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .home-icon {
+            font-size: 24px;
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toggle-slider {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: #333;
+            border-radius: 30px;
+            cursor: pointer;
+        }
+
+        .slider-icon {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            width: 20px;
+            height: 20px;
+            background: #fff;
+            border-radius: 50%;
+            transition: transform 0.3s;
+        }
+
+        .light-mode .slider-icon {
+            transform: translateX(30px);
+        }
+
+        /* Labels */
+        .labels {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .label {
+            padding: 5px 15px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            cursor: pointer;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .label.active {
+            background: var(--dark-fg);
+            color: var(--dark-bg);
+        }
+
+        /* Blog Posts */
+        .posts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .post {
+            backdrop-filter: blur(10px);
+            background: var(--glass-bg);
+            padding: 20px;
             border-radius: 15px;
             border: 1px solid var(--glass-border);
-            margin-bottom: 30px;
+            animation: slideUp 0.5s ease;
         }
 
-        .single-post img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 10px;
-            margin: 20px 0;
-        }
-
-        .single-post-content {
-            line-height: 1.8;
-        }
-
-        .single-post-content h1,
-        .single-post-content h2,
-        .single-post-content h3 {
-            margin: 25px 0 15px;
-        }
-
-        .single-post-content p {
+        .post-header {
             margin-bottom: 15px;
         }
 
-        .back-button {
+        .post-cover {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .post-title {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .post-meta {
+            display: flex;
+            gap: 15px;
+            font-size: 0.9em;
+            color: inherit;
+            opacity: 0.8;
+        }
+
+        .post-tags {
+            display: flex;
+            gap: 8px;
+            margin: 10px 0;
+        }
+
+        .tag {
+            font-size: 0.8em;
+            padding: 3px 8px;
+            border-radius: 12px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+        }
+
+        .post-excerpt {
+            margin: 15px 0;
+            line-height: 1.6;
+        }
+
+        .read-more {
             display: inline-block;
             color: inherit;
             text-decoration: none;
@@ -60,12 +191,94 @@
             border-radius: 20px;
             background: var(--glass-bg);
             border: 1px solid var(--glass-border);
-            margin-bottom: 20px;
+            transition: all 0.3s ease;
         }
 
-        .back-button:hover {
+        .read-more:hover {
             background: var(--dark-fg);
             color: var(--dark-bg);
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            background: var(--glass-bg);
+            border-radius: 15px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .social-links a {
+            color: inherit;
+            font-size: 24px;
+            transition: transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-3px);
+        }
+
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 40px;
+            font-size: 1.2em;
+        }
+
+        .error {
+            text-align: center;
+            padding: 40px;
+            color: #ff4444;
+            backdrop-filter: blur(10px);
+            background: var(--glass-bg);
+            border-radius: 15px;
+            border: 1px solid var(--glass-border);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+
+            .post {
+                margin-bottom: 15px;
+            }
+
+            .post-meta {
+                flex-wrap: wrap;
+            }
         }
     </style>
 </head>
@@ -94,10 +307,8 @@
         </header>
 
         <main>
-            <div id="content">
-                <div class="posts">
-                    <div class="loading">Loading posts...</div>
-                </div>
+            <div class="posts">
+                <div class="loading">Loading posts...</div>
             </div>
         </main>
 
@@ -132,79 +343,6 @@
             body.classList.add('light-mode');
         }
 
-        // Handle navigation
-        function handleNavigation() {
-            const path = window.location.pathname;
-            if (path === '/') {
-                showPosts();
-            } else if (path.startsWith('/blog/')) {
-                const slug = path.split('/blog/')[1];
-                showSinglePost(slug);
-            }
-        }
-
-        // Show single post
-        async function showSinglePost(slug) {
-            const contentDiv = document.getElementById('content');
-            contentDiv.innerHTML = '<div class="loading">Loading post...</div>';
-
-            try {
-                // First, get the post metadata from posts.json
-                const response = await fetch('/blog/posts.json');
-                const data = await response.json();
-                const postMeta = data.posts.find(post => post.slug === slug);
-
-                if (!postMeta) {
-                    throw new Error('Post not found');
-                }
-
-                // Then, fetch the actual post content
-                const postResponse = await fetch(`/blog/posts/${slug}.md`);
-                const postContent = await postResponse.text();
-
-                contentDiv.innerHTML = `
-                    <a href="/" class="back-button">
-                        <i class="fas fa-arrow-left"></i> Back to Posts
-                    </a>
-                    <article class="single-post">
-                        <div class="post-header">
-                            ${postMeta.coverImage ? `<img src="${postMeta.coverImage}" alt="${postMeta.title}" class="post-cover">` : ''}
-                            <h1 class="post-title">${postMeta.title}</h1>
-                            <div class="post-meta">
-                                <span class="post-date">
-                                    <i class="far fa-calendar"></i>
-                                    ${new Date(postMeta.date).toLocaleDateString()}
-                                </span>
-                                <span class="post-author">
-                                    <i class="far fa-user"></i>
-                                    ${postMeta.author}
-                                </span>
-                                <span class="post-reading-time">
-                                    <i class="far fa-clock"></i>
-                                    ${postMeta.readingTime}
-                                </span>
-                            </div>
-                        </div>
-                        <div class="post-tags">
-                            ${postMeta.tags.map(tag => `
-                                <span class="tag">${tag}</span>
-                            `).join('')}
-                        </div>
-                        <div class="single-post-content">
-                            ${marked.parse(postContent)}
-                        </div>
-                    </article>
-                `;
-            } catch (error) {
-                contentDiv.innerHTML = `
-                    <div class="error">
-                        <p>Error loading post. Please try again later.</p>
-                        <p>Error details: ${error.message}</p>
-                    </div>
-                `;
-            }
-        }
-
         // Filter posts by tag
         function filterPosts(tag) {
             currentTag = tag;
@@ -213,6 +351,7 @@
                 : allPosts.filter(post => post.tags.includes(tag));
             displayPosts(filteredPosts);
 
+            // Update active label
             document.querySelectorAll('.label').forEach(label => {
                 label.classList.toggle('active', label.dataset.tag === tag);
             });
@@ -253,13 +392,13 @@
                         `).join('')}
                     </div>
                     <p class="post-excerpt">${post.excerpt}</p>
-                    <a href="/blog/${post.slug}" class="read-more" onclick="showSinglePost('${post.slug}'); return false;">Read More</a>
+                    <a href="/blog/${post.slug}" class="read-more">Read More</a>
                 </article>
             `).join('');
         }
 
-        // Show posts list
-        async function showPosts() {
+        // Load blog posts
+        async function loadBlogPosts() {
             try {
                 const response = await fetch('/blog/posts.json');
                 const data = await response.json();
@@ -286,11 +425,9 @@
             }
         }
 
-        // Handle browser navigation
-        window.addEventListener('popstate', handleNavigation);
-
-        // Initial load
-        document.addEventListener('DOMContentLoaded', handleNavigation);
+        // Load posts when the page loads
+        document.addEventListener('DOMContentLoaded', loadBlogPosts);
     </script>
 </body>
 </html>
+
