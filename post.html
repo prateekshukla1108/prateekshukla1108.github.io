@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Post</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your main CSS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.0.2/marked.min.js"></script>
+    <style>
+        /* Include any additional styles specific to post display here */
+        body {
+            background-color: var(--dark-bg);
+            color: var(--dark-fg);
+        }
+        .post {
+            margin: 20px auto;
+            padding: 20px;
+            background: var(--glass-bg);
+            border-radius: 15px;
+            border: 1px solid var(--glass-border);
+        }
+        h1, h2 {
+            font-weight: bold;
+        }
+        p {
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <a href="/" class="home-icon"><i class="fas fa-home"></i></a>
+            </div>
+        </header>
+        <main id="post-content" class="post">
+            Loading post...
+        </main>
+    </div>
+
+    <script>
+        async function loadPost(slug) {
+            try {
+                const response = await fetch(`/blog/post/${slug}.md`);
+                if (!response.ok) throw new Error('Failed to load post');
+                const markdown = await response.text();
+                const htmlContent = marked.parse(markdown);
+                document.getElementById('post-content').innerHTML = htmlContent;
+            } catch (error) {
+                console.error('Error loading post:', error);
+                document.getElementById('post-content').innerHTML = '<p>Error loading post. Please try again later.</p>';
+            }
+        }
+
+        // Extract slug from URL and load the post
+        const urlParams = new URLSearchParams(window.location.search);
+        const slug = urlParams.get('slug');
+        if (slug) {
+            loadPost(slug);
+        } else {
+            document.getElementById('post-content').innerHTML = '<p>No post specified.</p>';
+        }
+    </script>
+</body>
+</html>
+

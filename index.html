@@ -402,7 +402,7 @@
                         `).join('')}
                     </div>
                     <p class="post-excerpt">${post.excerpt}</p>
-                    <a href="javascript:void(0)" onclick="handlePostClick('${post.slug}')" class="read-more">Read More</a>
+                    <a href="post.html?slug=${post.slug}" class="read-more">Read More</a>
                 </article>
             `).join('');
         }
