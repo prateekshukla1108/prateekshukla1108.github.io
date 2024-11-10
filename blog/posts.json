@@ -1,0 +1,16 @@
+{
+  "posts": [
+    {
+      "id": "first-post",
+      "title": "Understanding Artificial Intelligence",
+      "date": "2024-11-10",
+      "author": "Your Name",
+      "tags": ["AI", "Technology"],
+      "excerpt": "An exploration of modern AI systems and their impact on society...",
+      "coverImage": "/assets/images/ai-cover.jpg",
+      "readingTime": "5 min",
+      "slug": "understanding-artificial-intelligence",
+      "path": "/blog/posts/understanding-artificial-intelligence.md"
+    }
+  ]
+}
