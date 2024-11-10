@@ -1,14 +1,14 @@
 {
   "posts": [
     {
-      "slug": "ai",
+      "slug": "my-first-post",
       "title": "My First Post",
       "date": "2024-01-01",
       "author": "Your Name",
       "readingTime": "5 min read",
       "tags": ["AI", "Philosophy"],
       "excerpt": "A brief excerpt of the post...",
-      "coverImage": "/assets/images/ai" // optional
+      "coverImage": "/assets/images/ai-cover.jpg" // optional
     }
     // ... more posts
   ]
