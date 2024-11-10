@@ -101,13 +101,33 @@
            animation:fadIn(0.5s ease);
         }
 
-        /* Additional styles omitted for brevity */
+        /* Posts styling */
+        .posts {
+          display:grid;
+          grid-template-columns:auto-fit,minmax(300px,1fr);
+          gap:.5rem
+       }
+
+       .post {
+          backdrop-filter:bgblur(10px);
+          background:variables(glass-bg);
+          padding:.5rem;
+          border-radius:.5rem;
+          border:variables(glass-border);
+       }
+
+       /* Additional styles for post elements */
+       .post-title {
+          font-size:.9rem
+       }
+
+       /* Additional styles omitted for brevity */
 
     </style>
 </head>
 <body>
     <div class="container">
-        <header>
+      <header>
           <div class="header-content">
               <a href="/" class="home-icon">
                   <i class="fas fa-home"></i>
