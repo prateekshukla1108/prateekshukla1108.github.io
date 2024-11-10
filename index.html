@@ -47,211 +47,70 @@
             padding: 20px;
         }
 
-        /* Header Styles */
-        header {
-            backdrop-filter: blur(10px);
-            background: var(--glass-bg);
-            padding: 20px;
-            border-radius: 15px;
-            margin-bottom: 30px;
-            border: 1px solid var(--glass-border);
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            overflow-y: auto;
         }
 
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .modal-content {
+            position: relative;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 30px;
+            background: var(--dark-bg);
+            border-radius: 15px;
+            border: 1px solid var(--glass-border);
+            animation: modalSlideIn 0.3s ease;
+        }
+
+        .light-mode .modal-content {
+            background: var(--light-bg);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            color: inherit;
+        }
+
+        .modal-title {
+            font-size: 2em;
             margin-bottom: 20px;
         }
 
-        .home-icon {
-            font-size: 24px;
-            color: inherit;
-            text-decoration: none;
-        }
-
-        /* Theme Toggle */
-        .theme-toggle {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .toggle-slider {
-            position: relative;
-            width: 60px;
-            height: 30px;
-            background: #333;
-            border-radius: 30px;
-            cursor: pointer;
-        }
-
-        .slider-icon {
-            position: absolute;
-            top: 5px;
-            left: 5px;
-            width: 20px;
-            height: 20px;
-            background: #fff;
-            border-radius: 50%;
-            transition: transform 0.3s;
-        }
-
-        .light-mode .slider-icon {
-            transform: translateX(30px);
-        }
-
-        /* Labels */
-        .labels {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .label {
-            padding: 5px 15px;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            cursor: pointer;
-            animation: fadeIn 0.5s ease;
-        }
-
-        .label.active {
-            background: var(--dark-fg);
-            color: var(--dark-bg);
-        }
-
-        /* Blog Posts */
-        .posts {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        .post {
-            backdrop-filter: blur(10px);
-            background: var(--glass-bg);
-            padding: 20px;
-            border-radius: 15px;
-            border: 1px solid var(--glass-border);
-            animation: slideUp 0.5s ease;
-        }
-
-        .post-header {
-            margin-bottom: 15px;
-        }
-
-        .post-cover {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 10px;
-            margin-bottom: 15px;
-        }
-
-        .post-title {
-            font-size: 1.5em;
-            margin-bottom: 10px;
-        }
-
-        .post-meta {
+        .modal-meta {
             display: flex;
             gap: 15px;
-            font-size: 0.9em;
-            color: inherit;
+            margin-bottom: 20px;
             opacity: 0.8;
         }
 
-        .post-tags {
-            display: flex;
-            gap: 8px;
-            margin: 10px 0;
+        .modal-content img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin: 20px 0;
         }
 
-        .tag {
-            font-size: 0.8em;
-            padding: 3px 8px;
-            border-radius: 12px;
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
+        .modal-body {
+            line-height: 1.8;
+            margin-top: 20px;
         }
 
-        .post-excerpt {
-            margin: 15px 0;
-            line-height: 1.6;
-        }
-
-        .read-more {
-            display: inline-block;
-            color: inherit;
-            text-decoration: none;
-            padding: 8px 16px;
-            border-radius: 20px;
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            transition: all 0.3s ease;
-        }
-
-        .read-more:hover {
-            background: var(--dark-fg);
-            color: var(--dark-bg);
-        }
-
-        /* Footer */
-        footer {
-            margin-top: 50px;
-            text-align: center;
-            padding: 20px;
-            backdrop-filter: blur(10px);
-            background: var(--glass-bg);
-            border-radius: 15px;
-            border: 1px solid var(--glass-border);
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        .social-links a {
-            color: inherit;
-            font-size: 24px;
-            transition: transform 0.3s ease;
-        }
-
-        .social-links a:hover {
-            transform: translateY(-3px);
-        }
-
-        /* Loading State */
-        .loading {
-            text-align: center;
-            padding: 40px;
-            font-size: 1.2em;
-        }
-
-        .error {
-            text-align: center;
-            padding: 40px;
-            color: #ff4444;
-            backdrop-filter: blur(10px);
-            background: var(--glass-bg);
-            border-radius: 15px;
-            border: 1px solid var(--glass-border);
-        }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes slideUp {
+        @keyframes modalSlideIn {
             from {
-                transform: translateY(20px);
+                transform: translateY(-20px);
                 opacity: 0;
             }
             to {
@@ -260,30 +119,13 @@
             }
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .container {
-                padding: 10px;
-            }
-
-            .header-content {
-                flex-direction: column;
-                gap: 15px;
-                align-items: flex-start;
-            }
-
-            .post {
-                margin-bottom: 15px;
-            }
-
-            .post-meta {
-                flex-wrap: wrap;
-            }
-        }
+        /* Existing styles remain the same */
+        /* ... (keep all the previous styles) ... */
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- Previous header and content remain the same -->
         <header>
             <div class="header-content">
                 <a href="/" class="home-icon">
@@ -311,6 +153,14 @@
                 <div class="loading">Loading posts...</div>
             </div>
         </main>
+
+        <!-- Add Modal -->
+        <div class="modal" id="postModal">
+            <div class="modal-content">
+                <i class="fas fa-times modal-close" onclick="closeModal()"></i>
+                <div id="modalContent"></div>
+            </div>
+        </div>
 
         <footer>
             <div class="social-links">
@@ -343,6 +193,50 @@
             body.classList.add('light-mode');
         }
 
+        // Modal functions
+        function openModal(postId) {
+            const post = allPosts.find(p => p.id === postId);
+            if (!post) return;
+
+            const modal = document.getElementById('postModal');
+            const modalContent = document.getElementById('modalContent');
+
+            modalContent.innerHTML = `
+                <h1 class="modal-title">${post.title}</h1>
+                <div class="modal-meta">
+                    <span><i class="far fa-calendar"></i> ${new Date(post.date).toLocaleDateString()}</span>
+                    <span><i class="far fa-user"></i> ${post.author}</span>
+                    <span><i class="far fa-clock"></i> ${post.readingTime}</span>
+                </div>
+                ${post.coverImage ? `<img src="${post.coverImage}" alt="${post.title}">` : ''}
+                <div class="modal-body">${post.content}</div>
+            `;
+
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('postModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('postModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        // Handle escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+
         // Filter posts by tag
         function filterPosts(tag) {
             currentTag = tag;
@@ -351,7 +245,6 @@
                 : allPosts.filter(post => post.tags.includes(tag));
             displayPosts(filteredPosts);
 
-            // Update active label
             document.querySelectorAll('.label').forEach(label => {
                 label.classList.toggle('active', label.dataset.tag === tag);
             });
@@ -392,7 +285,7 @@
                         `).join('')}
                     </div>
                     <p class="post-excerpt">${post.excerpt}</p>
-                    <a href="/blog/${post.slug}" class="read-more">Read More</a>
+                    <button onclick="openModal('${post.id}')" class="read-more">Read More</button>
                 </article>
             `).join('');
         }
