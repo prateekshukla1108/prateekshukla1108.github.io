@@ -43,7 +43,7 @@
     <script>
         async function loadPost(slug) {
             try {
-                const response = await fetch(`/blog/post/${slug}.md`);
+                const response = await fetch(`/blog/posts/${slug}.md`);
                 if (!response.ok) throw new Error('Failed to load post');
                 const markdown = await response.text();
                 const htmlContent = marked.parse(markdown);
