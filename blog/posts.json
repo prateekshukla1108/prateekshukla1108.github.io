@@ -2,9 +2,9 @@
   "posts": [
     {
       "slug": "ai",
-      "title": "My First Post",
+      "title": "AI the introduction",
       "date": "2024-01-01",
-      "author": "Your Name",
+      "author": "Prateek Shukla",
       "readingTime": "5 min read",
       "tags": ["AI", "Philosophy"],
       "excerpt": "A brief excerpt of the post...",
