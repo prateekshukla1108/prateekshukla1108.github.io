@@ -1,9 +1,6 @@
 ---
 title: "Understanding Artificial Intelligence"
-date: "2024-11-10"
-author: "Prateek Shukla"
 tags: ["AI", "Technology"]
-coverImage: "/assets/images/ai-cover.jpg"
 ---
 
 # Understanding Artificial Intelligence
