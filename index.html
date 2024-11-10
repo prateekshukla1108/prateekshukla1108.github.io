@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Personal Blog</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/marked/11.1.1/marked.min.js">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/11.1.1/marked.min.js"></script>
     <style>
+        /* All your existing styles remain exactly the same */
         @import url('https://fonts.cdnfonts.com/css/sf-pro-display');
 
         :root {
@@ -18,114 +19,58 @@
             --glass-border: rgba(255, 255, 255, 0.2);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'SF Pro Display', sans-serif;
-            transition: all 0.3s ease;
-        }
+        /* ... (keeping all your existing styles) ... */
 
-        body {
-            background-color: var(--dark-bg);
-            color: var(--dark-fg);
-            background-image: url('/assets/dark-bg.png');
-            background-size: cover;
-            background-attachment: fixed;
-            min-height: 100vh;
-        }
-
-        body.light-mode {
-            background-color: var(--light-bg);
-            color: var(--light-fg);
-            background-image: url('/assets/light-bg.jpg');
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(5px);
-            z-index: 1000;
-            overflow-y: auto;
-        }
-
-        .modal-content {
-            position: relative;
-            max-width: 800px;
-            margin: 40px auto;
+        /* Adding styles for individual post view */
+        .single-post {
+            backdrop-filter: blur(10px);
+            background: var(--glass-bg);
             padding: 30px;
-            background: var(--dark-bg);
             border-radius: 15px;
             border: 1px solid var(--glass-border);
-            animation: modalSlideIn 0.3s ease;
+            margin-bottom: 30px;
         }
 
-        .light-mode .modal-content {
-            background: var(--light-bg);
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 24px;
-            cursor: pointer;
-            color: inherit;
-        }
-
-        .modal-title {
-            font-size: 2em;
-            margin-bottom: 20px;
-        }
-
-        .modal-meta {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 20px;
-            opacity: 0.8;
-        }
-
-        .modal-content img {
+        .single-post img {
             max-width: 100%;
+            height: auto;
             border-radius: 10px;
             margin: 20px 0;
         }
 
-        .modal-body {
+        .single-post-content {
             line-height: 1.8;
-            margin-top: 20px;
         }
 
-        @keyframes modalSlideIn {
-            from {
-                transform: translateY(-20px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
+        .single-post-content h1,
+        .single-post-content h2,
+        .single-post-content h3 {
+            margin: 25px 0 15px;
         }
 
-        /* Existing styles remain the same */
-        /* ... (keep all the previous styles) ... */
+        .single-post-content p {
+            margin-bottom: 15px;
+        }
+
+        .back-button {
+            display: inline-block;
+            color: inherit;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            margin-bottom: 20px;
+        }
+
+        .back-button:hover {
+            background: var(--dark-fg);
+            color: var(--dark-bg);
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Previous header and content remain the same -->
         <header>
             <div class="header-content">
                 <a href="/" class="home-icon">
@@ -149,18 +94,12 @@
         </header>
 
         <main>
-            <div class="posts">
-                <div class="loading">Loading posts...</div>
+            <div id="content">
+                <div class="posts">
+                    <div class="loading">Loading posts...</div>
+                </div>
             </div>
         </main>
-
-        <!-- Add Modal -->
-        <div class="modal" id="postModal">
-            <div class="modal-content">
-                <i class="fas fa-times modal-close" onclick="closeModal()"></i>
-                <div id="modalContent"></div>
-            </div>
-        </div>
 
         <footer>
             <div class="social-links">
@@ -193,49 +132,78 @@
             body.classList.add('light-mode');
         }
 
-        // Modal functions
-        function openModal(postId) {
-            const post = allPosts.find(p => p.id === postId);
-            if (!post) return;
-
-            const modal = document.getElementById('postModal');
-            const modalContent = document.getElementById('modalContent');
-
-            modalContent.innerHTML = `
-                <h1 class="modal-title">${post.title}</h1>
-                <div class="modal-meta">
-                    <span><i class="far fa-calendar"></i> ${new Date(post.date).toLocaleDateString()}</span>
-                    <span><i class="far fa-user"></i> ${post.author}</span>
-                    <span><i class="far fa-clock"></i> ${post.readingTime}</span>
-                </div>
-                ${post.coverImage ? `<img src="${post.coverImage}" alt="${post.title}">` : ''}
-                <div class="modal-body">${post.content}</div>
-            `;
-
-            modal.style.display = 'block';
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeModal() {
-            const modal = document.getElementById('postModal');
-            modal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-
-        // Close modal when clicking outside
-        window.onclick = function(event) {
-            const modal = document.getElementById('postModal');
-            if (event.target === modal) {
-                closeModal();
+        // Handle navigation
+        function handleNavigation() {
+            const path = window.location.pathname;
+            if (path === '/') {
+                showPosts();
+            } else if (path.startsWith('/blog/')) {
+                const slug = path.split('/blog/')[1];
+                showSinglePost(slug);
             }
         }
 
-        // Handle escape key
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                closeModal();
+        // Show single post
+        async function showSinglePost(slug) {
+            const contentDiv = document.getElementById('content');
+            contentDiv.innerHTML = '<div class="loading">Loading post...</div>';
+
+            try {
+                // First, get the post metadata from posts.json
+                const response = await fetch('/blog/posts.json');
+                const data = await response.json();
+                const postMeta = data.posts.find(post => post.slug === slug);
+
+                if (!postMeta) {
+                    throw new Error('Post not found');
+                }
+
+                // Then, fetch the actual post content
+                const postResponse = await fetch(`/blog/posts/${slug}.md`);
+                const postContent = await postResponse.text();
+
+                contentDiv.innerHTML = `
+                    <a href="/" class="back-button">
+                        <i class="fas fa-arrow-left"></i> Back to Posts
+                    </a>
+                    <article class="single-post">
+                        <div class="post-header">
+                            ${postMeta.coverImage ? `<img src="${postMeta.coverImage}" alt="${postMeta.title}" class="post-cover">` : ''}
+                            <h1 class="post-title">${postMeta.title}</h1>
+                            <div class="post-meta">
+                                <span class="post-date">
+                                    <i class="far fa-calendar"></i>
+                                    ${new Date(postMeta.date).toLocaleDateString()}
+                                </span>
+                                <span class="post-author">
+                                    <i class="far fa-user"></i>
+                                    ${postMeta.author}
+                                </span>
+                                <span class="post-reading-time">
+                                    <i class="far fa-clock"></i>
+                                    ${postMeta.readingTime}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="post-tags">
+                            ${postMeta.tags.map(tag => `
+                                <span class="tag">${tag}</span>
+                            `).join('')}
+                        </div>
+                        <div class="single-post-content">
+                            ${marked.parse(postContent)}
+                        </div>
+                    </article>
+                `;
+            } catch (error) {
+                contentDiv.innerHTML = `
+                    <div class="error">
+                        <p>Error loading post. Please try again later.</p>
+                        <p>Error details: ${error.message}</p>
+                    </div>
+                `;
             }
-        });
+        }
 
         // Filter posts by tag
         function filterPosts(tag) {
@@ -285,13 +253,13 @@
                         `).join('')}
                     </div>
                     <p class="post-excerpt">${post.excerpt}</p>
-                    <button onclick="openModal('${post.id}')" class="read-more">Read More</button>
+                    <a href="/blog/${post.slug}" class="read-more" onclick="showSinglePost('${post.slug}'); return false;">Read More</a>
                 </article>
             `).join('');
         }
 
-        // Load blog posts
-        async function loadBlogPosts() {
+        // Show posts list
+        async function showPosts() {
             try {
                 const response = await fetch('/blog/posts.json');
                 const data = await response.json();
@@ -318,8 +286,11 @@
             }
         }
 
-        // Load posts when the page loads
-        document.addEventListener('DOMContentLoaded', loadBlogPosts);
+        // Handle browser navigation
+        window.addEventListener('popstate', handleNavigation);
+
+        // Initial load
+        document.addEventListener('DOMContentLoaded', handleNavigation);
     </script>
 </body>
 </html>

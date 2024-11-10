@@ -1,16 +1,15 @@
 {
   "posts": [
     {
-      "id": "first-post",
-      "title": "Understanding Artificial Intelligence",
-      "date": "2024-11-10",
-      "author": "Prateek Shukla",
-      "tags": ["AI", "Technology"],
-      "excerpt": "An exploration of modern AI systems and their impact on society...",
-      "coverImage": "/assets/images/ai-cover.jpg",
-      "readingTime": "5 min",
-      "slug": "understanding-artificial-intelligence",
-      "path": "/blog/posts/ai.md"
+      "slug": "ai",
+      "title": "My First Post",
+      "date": "2024-01-01",
+      "author": "Your Name",
+      "readingTime": "5 min read",
+      "tags": ["AI", "Philosophy"],
+      "excerpt": "A brief excerpt of the post...",
+      "coverImage": "/assets/images/ai" // optional
     }
+    // ... more posts
   ]
 }
