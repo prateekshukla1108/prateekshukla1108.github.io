@@ -8,8 +8,7 @@
       "readingTime": "5 min read",
       "tags": ["AI", "Philosophy"],
       "excerpt": "A brief excerpt of the post...",
-      "coverImage": "/assets/images/ai-cover.jpg" // optional
+      "coverImage": "/assets/images/ai-cover.jpg"
     }
-    // ... more posts
   ]
 }
