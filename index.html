@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/marked/11.1.1/marked.min.js">
     <style>
+        /* All existing styles remain unchanged */
         @import url('https://fonts.cdnfonts.com/css/sf-pro-display');
 
         :root {
@@ -47,7 +48,6 @@
             padding: 20px;
         }
 
-        /* Header Styles */
         header {
             backdrop-filter: blur(10px);
             background: var(--glass-bg);
@@ -70,7 +70,6 @@
             text-decoration: none;
         }
 
-        /* Theme Toggle */
         .theme-toggle {
             display: flex;
             align-items: center;
@@ -101,7 +100,6 @@
             transform: translateX(30px);
         }
 
-        /* Labels */
         .labels {
             display: flex;
             flex-wrap: wrap;
@@ -123,7 +121,6 @@
             color: var(--dark-bg);
         }
 
-        /* Blog Posts */
         .posts {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -199,7 +196,6 @@
             color: var(--dark-bg);
         }
 
-        /* Footer */
         footer {
             margin-top: 50px;
             text-align: center;
@@ -226,7 +222,6 @@
             transform: translateY(-3px);
         }
 
-        /* Loading State */
         .loading {
             text-align: center;
             padding: 40px;
@@ -243,7 +238,6 @@
             border: 1px solid var(--glass-border);
         }
 
-        /* Animations */
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -260,7 +254,6 @@
             }
         }
 
-        /* Responsive Design */
         @media (max-width: 768px) {
             .container {
                 padding: 10px;
@@ -343,6 +336,12 @@
             body.classList.add('light-mode');
         }
 
+        // Handle post click
+        function handlePostClick(slug) {
+            // Navigate to the post's HTML file in the /blog/posts/ directory
+            window.location.href = `/blog/posts/${slug}/index.html`;
+        }
+
         // Filter posts by tag
         function filterPosts(tag) {
             currentTag = tag;
@@ -392,7 +391,7 @@
                         `).join('')}
                     </div>
                     <p class="post-excerpt">${post.excerpt}</p>
-                    <a href="/blog/${post.slug}" class="read-more">Read More</a>
+                    <a href="javascript:void(0)" onclick="handlePostClick('${post.slug}')" class="read-more">Read More</a>
                 </article>
             `).join('');
         }
@@ -430,4 +429,3 @@
     </script>
 </body>
 </html>
-
