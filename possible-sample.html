@@ -3,19 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal Blog</title>
+    <title>My Blog</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.0.2/marked.min.js"></script>
     <style>
         @import url('https://fonts.cdnfonts.com/css/sf-pro-display');
+
         :root {
             --dark-bg: #05040C;
             --dark-fg: #a8c1f2;
+            --dark-accent: #2a2d3e;
             --light-bg: #ffffff;
             --light-fg: #333333;
+            --light-accent: #f0f2f5;
             --glass-bg: rgba(255, 255, 255, 0.1);
             --glass-border: rgba(255, 255, 255, 0.2);
         }
+
         * {
             margin: 0;
             padding: 0;
@@ -23,24 +26,27 @@
             font-family: 'SF Pro Display', sans-serif;
             transition: all 0.3s ease;
         }
+
         body {
             background-color: var(--dark-bg);
             color: var(--dark-fg);
-            background-image: url('/assets/dark-bg.png');
-            background-size: cover;
-            background-attachment: fixed;
+            background-image: radial-gradient(circle at 50% 50%, #0f1129 0%, #05040C 100%);
             min-height: 100vh;
+            line-height: 1.6;
         }
+
         body.light-mode {
             background-color: var(--light-bg);
             color: var(--light-fg);
-            background-image: url('/assets/light-bg.jpg');
+            background-image: radial-gradient(circle at 50% 50%, #f0f2f5 0%, #ffffff 100%);
         }
+
         .container {
-            max-width: 1200px;
+            max-width: 900px;
             margin: 0 auto;
             padding: 20px;
         }
+
         header {
             backdrop-filter: blur(10px);
             background: var(--glass-bg);
@@ -48,31 +54,29 @@
             border-radius: 15px;
             margin-bottom: 30px;
             border: 1px solid var(--glass-border);
-        }
-        .header-content {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
+            justify-content: flex-end;
         }
-        .home-icon {
-            font-size: 24px;
-            color: inherit;
-            text-decoration: none;
-        }
+
         .theme-toggle {
             display: flex;
             align-items: center;
             gap: 10px;
         }
+
         .toggle-slider {
             position: relative;
             width: 60px;
             height: 30px;
-            background: #333;
+            background: var(--dark-accent);
             border-radius: 30px;
             cursor: pointer;
         }
+
+        .light-mode .toggle-slider {
+            background: var(--light-accent);
+        }
+
         .slider-icon {
             position: absolute;
             top: 5px;
@@ -83,227 +87,166 @@
             border-radius: 50%;
             transition: transform 0.3s;
         }
+
         .light-mode .slider-icon {
             transform: translateX(30px);
         }
-        .labels {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        .label {
-            padding: 5px 15px;
-            border-radius: 20px;
+
+        .blog-content {
             backdrop-filter: blur(10px);
             background: var(--glass-bg);
+            padding: 40px;
+            border-radius: 15px;
             border: 1px solid var(--glass-border);
-            cursor: pointer;
-            animation: fadeIn 0.5s ease;
+            margin-bottom: 30px;
         }
-        .label.active {
-            background: var(--dark-fg);
-            color: var(--dark-bg);
+
+        .blog-title {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            font-weight: 700;
         }
-        .posts {
-            display: grid; 
-           grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-           gap :20 px; 
-         }
-         .post { 
-           backdrop-filter : blur(10 px); 
-           background : var(--glass-bg); 
-           padding :20 px; 
-           border-radius :15 px; 
-           border :1 px solid var(--glass-border); 
-           animation : slideUp (0.5 s) ease; 
-         }
-         .post-header { 
-           margin-bottom :15 px; 
-         }
-         .post-cover { 
-           width :100 %; 
-           height :200 px; 
-           object-fit :cover; 
-           border-radius :10 px; 
-           margin-bottom :15 px; 
-         }
-         .post-title { 
-           font-size :1.5 em; 
-           margin-bottom :10 px; 
-         }
-         /* Add these to your existing CSS */
-         .blog-content { 
-           background : var(--glass-bg); 
-           border-color : var(--glass-border); 
-           margin-bottom :30 px; 
-         }
-         .light-mode .blog-content { 
-           --glass-bg : rgba(255,255,255,0.7); 
-           --glass-border : rgba(0,0,0,0.1); 
-           color : var(--light-fg); 
-         }
-         .dark-mode .blog-content { 
-           --glass-bg : rgba(255,255,255,0.1); 
-           --glass-border : rgba(255,255,255,0.2); 
-           color : var(--dark-fg); 
-         }
-         .featured-article > div,
-         .recent-posts > div { 
-           background : var(--glass-bg); 
-           border-color : var(--glass-border); 
-         }
-         .recent-posts button:hover { 
-           background : var(--dark-fg); 
-           color : var(--dark-bg); 
-         }
-         .light-mode .recent-posts button:hover { 
-           background : var(--light-fg); color : var(--light-bg); } 
 
-          .post-meta { display:flex; gap :15 px; font-size :.9 em; color :inherit; opacity :.8; } 
+        .blog-meta {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            opacity: 0.8;
+            font-size: 0.9em;
+        }
 
-          .post-tags { display:flex; gap :8 px; margin :10 px 0 ; } 
+        .blog-text {
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
 
-          .tag { font-size :.8 em; padding :3 px 8 px; border-radius :12 px; background :var(--glass-bg); border :1 px solid var(--glass-border); } 
+        .blog-text p {
+            margin-bottom: 20px;
+        }
 
-          .post-excerpt { margin :15 px 0 ; line-height :1.6 ; } 
+        .blog-text h2 {
+            font-size: 1.8em;
+            margin: 40px 0 20px;
+        }
 
-          .read-more { display:inline-block; color :inherit; text-decoration:none; padding :8 px 16 px; border-radius :20 px; background :var(--glass-bg); border :1 px solid var(--glass-border); transition :all (0.3 s) ease; } 
+        .blog-text h3 {
+            font-size: 1.4em;
+            margin: 30px 0 15px;
+        }
 
-          .read-more:hover { background :var(--dark-fg); color :var(--dark-bg); } 
+        footer {
+            text-align: center;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            background: var(--glass-bg);
+            border-radius: 15px;
+            border: 1px solid var(--glass-border);
+        }
 
-          footer { margin-top :50 px; text-align:center; padding :20 px; backdrop-filter :blur(10 px); background :var(--glass-bg); border-radius :15 px; border :1 px solid var(--glass-border); } 
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
 
-          .social-links { display:flex; justify-content:center; gap :20 px; } 
+        .social-links a {
+            color: inherit;
+            font-size: 24px;
+            transition: transform 0.3s ease;
+        }
 
-          .social-links a { color :inherit; font-size :24 px; transition :transform (0.3 s) ease; } 
+        .social-links a:hover {
+            transform: translateY(-3px);
+        }
 
-          .social-links a:hover { transform :translateY(-3 px); } 
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
 
-          @keyframes fadeIn { from { opacity :.0 ; } to { opacity :.1 ; } } 
+            .blog-content {
+                padding: 20px;
+            }
 
-          @keyframes slideUp { from { transform :translateY(20 px); opacity :.0 ; } to { transform translateY (0 ); opacity :.1 ; } }
-
-          @media (max-width:.768 px) { 
-
-             .container { padding :.10 px;} 
-
-             .header-content { flex-direction:center ; gap :.15 px ; align-items:flex-start;} 
-
-             .post{margin-bottom:.15 px;} 
-
-             .post-meta{flex-wrap:.wrap;} 
-
-             }
-
+            .blog-title {
+                font-size: 2em;
+            }
+        }
     </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
 </head>
 <body>
     <div class="container">
         <header>
-                <div class="header-content">
-                    <a href="/" class="home-icon">
-                        <i class="fas fa-home"></i>
-                    </a>
-                    <div class="theme-toggle">
-                        <i class="fas fa-moon"></i>
-                        <div class="toggle-slider">
-                            <div class="slider-icon"></div>
-                        </div>
-                        <i class="fas fa-sun"></i>
-                    </div>
-                </div>...
-        </header>
-        
-<main>
-    <div id="root"></div>
-</main>
-
-<footer>
-    <div class="social-links">
-    <a href="https://twitter.com/yourusername" target="_blank">
-    <i class="fab fa-twitter"></i></a>
-
-    <a href="https://github.com/yourusername" target="_blank">
-    <i class="fab fa-github"></i></a>
-
-    </div>
-</footer>
-
-</div>
-
-<script>
-// Theme Toggle
-const body = document.body;
-
-const themeToggle = document.querySelector('.toggle-slider');
-
-themeToggle.addEventListener('click', () => {
-    body.classList.toggle('light-mode');
-    localStorage.setItem('theme', body.classList.contains('light-mode') ? 'light' :'dark');
-});
-
-// Load saved theme
-if (localStorage.getItem('theme') === 'light') {
-    body.classList.add('light-mode');
-}
-</script>
-<script type="text/babel">
-    // BlogContent component
-    const BlogContent = () => {
-        return (
-            <div className="blog-content p-6 backdrop-blur-lg rounded-xl border transition-all duration-300">
-                <article className="max-w-3xl mx-auto">
-                    <h1 className="text-3xl font-bold mb-8">Welcome to My Blog</h1>
-                    
-                    <section className="mb-12">
-                        <h2 className="text-2xl font-semibold mb-4">Latest Posts</h2>
-                        <p className="mb-6 leading-relaxed">
-                            This is a blog where I share my thoughts on various topics.
-                        </p>
-                    </section>
-
-                    <section className="featured-article mb-12">
-                        <h3 className="text-xl font-semibold mb-4">Featured Article</h3>
-                        <div className="p-6 rounded-lg backdrop-blur-sm bg-opacity-10 bg-white border border-opacity-20 border-white">
-                            <p className="mb-4 leading-relaxed">
-                                In this article, we will explore the world of web development.
-                            </p>
-                            <p className="mb-4">
-                                <strong className="font-semibold">Important:</strong> This blog is regularly updated with new content.
-                            </p>
-                            <p className="leading-relaxed">
-                                Feel free to read more about <em className="italic">HTML</em>, <em className="italic">CSS</em>, and <em className="italic">JavaScript</em>.
-                            </p>
-                        </div>
-                    </section>
-
-                    <section className="recent-posts grid gap-6 md:grid-cols-2">
-                        {[1, 2, 3, 4].map((post) => (
-                            <div 
-                                key={post}
-                                className="p-4 rounded-lg backdrop-blur-sm bg-opacity-10 bg-white border border-opacity-20 border-white"
-                            >
-                                <h4 className="text-lg font-semibold mb-2">Blog Post {post}</h4>
-                                <p className="text-sm opacity-80 mb-3">Posted on November {post + 7}, 2024</p>
-                                <p className="mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt.</p>
-                                <button className="px-4 py-2 rounded-full bg-opacity-10 bg-white border border-opacity-20 border-white hover:bg-opacity-20 transition-all duration-300">
-                                    Read More
-                                </button>
-                            </div>
-                        ))}
-                    </section>
-                </article>
+            <div class="theme-toggle">
+                <i class="fas fa-moon"></i>
+                <div class="toggle-slider">
+                    <div class="slider-icon"></div>
+                </div>
+                <i class="fas fa-sun"></i>
             </div>
-        );
-    };
+        </header>
 
-    // Render the app
-    const root = ReactDOM.createRoot(document.getElementById('root'));
-    root.render(<BlogContent />);
-</script>
+        <main class="blog-content">
+            <h1 class="blog-title">The Art of Creating Beautiful Web Interfaces</h1>
+
+            <div class="blog-meta">
+                <span><i class="far fa-calendar"></i> November 11, 2024</span>
+                <span><i class="far fa-clock"></i> 5 min read</span>
+            </div>
+
+            <div class="blog-text">
+                <p>
+                    Creating beautiful web interfaces is a delicate balance between aesthetics and functionality. In this article, we'll explore the principles that guide modern web design and how to implement them effectively.
+                </p>
+
+                <h2>The Importance of Visual Hierarchy</h2>
+                <p>
+                    Visual hierarchy is the backbone of effective web design. It guides users through your content in a natural and intuitive way, ensuring that the most important elements receive the most attention.
+                </p>
+
+                <h3>Color Theory in Web Design</h3>
+                <p>
+                    Colors play a crucial role in setting the mood and tone of your website. Understanding color theory helps create harmonious combinations that enhance user experience while maintaining accessibility.
+                </p>
+
+                <h3>Typography and Readability</h3>
+                <p>
+                    The right typography can make or break a design. Choosing appropriate fonts and establishing a clear typographic hierarchy ensures that your content is both beautiful and readable.
+                </p>
+
+                <p>
+                    Remember, the best designs are those that feel invisible to the user while delivering an exceptional experience. It's about creating an interface that's both beautiful and functional.
+                </p>
+            </div>
+        </main>
+
+        <footer>
+            <div class="social-links">
+                <a href="https://twitter.com/yourusername" target="_blank">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://github.com/yourusername" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Theme Toggle
+        const body = document.body;
+        const themeToggle = document.querySelector('.toggle-slider');
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+            localStorage.setItem('theme', body.classList.contains('light-mode') ? 'light' : 'dark');
+        });
+
+        // Load saved theme
+        if (localStorage.getItem('theme') === 'light') {
+            body.classList.add('light-mode');
+        }
+    </script>
 </body>
 </html>
-
