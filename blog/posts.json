@@ -9,7 +9,7 @@
       "tags": ["AI", "Philosophy"],
       "excerpt": "A brief excerpt of the post...",
       "coverImage": "/assets/images/ai-cover.jpg"
-    };
+    },
     {
       "slug": "Machine Learning",
       "title": "Correct way to go for machine learning",
@@ -19,7 +19,7 @@
       "tags": ["AI"],
       "excerpt": "A brief excerpt of the post...",
       "coverImage": "/assets/images/ai-cover.jpg"
-    };
+    },
     {
       "slug": "neuroscience",
       "title": "AI the introduction",
@@ -32,3 +32,4 @@
     }
   ]
 }
+
