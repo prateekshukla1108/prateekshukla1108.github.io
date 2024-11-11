@@ -1,34 +1,14 @@
 {
   "posts": [
     {
-      "slug": "ai",
-      "title": "AI the introduction",
-      "date": "2024-01-01",
+      "slug": "suckless linux",
+      "title": "How to avoid getting miserable when switching to linux",
+      "date": "2024-11-11",
       "author": "Prateek Shukla",
       "readingTime": "5 min read",
       "tags": ["AI", "Philosophy"],
       "excerpt": "A brief excerpt of the post...",
-      "coverImage": "/assets/images/ai-cover.jpg"
-    },
-    {
-      "slug": "Machine Learning",
-      "title": "Correct way to go for machine learning",
-      "date": "2024-01-01",
-      "author": "Prateek Shukla",
-      "readingTime": "5 min read",
-      "tags": ["AI"],
-      "excerpt": "A brief excerpt of the post...",
-      "coverImage": "/assets/images/ai-cover.jpg"
-    },
-    {
-      "slug": "neuroscience",
-      "title": "AI the introduction",
-      "date": "2024-01-01",
-      "author": "Prateek Shukla",
-      "readingTime": "5 min read",
-      "tags": ["Neuroscience"],
-      "excerpt": "A brief excerpt of the post...",
-      "coverImage": "/assets/images/ai-cover.jpg"
+      "coverImage": "/assets/images/linux-sucks.png"
     }
   ]
 }
