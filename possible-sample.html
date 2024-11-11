@@ -12,11 +12,13 @@
             --dark-bg: #05040C;
             --dark-fg: #a8c1f2;
             --dark-accent: #2a2d3e;
-            --light-bg: #ffffff;
-            --light-fg: #333333;
+            --light-bg: #f1f4ed;
+            --light-fg: #575279;
             --light-accent: #f0f2f5;
-            --glass-bg: rgba(255, 255, 255, 0.3);
-            --glass-border: rgba(255, 255, 255, 0.4);
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --glass-bg-2: rgba(255,255,255, 0.4);
+            --glass-bg-2: rgba(255,255,255, 0.5);
         }
 
         * {
@@ -94,10 +96,10 @@
 
         .blog-content {
             backdrop-filter: blur(10px);
-            background: var(--glass-bg);
+            background: var(--glass-bg-2);
             padding: 40px;
             border-radius: 15px;
-            border: 1px solid var(--glass-border);
+            border: 1px solid var(--glass-border-2);
             margin-bottom: 30px;
         }
 
