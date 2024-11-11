@@ -67,8 +67,19 @@
             margin-bottom: 30px;
             border: 1px solid var(--glass-border);
             display: flex;
-            justify-content: flex-end;
+            justify-content: space-between;
+            align-items: center;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .home-link {
+            color: inherit;
+            font-size: 24px;
+            transition: transform 0.3s ease;
+        }
+
+        .home-link:hover {
+            transform: translateY(-3px);
         }
 
         .theme-toggle {
@@ -106,6 +117,7 @@
             transform: translateX(30px);
         }
 
+        /* Rest of the styles remain the same */
         .blog-content {
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
@@ -196,6 +208,9 @@
 <body>
     <div class="container">
         <header>
+            <a href="https://prateekshukla1108.github.io" class="home-link">
+                <i class="fas fa-home"></i>
+            </a>
             <div class="theme-toggle">
                 <i class="fas fa-moon"></i>
                 <div class="toggle-slider">
