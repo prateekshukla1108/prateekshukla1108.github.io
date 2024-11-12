@@ -11,15 +11,14 @@
       "coverImage": "/assets/images/linux-sucks.png"
     },
     {
-      "slug": "Test of Independence"
+      "slug": "Test of Independence",
       "title": "Embracing the Test of Independence: A Nietzschean Challenge",
-      "date": "2024-11-11"
-      "author": "Prateek Shukla"
-      "readingTime": "8 min read"
-      "tags": ["Philosophy"]
-      "excerpt": "Nietzsche's thoughts on true independence"
+      "date": "2024-11-11",
+      "author": "Prateek Shukla",
+      "readingTime": "8 min read",
+      "tags": ["Philosophy"],
+      "excerpt": "Nietzsche's thoughts on true independence",
       "coverImage": "/assets/images/Nietzsche.jpg"
-
     }
   ]
 }
