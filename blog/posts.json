@@ -1,4 +1,4 @@
-{
+
   "posts": [
     {
       "slug": "suckless linux",
@@ -19,6 +19,16 @@
       "tags": ["Philosophy"],
       "excerpt": "Nietzsche's thoughts on true independence",
       "coverImage": "/assets/images/Nietzsche.jpg"
+    },
+    {
+      "slug": "Setting up WSL and Python",
+      "title": "Installing and setting up WSL and Python for Fast AI",
+      "date": "2024-11-13",
+      "author": "Prateek Shukla",
+      "readingTime": "15 min read",
+      "tags": ["AI"],
+      "excerpt": "How to setup WSL and python to get ready for Fast AI",
+      "coverImage": "/assets/images/Python.png"
     }
   ]
 }

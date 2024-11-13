@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Installing and setting up WSL and python for Fast AI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.cdnfonts.com/css/sf-pro-display');
+
+        :root {
+            /* Dark theme variables */
+            --dark-bg: #05040C;
+            --dark-fg: #a8c1f2;
+            --dark-accent: #2a2d3e;
+            --dark-glass-bg: rgba(0, 0, 0, 0.2);
+            --dark-glass-border: rgba(0, 0, 0, 0.3);
+
+            /* Light theme variables */
+            --light-bg: #ffffff;
+            --light-fg: #333333;
+            --light-accent: #f0f2f5;
+            --light-glass-bg: rgba(255, 255, 255, 0.4);
+            --light-glass-border: rgba(0, 0, 0, 0.3);
+
+            /* Default to dark theme */
+            --glass-bg: var(--dark-glass-bg);
+            --glass-border: var(--dark-glass-border);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'SF Pro Display', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--dark-fg);
+            background-image: url('/assets/dark-bg-3.png');
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        body.light-mode {
+            background-color: var(--light-bg);
+            color: var(--light-fg);
+            background-image: url('/assets/light-bg-7.jpg');
+            --glass-bg: var(--light-glass-bg);
+            --glass-border: var(--light-glass-border);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            background: var(--glass-bg);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border: 1px solid var(--glass-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .home-link {
+            color: inherit;
+            font-size: 24px;
+            transition: transform 0.3s ease;
+        }
+
+        .home-link:hover {
+            transform: translateY(-3px);
+        }
+
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toggle-slider {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: var(--dark-accent);
+            border-radius: 30px;
+            cursor: pointer;
+        }
+
+        .light-mode .toggle-slider {
+            background: var(--light-accent);
+        }
+
+        .slider-icon {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            width: 20px;
+            height: 20px;
+            background: #fff;
+            border-radius: 50%;
+            transition: transform 0.3s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .light-mode .slider-icon {
+            transform: translateX(30px);
+        }
+
+        /* Rest of the styles remain the same */
+        .blog-content {
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            background: var(--glass-bg);
+            padding: 40px;
+            border-radius: 15px;
+            border: 1px solid var(--glass-border);
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .blog-title {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .blog-meta {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            opacity: 0.8;
+            font-size: 0.9em;
+        }
+
+        .blog-text {
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .blog-text p {
+            margin-bottom: 20px;
+        }
+
+        .blog-text h2 {
+            font-size: 1.8em;
+            margin: 40px 0 20px;
+        }
+
+        .blog-text h3 {
+            font-size: 1.4em;
+            margin: 30px 0 15px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            background: var(--glass-bg);
+            border-radius: 15px;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .social-links a {
+            color: inherit;
+            font-size: 24px;
+            transition: transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-3px);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            .blog-content {
+                padding: 20px;
+            }
+
+            .blog-title {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="https://prateekshukla1108.github.io" class="home-link">
+                <i class="fas fa-home"></i>
+            </a>
+            <div class="theme-toggle">
+                <i class="fas fa-moon"></i>
+                <div class="toggle-slider">
+                    <div class="slider-icon"></div>
+                </div>
+                <i class="fas fa-sun"></i>
+            </div>
+        </header>
+
+        <main class="blog-content">
+            <h1 class="blog-title">Installing and setting up WSL and Python for Fast AI</h1>
+
+            <div class="blog-meta">
+                <span><i class="far fa-calendar"></i> November 11, 2024</span>
+                <span><i class="far fa-clock"></i> 5 min read</span>
+            </div>
+
+            <div class="blog-text">
+                <h1>How to install WSL in Windows</h1> <p>WSL implies for Windows Subsystem for Linux (WSL), where you can run a Linux environment on your Windows machine without the hassle of dual-booting or setting up a virtual machine. This guide will take you through the steps to install WSL, focusing on WSL 2, which is faster, better, and more compatible than its predecessor.</p> <p>The basic prerequisites are that you need Windows 10 version 2004 or higher (Build 19041 and above) or Windows 11. If you’re still rocking an older version, it might be time for an upgrade—like swapping out your flip phone for a smartphone!</p> <p>If you get any error related to virtualization, you need to have virtualization enabled, which you can do by enabling Hyper-V in your device.</p> <h2>Step 1: Enable WSL:</h2> <strong>Open PowerShell as Administrator</strong>: Search for "PowerShell" in the Start menu. Right-click on it and select "Run as administrator". If you get intimidated by the black screen, don't panic; you are inside the terminal which helps us to execute commands. More on it later! <strong>Run the Installation Command</strong>: In the PowerShell window, type the following command and press Enter: <pre><code>wsl --install</code></pre> <p>This command will enable all the necessary features for WSL, download the Linux Kernel, and install Ubuntu as your default distribution. A restart may be required.</p> <p>If Ubuntu is not your cup of tea, then you can choose another distribution by:</p> <pre><code>wsl --install -d Debian</code></pre> <p>for Debian.</p>
+                <h2>Step 2: Make a user account</h2>
+
+<p>After installation, launch your installed Linux distribution from the Start menu.</p>
+
+<p>You’ll be prompted to create a <strong>username</strong> and <strong>password</strong>. Choose wisely; this is your secret identity! Remember, while typing your password, nothing will appear on the screen; this is normal behavior in Linux. It’s not broken; it’s just shy.</p>
+
+<h2>Step 4: Update the system</h2>
+
+<p>Now that you’ve got your Linux environment set up, let’s make sure it’s up to date: you can do that by just typing</p>
+<pre><code>sudo apt update
+sudo apt upgrade
+</code></pre>
+
+<h1>Terminal and CLI</h1>
+
+<p>Okay, so now as you are staring at that black window, let's talk a little bit about terminal and CLI.</p>
+
+<p>A <strong>terminal</strong> is essentially a user interface that allows you to interact with your computer using text-based commands.</p>
+
+<p><strong>CLI</strong> or command line interface is the way we interact with the computer in text format.</p>
+
+<p>Now by now, two questions will arise in your mind:</p>
+
+<ul>
+    <li><strong>Why are we using WSL? Why not use Windows?</strong><br>
+    The programs we will be using are much easier to operate on Linux than Windows. You can modify Linux in many ways to make your life easier than it is in Windows.</li>
+
+    <li><strong>Why are we using CLI? Why not use the graphical apps which are more beautiful?</strong><br>
+    Once you get the hang of it, typing commands can be faster than clicking through menus. You can write scripts to automate repetitive tasks, saving time and effort.</li>
+</ul>
+
+<h2>Some basic definitions and tools handy in CLI</h2>
+
+<p>So here are some popular commands and definitions which we need to keep in mind while we use CLI:</p>
+
+<ul>
+    <li><strong>Directory</strong>: For most cases, a directory is your 'folder'; we can store different files and directories in a directory.</li>
+
+    <li><code>ls</code>: Lists the contents of a directory. Use options like <code>-a</code> for hidden files or <code>-l</code> for detailed information.</li>
+
+    <li><code>cd [directory]</code>: Changes the current directory to the specified one. Use <code>cd ..</code> to go back.</li>
+
+    <li><code>mkdir [dirname]</code>: Creates a new directory with the specified name.</li>
+
+    <li><code>rm -rf [dirname]</code>: Removes a directory and everything in it. This is done without confirmation, so know what you are doing.</li>
+</ul>
+<h1>Installing Python and Other Dependencies</h1>
+
+<p>Now if you type <code>python</code> on your terminal you will see that some application is getting activated.</p>
+
+<p>Now the python that has been activated is not the python we are gonna use. This python is used by the system to run stuff. We are gonna use something called <strong>miniforge</strong> for python.</p>
+
+<p>Here are the steps in setting up miniforge in your system:</p>
+
+<h2>Step 1: Install wget in your system</h2>
+
+<p>You can do so by executing:</p>
+<pre><code>sudo apt install wget</code></pre>
+
+<h2>Step 2: Download the setup script for miniforge</h2>
+
+<p>You can do that by following these commands:</p>
+
+<h3>For x86_64</h3>
+<pre><code>wget https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh</code></pre>
+
+<h3>For arm</h3>
+<pre><code>wget https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-aarch64.sh</code></pre>
+
+<p>This will download the Miniforge installer in your WSL.</p>
+
+<h2>Step 3: Install miniforge in your WSL</h2>
+
+<p>Execute the following command:</p>
+
+<h3>For x86_64</h3>
+<pre><code>bash Miniforge3-Linux-x86_64.sh</code></pre>
+
+<h3>For Arm</h3>
+<pre><code>bash Miniforge3-Linux-aarch64.sh</code></pre>
+
+<p>A simple setup will appear which will ask you to accept the license agreement.</p>
+
+<p>Then a prompt will appear telling you that setup will install miniforge in your home directory. Say yes to it.</p>
+
+<p>And then miniforge will install not only python but a whole bunch of libraries which will come handy to us later.</p>
+
+<p>Restart your shell by executing <code>bash</code> to make it initialize miniforge.</p>
+<h2>Step 4: Agree to initialize it</h2> <p>It will ask you if you want to initialize it whenever you start your machine and say yes to it.</p> <p>What it will do is that it will execute Python every time we launch WSL.</p> <h2>Mamba and Conda</h2> <p>Mamba and Conda are both powerful tools used for package and environment management in Python. They install everything we need for Python and help us create virtual environments. This brings us to:</p> <h2>Step 5: Enable virtual environment</h2> <p>A virtual environment is a self-contained directory that allows you to manage dependencies for different projects without stepping on each other’s toes. It will help separate the Python we need with the system Python.</p> <p>To create a virtual environment just execute:</p> <pre><code>mamba create -n fastai_env python=3.9</code></pre> <p>This will create a Python virtual environment.</p> <p>But that's not all; we also need to activate it for it to work. This is done by executing:</p> <pre><code>mamba activate fastai_env</code></pre> <ul> <li><strong>A pro tip:</strong> You can activate the virtual environment every time you want by putting it in your .bashrc file. You can do that by:</li> </ul> <pre><code>nano .bashrc</code></pre> <p>This opens a text editor which we will use to edit files. Edit it by adding <code>mamba activate fastai_env</code> at the end of the file.</p> <p>Then press <strong>Ctrl + X</strong> to exit and <strong>Y</strong> to save the file.</p> <h2>Step 6: Installing IPython and Jupyter Lab</h2> <h3>Need for these tools</h3> <p>If you’re ready to kick your AI game up a notch, you need to get cozy with <strong>IPython</strong>, <strong>JupyterLab</strong>, and <strong>nbdev</strong>. We have so many good reasons to use these tools.</p> <p>We will use IPython because:</p> <ul> <li>It helps us to display media like images, videos, etc.</li> <li>IPython includes special commands (prefixed with <code>%</code> or <code>%%</code>) that allow you to perform tasks like timing execution or running shell commands seamlessly.</li> <li>With improved tracebacks and debugging capabilities, it makes troubleshooting easier.</li> </ul> <p>We will use Jupyter Lab because:</p> <ul> <li><strong>Multi-document UI:</strong> Open multiple notebooks, text files, and terminals all at once. You can juggle your projects too. No more switching tabs.</li> <li><strong>Extensions Galore:</strong> Want to customize your experience? JupyterLab supports extensions that let you add new features or integrate with other tools. It’s like dressing up your notebook in the latest fashion; make it yours.</li> <li><strong>Interactive Widgets:</strong> Create interactive visualizations and controls right in your notebooks. Want to tweak parameters on the fly? Just slide those sliders.</li> </ul> <p><strong>nbdev is important because:</strong></p> <ol> <li><strong>Literate Programming:</strong> Write code, tests, and documentation together in Jupyter notebooks, enhancing readability and maintainability.</li> <li><strong>Automatic Documentation:</strong> Generate up-to-date documentation directly from your notebooks, streamlining the process of creating and maintaining libraries.</li> <li><strong>Integrated Testing:</strong> Write and run unit tests within your notebooks, ensuring code quality with automatic execution during builds and CI/CD processes.</li> </ol> <p>Basically, they help in making the experience smoother for the journey.</p> <h3>Installation</h3> <p>Here is the command to install these tools:</p> <pre><code>mamba install ipython jupyterlab nbdev</code></pre>
+<h2>Step 7: Install pytorch</h2>
+
+<p>PyTorch is a powerful and flexible tool for deep learning and machine learning projects. Here are some of its features:</p>
+
+<ul>
+    <li><strong>Dynamic Computation Graphs</strong>: Allows changes to the model on-the-fly, making debugging easier.</li>
+    <li><strong>Tensor Operations</strong>: Supports efficient tensor computations with GPU acceleration for faster processing.</li>
+    <li><strong>User-Friendly</strong>: Intuitive and Pythonic interface, great for beginners and experienced users alike.</li>
+    <li><strong>Rich Ecosystem</strong>: Includes libraries for building neural networks and optimization, simplifying model development.</li>
+    <li><strong>Strong Community</strong>: Extensive documentation and active community support for learning and troubleshooting.</li>
+</ul>
+
+<h3>Installation</h3>
+
+<p>Here is how to get it installed:</p>
+
+<ul>
+    <li><strong>For devices with Nvidia GPU</strong>: If your device has an Nvidia GPU, you can install PyTorch with CUDA support by executing the following command:</li>
+</ul>
+
+<pre><code>mamba install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia
+</code></pre>
+
+<p>You will also need to install the CUDA toolkit for PyTorch to work. You can do it by executing:</p>
+
+<pre><code>wget https://developer.download.nvidia.com/compute/cuda/12.6.2/local_installers/cuda_12.6.2_560.35.03_linux.run
+</code></pre>
+
+<p>Then run:</p>
+
+<pre><code>sudo sh cuda_12.6.2_560.35.03_linux.run
+</code></pre>
+
+<ul>
+    <li><strong>For devices with integrated graphics</strong>: If you are a poor student like me and have a device with integrated graphics, then you should install PyTorch by using the following command:</li>
+</ul>
+
+<pre><code>mamba install pytorch torchvision torchaudio cpuonly -c pytorch
+</code></pre>
+
+<h2>Step 8: Install FastAI</h2>
+
+<p>Fast AI will be the main library we will be working with. It is designed to make deep learning accessible to everyone, regardless of their coding experience. It is built on top of PyTorch, designed to make the complex realm of artificial intelligence as approachable as your favorite recipe for instant noodles.</p>
+
+<h3>Installation</h3>
+
+<p>To install it, just execute this command in your terminal:</p>
+
+<pre><code>mamba install -c fastai fastai
+</code></pre>
+
+<p>And you have successfully installed the tools required for the course!</p>
+<h1>Optional stuff</h1>
+
+<h2>Vim</h2>
+<p>Vim is the most supereme cli text editor that one can use in linux. Here is how to install and use it</p>
+
+<ol>
+    <li><strong>Open WSL Terminal</strong>:
+        <ul>
+            <li>Launch your WSL terminal.</li>
+        </ul>
+    </li>
+    <li><strong>Update Package List</strong>:
+        <ul>
+            <li>Before installing any software, update the package list by running:</li>
+            <pre><code>sudo apt update</code></pre>
+        </ul>
+    </li>
+    <li><strong>Install Vim</strong>:
+        <ul>
+            <li>Install Vim by executing the following command:</li>
+            <pre><code>sudo apt install vim -y</code></pre>
+            <li>This command retrieves and installs Vim along with its necessary components.</li>
+        </ul>
+    </li>
+    <li><strong>Launching Vim</strong>:
+        <ul>
+            <li>To create or edit a file, use the command:</li>
+            <pre><code>vim filename.txt</code></pre>
+            <li>Replace <code>filename.txt</code> with your desired file name. If the file does not exist, Vim will create it.</li>
+        </ul>
+    </li>
+    <li><strong>Basic Navigation and Editing</strong>:
+        <ul>
+            <li>Upon opening a file, you start in <strong>Normal mode</strong>. Press <code>i</code> to switch to <strong>Insert mode</strong>, where you can type text.</li>
+            <li>To return to Normal mode, press <code>Esc</code>.</li>
+            <li>You can go up down left and right in the document by either using arrow keys or using <code>h,j,k,l</code> keys (right, down, up, left).</li>
+        </ul>
+    </li>
+    <li><strong>Saving and Exiting</strong>:
+        <ul>
+            <li>To save changes, type <code>:w</code> and press <code>Enter</code>.</li>
+            <li>To exit Vim, type <code>:q</code> and press <code>Enter</code>. If you want to save and exit simultaneously, type <code>:wq</code>.</li>
+        </ul>
+    </li>
+</ol>
+
+<h2>Ranger</h2>
+<p>Ranger is a cli file manager which you can use to navigate through files easily.</p>
+
+<p>To install and use Ranger, a VIM-inspired file manager, in Windows Subsystem for Linux (WSL), follow these detailed steps:</p>
+
+<h3>Installation Steps</h3>
+
+<ol>
+    <li><strong>Open WSL Terminal</strong>:
+        <ul>
+            <li>Launch your WSL terminal.</li>
+        </ul>
+    </li>
+    <li><strong>Install Prerequisites</strong>:
+        <ul>
+            <li>Update the package list and install the necessary packages (<code>make</code>, <code>git</code>, and <code>vim</code>) by running:</li>
+            <pre><code>sudo apt update
+sudo apt install make git vim -y
+</code></pre>
+        </ul>
+    </li>
+    <li><strong>Install Ranger</strong>:
+        <pre><code>sudo apt install ranger -y
+</code></pre></li>
+
+    <li><strong>Configure Ranger</strong>:
+        <ul>
+            <li>Run Ranger once to create the configuration directory:</li>
+            <pre><code>ranger
+</code></pre></li>
+        </ul>
+    </li>
+</ol>
+<h2>Using Ranger</h2>
+
+<ol>
+    <li><strong>Launching Ranger</strong>:
+        <ul>
+            <li>Start Ranger by typing:</li>
+            <pre><code>bash
+ranger
+</code></pre>
+        </ul>
+    </li>
+
+    <li><strong>Interface Overview</strong>:
+        <ul>
+            <li>The interface is divided into three columns:
+                <ul>
+                    <li><strong>Left Column</strong>: Displays the parent directory.</li>
+                    <li><strong>Middle Column</strong>: Shows contents of the current directory.</li>
+                    <li><strong>Right Column</strong>: Provides a preview of the selected file or folder.</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+
+    <li><strong>Basic Navigation</strong>:
+        <ul>
+            <li>Use the following keys to navigate:
+                <ul>
+                    <li>Arrow keys or <code>h</code>, <code>j</code>, <code>k</code>, <code>l</code> for left, down, up, and right respectively.</li>
+                    <li><code>Enter</code> to open a file or directory.</li>
+                    <li><code>q</code> to quit.</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ol>
+
+<h3>Copying, Pasting, and Deleting Files</h3>
+
+<ul>
+    <li><strong>Copying Files</strong>:
+        <ul>
+            <li>To copy a file or directory, navigate to it and press <code>yy</code> (yank).</li>
+            <li>To copy multiple files, select them using <code>Space</code> and then press <code>yy</code>.</li>
+        </ul>
+    </li>
+
+    <li><strong>Pasting Files</strong>:
+        <ul>
+            <li>Navigate to the destination directory and press <code>p</code> to paste the copied files.</li>
+        </ul>
+    </li>
+
+    <li><strong>Deleting Files</strong>:
+        <ul>
+            <li>To delete a file or directory, navigate to it and press <code>dd</code> (delete).</li>
+            <li>Confirm the deletion when prompted.</li>
+        </ul>
+    </li>
+</ul>
+                </div>
+        </main>
+
+        <footer>
+            <div class="social-links">
+                <a href="https://twitter.com/yourusername" target="_blank">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://github.com/yourusername" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Theme Toggle
+        const body = document.body;
+        const themeToggle = document.querySelector('.toggle-slider');
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+            localStorage.setItem('theme', body.classList.contains('light-mode') ? 'light' : 'dark');
+        });
+
+        // Load saved theme
+        if (localStorage.getItem('theme') === 'light') {
+            body.classList.add('light-mode');
+        }
+    </script>
+</body>
+</html>
+
