@@ -21,6 +21,16 @@
       "coverImage": "/assets/images/Nietzsche.jpg"
     },
     {
+      "slug": "Free Spirit",
+      "title": "The True Nature of Free Spirits: Analyzing Nietzsche's Vision of Future Philosophers",
+      "date": "2024-11-16",
+      "author": "Prateek Shukla",
+      "readingTime": "8 min read",
+      "tags": ["Philosophy"],
+      "excerpt": "The Future and Nature of Free Spirit",
+      "coverImage": "/assets/images/Free-Spirit.jpg"
+    },
+    {
       "slug": "Setting up WSL and Python",
       "title": "Installing and setting up WSL and Python for Fast AI",
       "date": "2024-11-13",
