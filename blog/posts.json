@@ -20,6 +20,16 @@
       "excerpt": "Nietzsche's Fantasy of Free Spirits and future Philosophers",
       "coverImage": "/assets/images/Free-Spirit.jpg"
     },
+    {
+      "slug": "Heidegger's Being",
+      "title": "The Question of Being: A Personal Journey Through Heidegger's Labyrinth",
+      "date": "2024-11-22",
+      "author": "Prateek Shukla",
+      "readingTime": "10 min read",
+      "tags": ["Philosophy"],
+      "excerpt": "Nietzsche's thoughts on true independence",
+      "coverImage": "/assets/images/heidegger.jpg"
+    },
 
     {
       "slug": "Test of Independence",
