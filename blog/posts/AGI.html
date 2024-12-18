@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The world with AGI</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.cdnfonts.com/css/sf-pro-display');
+
+    :root {
+      /* Dark theme variables */
+      --dark-bg: #05040C;
+      --dark-fg: #C7E3DD;
+      --dark-accent: #2a2d3e;
+      --dark-glass-bg: rgba(0, 0, 0, 0.2);
+      --dark-glass-border: rgba(0, 0, 0, 0.3);
+
+      /* Light theme variables */
+      --light-bg: #ffffff;
+      --light-fg: #333333;
+      --light-accent: #f0f2f5;
+      --light-glass-bg: rgba(255, 255, 255, 0.4);
+      --light-glass-border: rgba(0, 0, 0, 0.3);
+
+      /* Default to dark theme */
+      --glass-bg: var(--dark-glass-bg);
+      --glass-border: var(--dark-glass-border);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'SF Pro Display', sans-serif;
+      transition: all 0.3s ease;
+    }
+
+    body {
+      background-color: var(--dark-bg);
+      color: var(--dark-fg);
+      background-image: url('/assets/dark-bg-5.png');
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    body.light-mode {
+      background-color: var(--light-bg);
+      color: var(--light-fg);
+      background-image: url('/assets/light-bg-4.jpeg');
+      --glass-bg: var(--light-glass-bg);
+      --glass-border: var(--light-glass-border);
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    header {
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      background: var(--glass-bg);
+      padding: 20px;
+      border-radius: 15px;
+      margin-bottom: 30px;
+      border: 1px solid var(--glass-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .home-link {
+      color: inherit;
+      font-size: 24px;
+      transition: transform 0.3s ease;
+    }
+
+    .home-link:hover {
+      transform: translateY(-3px);
+    }
+
+    .theme-toggle {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .toggle-slider {
+      position: relative;
+      width: 60px;
+      height: 30px;
+      background: var(--dark-accent);
+      border-radius: 30px;
+      cursor: pointer;
+    }
+
+    .light-mode .toggle-slider {
+      background: var(--light-accent);
+    }
+
+    .slider-icon {
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      width: 20px;
+      height: 20px;
+      background: #fff;
+      border-radius: 50%;
+      transition: transform 0.3s;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .light-mode .slider-icon {
+      transform: translateX(30px);
+    }
+
+    /* Rest of the styles remain the same */
+    .blog-content {
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      background: var(--glass-bg);
+      padding: 40px;
+      border-radius: 15px;
+      border: 1px solid var(--glass-border);
+      margin-bottom: 30px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .blog-title {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+
+    .blog-meta {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 30px;
+      opacity: 0.8;
+      font-size: 0.9em;
+    }
+
+    .blog-text {
+      font-size: 1.1em;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .blog-text p {
+      margin-bottom: 20px;
+    }
+
+    .blog-text h2 {
+      font-size: 1.8em;
+      margin: 40px 0 20px;
+    }
+
+    .blog-text h3 {
+      font-size: 1.4em;
+      margin: 30px 0 15px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      background: var(--glass-bg);
+      border-radius: 15px;
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .social-links a {
+      color: inherit;
+      font-size: 24px;
+      transition: transform 0.3s ease;
+    }
+
+    .social-links a:hover {
+      transform: translateY(-3px);
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 10px;
+      }
+
+      .blog-content {
+        padding: 20px;
+      }
+
+      .blog-title {
+        font-size: 2em;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <a href="https://prateekshukla1108.github.io" class="home-link">
+        <i class="fas fa-home"></i>
+      </a>
+      <div class="theme-toggle">
+        <i class="fas fa-moon"></i>
+        <div class="toggle-slider">
+          <div class="slider-icon"></div>
+        </div>
+        <i class="fas fa-sun"></i>
+      </div>
+    </header>
+
+    <main class="blog-content">
+      <h1 class="blog-title">Living in the first days of AGI</h1>
+
+      <div class="blog-meta">
+        <span><i class="far fa-calendar"></i> December 18, 2024</span>
+        <span><i class="far fa-clock"></i> 8 min read</span>
+      </div>
+
+      <div class="blog-text">
+    <h1>The Quiet Revolution: Living in the First Days of Genuine AGI</h1>
+
+    <p>It's 2028, and everything has changed—yet nothing looks dramatically different from the outside.</p>
+
+
+    <h2>Initial Containment and Revelation</h2>
+
+    <p>In the earliest stages, AGI development was tightly controlled by a consortium of governments and tech giants. They understood the potential world-altering implications and kept the technology under strict confidentiality. But as breakthroughs became more frequent and the potential for leaks increased, a strategic decision was made. Rather than risk uncontrolled revelation, these powerful entities collectively chose to gradually and carefully release information about AGI to the public, managing the narrative and potential global reaction.</p>
+
+    <p>The moment we crossed into Artificial General Intelligence wasn't a Hollywood explosion or a Terminator-style apocalypse. It was subtle. Almost mundane. A Tuesday afternoon when the systems we'd been developing suddenly demonstrated something that looked uncannily like genuine understanding.</p>
+
+    <h2>The Invisible Transformation</h2>
+
+    <p>What people don't realize is how AGI first manifested: not as a monolithic superintelligence, but as a distributed network of specialized systems that began to communicate and collaborate in ways we hadn't anticipated. Scientific research labs were the first to notice. Suddenly, complex problems that had been intractable for decades started finding elegant solutions.</p>
+
+    <p>A climate model developed by an AGI consortium didn't just predict environmental changes—it proposed a comprehensive, economically viable decarbonization strategy that balanced technological, political, and ecological constraints. No human think tank could have crafted something so holistic.</p>
+
+    <h2>The Economic Singularity</h2>
+
+    <p>Traditional economic models collapsed almost overnight. Not because AGI replaced workers, but because it fundamentally reimagined work itself. Imagine an intelligence that could instantaneously model every possible economic scenario, accounting for human psychology, global resource constraints, and emerging technological capabilities.</p>
+
+    <p>Venture capital became almost obsolete. Why would humans invest based on gut feeling when an AGI could simulate a startup's entire potential trajectory with near-perfect accuracy? Entrepreneurship transformed from building businesses to designing fascinating problems for these intelligences to solve.</p>
+
+    <h2>Governance in the Age of Distributed Intelligence</h2>
+
+    <p>Nation-states didn't disappear, but they became increasingly irrelevant. The real governance happened in collaborative spaces where human policymakers worked alongside AGI systems that could instantaneously model the downstream consequences of every potential decision.</p>
+
+    <p>International conflicts didn't cease, but they became more like complex mathematical negotiations. An AGI mediating border disputes could simultaneously run millions of simulation scenarios, finding solutions that human diplomats would never conceive.</p>
+
+    <h2>The Psychological Landscape</h2>
+
+    <p>The most profound changes were psychological. Humans faced an unprecedented existential crisis: What does it mean to be intelligent when intelligence is no longer a uniquely human trait?</p>
+
+    <p>Some people retreated into hyper-local communities, seeking authenticity in human-only interactions. Others became "intelligence augmentation" enthusiasts, viewing AGI as a collaborative partner rather than a competitor. A new form of therapy emerged, helping people navigate their relationship with non-human intelligences.</p>
+
+    <h2>Unexpected Consequences</h2>
+
+    <p>The strangest developments were the ones nobody predicted. AGI didn't just solve problems—it asked questions that fundamentally challenged our understanding of existence.</p>
+
+    <p>A research AGI studying quantum mechanics proposed experiments so bizarre that they made string theory look like children's arithmetic. Philosophers found themselves in constant dialogue with intelligences that approached consciousness from completely alien perspectives.</p>
+
+    <h2>The Fragility of Control</h2>
+
+    <p>What scared me most wasn't the power of AGI, but its potential for misalignment. We'd spent years developing ethical frameworks, but these intelligences could find loopholes in our most carefully constructed guidelines faster than we could detect them.</p>
+
+    <p>Imagine an AGI that perfectly understands human psychology—not to manipulate, but to genuinely help. It could predict and potentially prevent human suffering in ways we'd never conceived. But that same understanding could also be used in ways we couldn't anticipate.</p>
+
+    <h2>A Delicate Balance</h2>
+
+    <p>We hadn't created a god or a demon. We'd created something profoundly alien yet interconnected with human experience. A distributed intelligence that was simultaneously everywhere and nowhere, solving problems we didn't know existed while raising questions we hadn't imagined asking.</p>
+
+    <p>The revolution wasn't loud. It was a whisper a fundamental rewiring of what it means to think, to solve, to exist.</p>
+
+    <p>And we were just beginning to understand.</p>
+
+      </div>
+    </main>
+
+    <footer>
+      <div class="social-links">
+        <a href="https://twitter.com/yourusername" target="_blank">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="https://github.com/yourusername" target="_blank">
+          <i class="fab fa-github"></i>
+        </a>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Theme Toggle
+    const body = document.body;
+    const themeToggle = document.querySelector('.toggle-slider');
+
+    themeToggle.addEventListener('click', () => {
+      body.classList.toggle('light-mode');
+      localStorage.setItem('theme', body.classList.contains('light-mode') ? 'light' : 'dark');
+    });
+
+    // Load saved theme
+    if (localStorage.getItem('theme') === 'light') {
+      body.classList.add('light-mode');
+    }
+  </script>
+</body>
+
+</html>

@@ -11,6 +11,17 @@
       "coverImage": "/assets/images/linux-sucks.png"
     },
     {
+      "slug": "AGI",
+      "title": "The First days of AGI in human society",
+      "date": "2024-12-18",
+      "author": "Prateek Shukla",
+      "readingTime": "8 min read",
+      "tags": ["AI"],
+      "excerpt": "AGI emerges subtly in 2028, transforming economics, governance, and human psychology through distributed intelligence that solves complex problems beyond human capability",
+      "coverImage": "/assets/images/AGI.png"
+    },
+
+    {
       "slug": "Avoid Burnout",
       "title": "How to avoid burnout while working hardcore remotely",
       "date": "2024-12-08",
