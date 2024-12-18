@@ -342,22 +342,77 @@ if (localStorage.getItem('theme') === 'light') {
   body.classList.add('light-mode');
 }
 
+// Create a function to render the main page layout
+function renderMainPageLayout() {
+  return `
+    <div class="container">
+      <header>
+        <div class="header-content">
+          <a href="/" class="home-icon">
+            <i class="fas fa-home"></i>
+          </a>
+          <div class="theme-toggle">
+            <i class="fas fa-moon"></i>
+            <div class="toggle-slider">
+              <div class="slider-icon"></div>
+            </div>
+            <i class="fas fa-sun"></i>
+          </div>
+        </div>
+        <div class="labels">
+          <span class="label active" data-tag="all">All</span>
+          <span class="label" data-tag="AI">AI</span>
+          <span class="label" data-tag="Philosophy">Philosophy</span>
+          <span class="label" data-tag="Life">Life</span>
+          <span class="label" data-tag="Others">Others</span>
+          <span class="label" data-tag="Neuroscience">Neuroscience</span>
+        </div>
+      </header>
+
+      <main>
+        <div class="posts">
+          <div class="loading">Loading posts...</div>
+        </div>
+      </main>
+
+      <footer>
+        <div class="social-links">
+          <a href="https://twitter.com/yourusername" target="_blank">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="https://github.com/yourusername" target="_blank">
+            <i class="fab fa-github"></i>
+          </a>
+        </div>
+      </footer>
+    </div>
+  `;
+}
+
 // Handle post click and load markdown content
 async function handlePostClick(slug) {
   try {
-    const response = await fetch(`/blog/posts/${slug}.md`);
-    if (!response.ok) throw new Error('Failed to load post');
-    const markdown = await response.text();
-    const htmlContent = marked.parse(markdown);
-    const tempContainer = document.createElement('div');
-    tempContainer.innerHTML = htmlContent;
+    // First, fetch the post details from the JSON
+    const postResponse = await fetch('/blog/posts.json');
+    const postData = await postResponse.json();
+    const post = postData.posts.find(p => p.slug === slug);
 
+    if (!post) throw new Error('Post not found');
+
+    // Fetch the markdown content
+    const markdownResponse = await fetch(`/blog/posts/${slug}.md`);
+    if (!markdownResponse.ok) throw new Error('Failed to load post markdown');
+    
+    const markdown = await markdownResponse.text();
+    const htmlContent = marked.parse(markdown);
+
+    // Create a full page view for the post
     document.body.innerHTML = `
       <div class="container">
         <header>
           <div class="header-content">
             <a href="/" class="home-icon">
-              <i class="fas fa-home"></i>
+              <i class="fas fa-home" onclick="reloadMainPage()"></i>
             </a>
             <div class="theme-toggle">
               <i class="fas fa-moon"></i>
@@ -369,29 +424,53 @@ async function handlePostClick(slug) {
           </div>
         </header>
         <main>
-          <div class="post">${tempContainer.innerHTML}</div>
+          <article class="post-full">
+            <h1 class="post-title">${post.title}</h1>
+            <div class="post-meta">
+              <span class="post-date"><i class="far fa-calendar"></i> ${new Date(post.date).toLocaleDateString()}</span>
+              <span class="post-author"><i class="far fa-user"></i> ${post.author}</span>
+              <span class="post-reading-time"><i class="far fa-clock"></i> ${post.readingTime}</span>
+            </div>
+            ${post.coverImage ? `<img src="${post.coverImage}" alt="${post.title}" class="post-cover">` : ''}
+            <div class="post-content">${htmlContent}</div>
+          </article>
         </main>
-      </div>`;
-    
-    // Reattach theme toggle functionality
+      </div>
+    `;
+
+    // Reattach theme toggle and other functionalities
     reattachThemeToggle();
   } catch (error) {
     console.error('Error loading post:', error);
     alert('Error loading post. Please try again later.');
+    reloadMainPage();
   }
+}
+
+// Reload main page
+function reloadMainPage() {
+  document.body.innerHTML = renderMainPageLayout();
+  
+  // Reattach theme toggle
+  reattachThemeToggle();
+  
+  // Reload blog posts
+  loadBlogPosts();
 }
 
 // Reattach theme toggle functionality
 function reattachThemeToggle() {
   const newThemeToggle = document.querySelector('.toggle-slider');
-  newThemeToggle.addEventListener('click', () => {
-    body.classList.toggle('light-mode');
-    localStorage.setItem('theme', body.classList.contains('light-mode') ? 'light' : 'dark');
-  });
+  if (newThemeToggle) {
+    newThemeToggle.addEventListener('click', () => {
+      body.classList.toggle('light-mode');
+      localStorage.setItem('theme', body.classList.contains('light-mode') ? 'light' : 'dark');
+    });
 
-  // Restore previous theme
-  if (localStorage.getItem('theme') === 'light') {
-    body.classList.add('light-mode');
+    // Restore previous theme
+    if (localStorage.getItem('theme') === 'light') {
+      body.classList.add('light-mode');
+    }
   }
 }
 
@@ -420,7 +499,7 @@ function displayPosts(posts) {
   }
 
   postsContainer.innerHTML = posts.map(post => `
-    <a href="#" class="post-link" onclick="handlePostClick('${post.slug}'); return false;">
+    <div class="post-link" onclick="handlePostClick('${post.slug}')">
       <article class="post">
         <div class="post-header">
           ${post.coverImage ? `<img src="${post.coverImage}" alt="${post.title}" class="post-cover">` : ''}
@@ -433,43 +512,14 @@ function displayPosts(posts) {
         </div>
 
         <div class="post-tags">
-          ${post.tags.map(tag => `<span class="tag" onclick="filterPosts('${tag}'); event.stopPropagation();">${tag}</span>`).join('')}
+          ${post.tags.map(tag => `<span class="tag" onclick="event.stopPropagation(); filterPosts('${tag}')">${tag}</span>`).join('')}
         </div>
 
         <p class="post-excerpt">${post.excerpt}</p>
 
         <div class="read-more">Read More</div>
       </article>
-    </a>`).join('');
-}
-
-// Live reload functionality
-function setupLiveReload() {
-  // Check for new posts every 60 seconds
-  setInterval(async () => {
-    try {
-      const response = await fetch('/blog/posts.json');
-      const data = await response.json();
-      
-      // Compare the new posts with existing posts
-      const newPosts = data.posts.filter(newPost => 
-        !allPosts.some(existingPost => existingPost.slug === newPost.slug)
-      );
-
-      if (newPosts.length > 0) {
-        // Add new posts to the existing posts
-        allPosts = [...newPosts, ...allPosts].sort((a, b) => new Date(b.date) - new Date(a.date));
-        
-        // Reapply current filter
-        filterPosts(currentTag);
-
-        // Optional: Show a notification about new posts
-        console.log(`${newPosts.length} new post(s) added!`);
-      }
-    } catch (error) {
-      console.error('Error checking for new posts:', error);
-    }
-  }, 60000); // Check every minute
+    </div>`).join('');
 }
 
 // Load blog posts
@@ -489,9 +539,6 @@ async function loadBlogPosts() {
     document.querySelectorAll('.label').forEach(label => {
       label.addEventListener('click', () => filterPosts(label.dataset.tag));
     });
-
-    // Setup live reload
-    setupLiveReload();
   } catch (error) {
     console.error('Error loading blog posts:', error);
     document.querySelector('.posts').innerHTML = `
@@ -503,8 +550,7 @@ async function loadBlogPosts() {
 }
 
 // Load posts when the page loads
-document.addEventListener('DOMContentLoaded', loadBlogPosts);
-  </script>
+document.addEventListener('DOMContentLoaded', loadBlogPosts);  </script>
 
 </body>
 
