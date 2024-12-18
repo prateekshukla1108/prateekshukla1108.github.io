@@ -323,10 +323,10 @@
   </div>
 
   <script>
-
 // Global state
 let allPosts = [];
 let currentTag = 'all';
+let lastModified = null; // To store the last modified time
 
 // Theme Toggle
 const body = document.body;
@@ -342,135 +342,32 @@ if (localStorage.getItem('theme') === 'light') {
   body.classList.add('light-mode');
 }
 
-// Create a function to render the main page layout
-function renderMainPageLayout() {
-  return `
-    <div class="container">
-      <header>
-        <div class="header-content">
-          <a href="/" class="home-icon">
-            <i class="fas fa-home"></i>
-          </a>
-          <div class="theme-toggle">
-            <i class="fas fa-moon"></i>
-            <div class="toggle-slider">
-              <div class="slider-icon"></div>
-            </div>
-            <i class="fas fa-sun"></i>
-          </div>
-        </div>
-        <div class="labels">
-          <span class="label active" data-tag="all">All</span>
-          <span class="label" data-tag="AI">AI</span>
-          <span class="label" data-tag="Philosophy">Philosophy</span>
-          <span class="label" data-tag="Life">Life</span>
-          <span class="label" data-tag="Others">Others</span>
-          <span class="label" data-tag="Neuroscience">Neuroscience</span>
-        </div>
-      </header>
-
-      <main>
-        <div class="posts">
-          <div class="loading">Loading posts...</div>
-        </div>
-      </main>
-
-      <footer>
-        <div class="social-links">
-          <a href="https://twitter.com/yourusername" target="_blank">
-            <i class="fab fa-twitter"></i>
-          </a>
-          <a href="https://github.com/yourusername" target="_blank">
-            <i class="fab fa-github"></i>
-          </a>
-        </div>
-      </footer>
-    </div>
-  `;
-}
-
 // Handle post click and load markdown content
 async function handlePostClick(slug) {
   try {
-    // First, fetch the post details from the JSON
-    const postResponse = await fetch('/blog/posts.json');
-    const postData = await postResponse.json();
-    const post = postData.posts.find(p => p.slug === slug);
-
-    if (!post) throw new Error('Post not found');
-
-    // Fetch the markdown content
-    const markdownResponse = await fetch(`/blog/posts/${slug}.html`);
-    if (!markdownResponse.ok) throw new Error('Failed to load post markdown');
-    
-    const markdown = await markdownResponse.text();
+    const response = await fetch(`/blog/posts/${slug}.md`, { cache: 'no-cache' });
+    if (!response.ok) throw new Error('Failed to load post');
+    const markdown = await response.text();
     const htmlContent = marked.parse(markdown);
+    const tempContainer = document.createElement('div');
+    tempContainer.innerHTML = htmlContent;
 
-    // Create a full page view for the post
     document.body.innerHTML = `
       <div class="container">
-        <header>
-          <div class="header-content">
-            <a href="/" class="home-icon">
-              <i class="fas fa-home" onclick="reloadMainPage()"></i>
-            </a>
-            <div class="theme-toggle">
-              <i class="fas fa-moon"></i>
-              <div class="toggle-slider">
-                <div class="slider-icon"></div>
+          <header>
+              <div class="header-content">
+                  <a href="/" class="home-icon">
+                      <i class="fas fa-home"></i>
+                  </a>
               </div>
-              <i class="fas fa-sun"></i>
-            </div>
-          </div>
-        </header>
-        <main>
-          <article class="post-full">
-            <h1 class="post-title">${post.title}</h1>
-            <div class="post-meta">
-              <span class="post-date"><i class="far fa-calendar"></i> ${new Date(post.date).toLocaleDateString()}</span>
-              <span class="post-author"><i class="far fa-user"></i> ${post.author}</span>
-              <span class="post-reading-time"><i class="far fa-clock"></i> ${post.readingTime}</span>
-            </div>
-            ${post.coverImage ? `<img src="${post.coverImage}" alt="${post.title}" class="post-cover">` : ''}
-            <div class="post-content">${htmlContent}</div>
-          </article>
-        </main>
-      </div>
-    `;
-
-    // Reattach theme toggle and other functionalities
-    reattachThemeToggle();
+          </header>
+          <main>
+              <div class="post">${tempContainer.innerHTML}</div>
+          </main>
+      </div>`;
   } catch (error) {
     console.error('Error loading post:', error);
     alert('Error loading post. Please try again later.');
-    reloadMainPage();
-  }
-}
-
-// Reload main page
-function reloadMainPage() {
-  document.body.innerHTML = renderMainPageLayout();
-  
-  // Reattach theme toggle
-  reattachThemeToggle();
-  
-  // Reload blog posts
-  loadBlogPosts();
-}
-
-// Reattach theme toggle functionality
-function reattachThemeToggle() {
-  const newThemeToggle = document.querySelector('.toggle-slider');
-  if (newThemeToggle) {
-    newThemeToggle.addEventListener('click', () => {
-      body.classList.toggle('light-mode');
-      localStorage.setItem('theme', body.classList.contains('light-mode') ? 'light' : 'dark');
-    });
-
-    // Restore previous theme
-    if (localStorage.getItem('theme') === 'light') {
-      body.classList.add('light-mode');
-    }
   }
 }
 
@@ -499,58 +396,81 @@ function displayPosts(posts) {
   }
 
   postsContainer.innerHTML = posts.map(post => `
-    <div class="post-link" onclick="handlePostClick('${post.slug}')">
-      <article class="post">
-        <div class="post-header">
-          ${post.coverImage ? `<img src="${post.coverImage}" alt="${post.title}" class="post-cover">` : ''}
-          <h2 class="post-title">${post.title}</h2>
-          <div class="post-meta">
-            <span class="post-date"><i class="far fa-calendar"></i> ${new Date(post.date).toLocaleDateString()}</span>
-            <span class="post-author"><i class="far fa-user"></i> ${post.author}</span>
-            <span class="post-reading-time"><i class="far fa-clock"></i> ${post.readingTime}</span>
-          </div>
-        </div>
+    <a href="/blog/posts/${post.slug}.html" class="post-link">
+        <article class="post">
+            <div class="post-header">
+                ${post.coverImage ? `<img src="${post.coverImage}" alt="${post.title}" class="post-cover">` : ''}
+                <h2 class="post-title">${post.title}</h2>
+                <div class="post-meta">
+                    <span class="post-date"><i class="far fa-calendar"></i> ${new Date(post.date).toLocaleDateString()}</span>
+                    <span class="post-author"><i class="far fa-user"></i> ${post.author}</span>
+                    <span class="post-reading-time"><i class="far fa-clock"></i> ${post.readingTime}</span>
+                </div>
+            </div>
 
-        <div class="post-tags">
-          ${post.tags.map(tag => `<span class="tag" onclick="event.stopPropagation(); filterPosts('${tag}')">${tag}</span>`).join('')}
-        </div>
+            <div class="post-tags">
+                ${post.tags.map(tag => `<span class="tag" onclick="filterPosts('${tag}')">${tag}</span>`).join('')}
+            </div>
 
-        <p class="post-excerpt">${post.excerpt}</p>
+            <p class="post-excerpt">${post.excerpt}</p>
 
-        <div class="read-more">Read More</div>
-      </article>
-    </div>`).join('');
+            <div class="read-more">Read More</div>
+        </article>
+    </a>`).join('');
 }
 
 // Load blog posts
 async function loadBlogPosts() {
   try {
-    const response = await fetch('/blog/posts.json');
-    const data = await response.json();
-    allPosts = data.posts;
+    let headers = {};
 
-    // Sort posts by date (newest first)
-    allPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+    // If lastModified exists, send it in the If-Modified-Since header
+    if (lastModified) {
+      headers = { 'If-Modified-Since': lastModified };
+    }
 
-    // Display all posts initially
-    filterPosts('all');
+    const response = await fetch('/blog/posts.json', { headers, cache: 'no-cache' });
 
-    // Add click handlers to labels
-    document.querySelectorAll('.label').forEach(label => {
-      label.addEventListener('click', () => filterPosts(label.dataset.tag));
-    });
+    if (response.status === 304) {
+      // Not modified, do nothing
+      return;
+    } else if (response.ok) {
+      const data = await response.json();
+      allPosts = data.posts;
+
+      // Get the new Last-Modified header
+      lastModified = response.headers.get('Last-Modified');
+
+      // Sort posts by date (newest first)
+      allPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+      // Display all posts initially
+      filterPosts('all');
+    } else {
+      throw new Error('Failed to load blog posts');
+    }
   } catch (error) {
     console.error('Error loading blog posts:', error);
     document.querySelector('.posts').innerHTML = `
       <div class="error">
-        <p>Error loading posts. Please try again later.</p>
-        <p>Error details: ${error.message}</p>
+          <p>Error loading posts. Please try again later.</p>
+          <p>Error details: ${error.message}</p>
       </div>`;
   }
 }
 
 // Load posts when the page loads
-document.addEventListener('DOMContentLoaded', loadBlogPosts);  </script>
+document.addEventListener('DOMContentLoaded', loadBlogPosts);
+
+// Set interval to check for updates every 60 seconds
+setInterval(loadBlogPosts, 60000);
+
+// Add click handlers to labels
+document.querySelectorAll('.label').forEach(label => {
+  label.addEventListener('click', () => filterPosts(label.dataset.tag));
+}); 
+
+</script>
 
 </body>
 
