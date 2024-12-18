@@ -323,130 +323,187 @@
   </div>
 
   <script>
-    // Global state
-    let allPosts = [];
-    let currentTag = 'all';
 
-    // Theme Toggle
-    const body = document.body;
+// Global state
+let allPosts = [];
+let currentTag = 'all';
 
-    const themeToggle = document.querySelector('.toggle-slider');
-    themeToggle.addEventListener('click', () => {
-      body.classList.toggle('light-mode');
-      localStorage.setItem('theme', body.classList.contains('light-mode') ? 'light' : 'dark');
+// Theme Toggle
+const body = document.body;
+
+const themeToggle = document.querySelector('.toggle-slider');
+themeToggle.addEventListener('click', () => {
+  body.classList.toggle('light-mode');
+  localStorage.setItem('theme', body.classList.contains('light-mode') ? 'light' : 'dark');
+});
+
+// Load saved theme
+if (localStorage.getItem('theme') === 'light') {
+  body.classList.add('light-mode');
+}
+
+// Handle post click and load markdown content
+async function handlePostClick(slug) {
+  try {
+    const response = await fetch(`/blog/posts/${slug}.md`);
+    if (!response.ok) throw new Error('Failed to load post');
+    const markdown = await response.text();
+    const htmlContent = marked.parse(markdown);
+    const tempContainer = document.createElement('div');
+    tempContainer.innerHTML = htmlContent;
+
+    document.body.innerHTML = `
+      <div class="container">
+        <header>
+          <div class="header-content">
+            <a href="/" class="home-icon">
+              <i class="fas fa-home"></i>
+            </a>
+            <div class="theme-toggle">
+              <i class="fas fa-moon"></i>
+              <div class="toggle-slider">
+                <div class="slider-icon"></div>
+              </div>
+              <i class="fas fa-sun"></i>
+            </div>
+          </div>
+        </header>
+        <main>
+          <div class="post">${tempContainer.innerHTML}</div>
+        </main>
+      </div>`;
+    
+    // Reattach theme toggle functionality
+    reattachThemeToggle();
+  } catch (error) {
+    console.error('Error loading post:', error);
+    alert('Error loading post. Please try again later.');
+  }
+}
+
+// Reattach theme toggle functionality
+function reattachThemeToggle() {
+  const newThemeToggle = document.querySelector('.toggle-slider');
+  newThemeToggle.addEventListener('click', () => {
+    body.classList.toggle('light-mode');
+    localStorage.setItem('theme', body.classList.contains('light-mode') ? 'light' : 'dark');
+  });
+
+  // Restore previous theme
+  if (localStorage.getItem('theme') === 'light') {
+    body.classList.add('light-mode');
+  }
+}
+
+// Filter posts by tag
+function filterPosts(tag) {
+  currentTag = tag;
+
+  const filteredPosts = tag === 'all' ? allPosts :
+    allPosts.filter(post => post.tags.includes(tag));
+
+  displayPosts(filteredPosts);
+
+  // Update active label
+  document.querySelectorAll('.label').forEach(label => {
+    label.classList.toggle('active', label.dataset.tag === tag);
+  });
+}
+
+// Display posts function
+function displayPosts(posts) {
+  const postsContainer = document.querySelector('.posts');
+
+  if (posts.length === 0) {
+    postsContainer.innerHTML = '<div class="error">No posts found</div>';
+    return;
+  }
+
+  postsContainer.innerHTML = posts.map(post => `
+    <a href="#" class="post-link" onclick="handlePostClick('${post.slug}'); return false;">
+      <article class="post">
+        <div class="post-header">
+          ${post.coverImage ? `<img src="${post.coverImage}" alt="${post.title}" class="post-cover">` : ''}
+          <h2 class="post-title">${post.title}</h2>
+          <div class="post-meta">
+            <span class="post-date"><i class="far fa-calendar"></i> ${new Date(post.date).toLocaleDateString()}</span>
+            <span class="post-author"><i class="far fa-user"></i> ${post.author}</span>
+            <span class="post-reading-time"><i class="far fa-clock"></i> ${post.readingTime}</span>
+          </div>
+        </div>
+
+        <div class="post-tags">
+          ${post.tags.map(tag => `<span class="tag" onclick="filterPosts('${tag}'); event.stopPropagation();">${tag}</span>`).join('')}
+        </div>
+
+        <p class="post-excerpt">${post.excerpt}</p>
+
+        <div class="read-more">Read More</div>
+      </article>
+    </a>`).join('');
+}
+
+// Live reload functionality
+function setupLiveReload() {
+  // Check for new posts every 60 seconds
+  setInterval(async () => {
+    try {
+      const response = await fetch('/blog/posts.json');
+      const data = await response.json();
+      
+      // Compare the new posts with existing posts
+      const newPosts = data.posts.filter(newPost => 
+        !allPosts.some(existingPost => existingPost.slug === newPost.slug)
+      );
+
+      if (newPosts.length > 0) {
+        // Add new posts to the existing posts
+        allPosts = [...newPosts, ...allPosts].sort((a, b) => new Date(b.date) - new Date(a.date));
+        
+        // Reapply current filter
+        filterPosts(currentTag);
+
+        // Optional: Show a notification about new posts
+        console.log(`${newPosts.length} new post(s) added!`);
+      }
+    } catch (error) {
+      console.error('Error checking for new posts:', error);
+    }
+  }, 60000); // Check every minute
+}
+
+// Load blog posts
+async function loadBlogPosts() {
+  try {
+    const response = await fetch('/blog/posts.json');
+    const data = await response.json();
+    allPosts = data.posts;
+
+    // Sort posts by date (newest first)
+    allPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+    // Display all posts initially
+    filterPosts('all');
+
+    // Add click handlers to labels
+    document.querySelectorAll('.label').forEach(label => {
+      label.addEventListener('click', () => filterPosts(label.dataset.tag));
     });
 
-    // Load saved theme
-    if (localStorage.getItem('theme') === 'light') {
-      body.classList.add('light-mode');
-    }
+    // Setup live reload
+    setupLiveReload();
+  } catch (error) {
+    console.error('Error loading blog posts:', error);
+    document.querySelector('.posts').innerHTML = `
+      <div class="error">
+        <p>Error loading posts. Please try again later.</p>
+        <p>Error details: ${error.message}</p>
+      </div>`;
+  }
+}
 
-    // Handle post click and load markdown content
-    async function handlePostClick(slug) {
-      try {
-        const response = await fetch(`/blog/posts/${slug}.md`);
-        if (!response.ok) throw new Error('Failed to load post');
-        const markdown = await response.text();
-        const htmlContent = marked.parse(markdown);
-        const tempContainer = document.createElement('div');
-        tempContainer.innerHTML = htmlContent;
-
-        document.body.innerHTML = `
-                    <div class="container">
-                        <header>
-                            <div class="header-content">
-                                <a href="/" class="home-icon">
-                                    <i class="fas fa-home"></i>
-                                </a>
-                            </div>
-                        </header>
-                        <main>
-                            <div class="post">${tempContainer.innerHTML}</div>
-                        </main>
-                    </div>`;
-      } catch (error) {
-        console.error('Error loading post:', error);
-        alert('Error loading post. Please try again later.');
-      }
-    }
-
-    // Filter posts by tag
-    function filterPosts(tag) {
-      currentTag = tag;
-
-      const filteredPosts = tag === 'all' ? allPosts :
-        allPosts.filter(post => post.tags.includes(tag));
-
-      displayPosts(filteredPosts);
-
-      // Update active label
-      document.querySelectorAll('.label').forEach(label => {
-        label.classList.toggle('active', label.dataset.tag === tag);
-      });
-    }
-
-    // Display posts function
-    function displayPosts(posts) {
-      const postsContainer = document.querySelector('.posts');
-
-      if (posts.length === 0) {
-        postsContainer.innerHTML = '<div class="error">No posts found</div>';
-        return;
-      }
-
-      postsContainer.innerHTML = posts.map(post => `
-        <a href="/blog/posts/${post.slug}.html" class="post-link">
-            <article class="post">
-                <div class="post-header">
-                    ${post.coverImage ? `<img src="${post.coverImage}" alt="${post.title}" class="post-cover">` : ''}
-                    <h2 class="post-title">${post.title}</h2>
-                    <div class="post-meta">
-                        <span class="post-date"><i class="far fa-calendar"></i> ${new Date(post.date).toLocaleDateString()}</span>
-                        <span class="post-author"><i class="far fa-user"></i> ${post.author}</span>
-                        <span class="post-reading-time"><i class="far fa-clock"></i> ${post.readingTime}</span>
-                    </div>
-                </div>
-
-                <div class="post-tags">
-                    ${post.tags.map(tag => `<span class="tag" onclick="filterPosts('${tag}')">${tag}</span>`).join('')}
-                </div>
-
-                <p class="post-excerpt">${post.excerpt}</p>
-
-                <div class="read-more">Read More</div>
-            </article>
-        </a>`).join('');
-    }
-
-    // Load blog posts
-    async function loadBlogPosts() {
-      try {
-        const response = await fetch('/blog/posts.json');
-        const data = await response.json();
-        allPosts = data.posts;
-
-        // Sort posts by date (newest first)
-        allPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-        // Display all posts initially
-        filterPosts('all');
-
-        // Add click handlers to labels
-        document.querySelectorAll('.label').forEach(label => {
-          label.addEventListener('click', () => filterPosts(label.dataset.tag));
-        });
-      } catch (error) {
-        console.error('Error loading blog posts:', error);
-        document.querySelector('.posts').innerHTML = `
-                    <div class="error">
-                        <p>Error loading posts. Please try again later.</p>
-                        <p>Error details: ${error.message}</p>
-                    </div>`;
-      }
-    }
-
-    // Load posts when the page loads
-    document.addEventListener('DOMContentLoaded', loadBlogPosts);
+// Load posts when the page loads
+document.addEventListener('DOMContentLoaded', loadBlogPosts);
   </script>
 
 </body>
