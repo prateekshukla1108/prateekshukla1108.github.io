@@ -400,7 +400,7 @@ async function handlePostClick(slug) {
     if (!post) throw new Error('Post not found');
 
     // Fetch the markdown content
-    const markdownResponse = await fetch(`/blog/posts/${slug}.md`);
+    const markdownResponse = await fetch(`/blog/posts/${slug}.html`);
     if (!markdownResponse.ok) throw new Error('Failed to load post markdown');
     
     const markdown = await markdownResponse.text();
