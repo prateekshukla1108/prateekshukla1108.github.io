@@ -20,6 +20,17 @@
       "excerpt": "AGI emerges subtly in 2028, transforming economics, governance, and human psychology through distributed intelligence that solves complex problems beyond human capability",
       "coverImage": "/assets/images/AGI.png"
     },
+    {
+      "slug": "camus",
+      "title": "Camus: The Myth of the Absurd",
+      "date": "2024-12-23",
+      "author": "Prateek Shukla",
+      "readingTime": "8 min read",
+      "tags": ["Philosophy"],
+      "excerpt": "If life is meaningless, then how to make it wonderful?",
+      "coverImage": "/assets/images/camus.jpg"
+    },
+
 
     {
       "slug": "Avoid Burnout",

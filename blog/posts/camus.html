@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Myth of Sisyphus</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.cdnfonts.com/css/sf-pro-display');
+
+        :root {
+            /* Dark theme variables */
+            --dark-bg: #05040C;
+            --dark-fg: #a8c1f2;
+            --dark-accent: #2a2d3e;
+            --dark-glass-bg: rgba(0, 0, 0, 0.2);
+            --dark-glass-border: rgba(0, 0, 0, 0.3);
+
+            /* Light theme variables */
+            --light-bg: #ffffff;
+            --light-fg: #333333;
+            --light-accent: #f0f2f5;
+            --light-glass-bg: rgba(255, 255, 255, 0.4);
+            --light-glass-border: rgba(0, 0, 0, 0.3);
+
+            /* Default to dark theme */
+            --glass-bg: var(--dark-glass-bg);
+            --glass-border: var(--dark-glass-border);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'SF Pro Display', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--dark-fg);
+            background-image: url('/assets/dark-bg-6.png');
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        body.light-mode {
+            background-color: var(--light-bg);
+            color: var(--light-fg);
+            background-image: url('/assets/light-bg-3.jpg');
+            --glass-bg: var(--light-glass-bg);
+            --glass-border: var(--light-glass-border);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            background: var(--glass-bg);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border: 1px solid var(--glass-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .home-link {
+            color: inherit;
+            font-size: 24px;
+            transition: transform 0.3s ease;
+        }
+
+        .home-link:hover {
+            transform: translateY(-3px);
+        }
+
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toggle-slider {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: var(--dark-accent);
+            border-radius: 30px;
+            cursor: pointer;
+        }
+
+        .light-mode .toggle-slider {
+            background: var(--light-accent);
+        }
+
+        .slider-icon {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            width: 20px;
+            height: 20px;
+            background: #fff;
+            border-radius: 50%;
+            transition: transform 0.3s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .light-mode .slider-icon {
+            transform: translateX(30px);
+        }
+
+        /* Rest of the styles remain the same */
+        .blog-content {
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            background: var(--glass-bg);
+            padding: 40px;
+            border-radius: 15px;
+            border: 1px solid var(--glass-border);
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .blog-title {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .blog-meta {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            opacity: 0.8;
+            font-size: 0.9em;
+        }
+
+        .blog-text {
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .blog-text p {
+            margin-bottom: 20px;
+        }
+
+        .blog-text h2 {
+            font-size: 1.8em;
+            margin: 40px 0 20px;
+        }
+
+        .blog-text h3 {
+            font-size: 1.4em;
+            margin: 30px 0 15px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            background: var(--glass-bg);
+            border-radius: 15px;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .social-links a {
+            color: inherit;
+            font-size: 24px;
+            transition: transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-3px);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            .blog-content {
+                padding: 20px;
+            }
+
+            .blog-title {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="https://prateekshukla1108.github.io" class="home-link">
+                <i class="fas fa-home"></i>
+            </a>
+            <div class="theme-toggle">
+                <i class="fas fa-moon"></i>
+                <div class="toggle-slider">
+                    <div class="slider-icon"></div>
+                </div>
+                <i class="fas fa-sun"></i>
+            </div>
+        </header>
+
+        <main class="blog-content">
+            <h1 class="blog-title">Finding Joy in the Meaningless: A Personal Take on The Myth of Sisyphus</h1>
+
+            <div class="blog-meta">
+                <span><i class="far fa-calendar"></i> December 23, 2024</span>
+                <span><i class="far fa-clock"></i> 8 min read</span>
+            </div>
+
+            <div class="blog-text">
+            
+  <h2></h2>
+
+  <p>Have you ever had one of those moments where you're doing something completely routine – maybe washing dishes or sitting in traffic – and suddenly think, "What's the point of all this?" If so, you've brushed up against what Albert Camus was obsessed with in his famous essay "The Myth of Sisyphus." Let's talk about it, because his insights might just change how you see your daily grind.</p>
+
+  <h3>The Story That Started It All</h3>
+
+  <p>Picture this: There's this guy, Sisyphus, who the gods really had it in for. His punishment? He has to push a massive boulder up a mountain, only to watch it roll back down, every single day, forever. Sounds like a really bad case of the Mondays, right? But Camus saw something fascinating in this story – a perfect picture of our own lives.</p>
+
+  <h3>The Big Question</h3>
+
+  <p>Camus jumps right in with the only philosophical question he thinks really matters: why shouldn't we just kill ourselves? Dark stuff, I know. But stick with me here. He's not being dramatic – he's asking why, if life seems meaningless, we choose to keep going. It's like when you're in the middle of a Netflix series and suddenly wonder why you're spending hours watching strangers' made-up problems. Yet you keep watching, don't you?</p>
+
+  <h3>The Absurd (Not the Funny Kind)</h3>
+
+  <p>Here's where things get interesting. Camus points out this weird gap between what we want and what we get. We desperately want life to make sense, to have some grand purpose. We want the universe to give us a sign, any sign, that it all means something. But the universe just sits there, silent as a teenager being asked about their day. This gap – between our desire for meaning and the universe's cold shoulder – that's what Camus calls "the absurd."</p>
+
+  <h3>Three Ways to Deal</h3>
+
+  <p>When people realize life might be meaningless, they typically do one of three things:</p>
+  <ol>
+    <li>They find religion or philosophy to give them answers (Camus calls this "philosophical suicide" – harsh, right?)</li>
+    <li>They give up entirely (actual suicide, which Camus strongly argues against)</li>
+    <li>They say "whatever" and keep going anyway (this is Camus' favorite)</li>
+  </ol>
+
+  <h3>The Plot Twist</h3>
+
+  <p>Here's where Camus blows our minds. He suggests that the absence of meaning isn't a curse – it's a gift. Think about it: if life has no preset meaning, we're free to create our own. It's like being handed a blank canvas instead of a paint-by-numbers kit.</p>
+
+  <h3>Back to Our Boy Sisyphus</h3>
+
+  <p>Remember Sisyphus? Camus says we need to imagine him happy. Not because pushing rocks is fun, but because he's fully aware of his situation and chooses to own it anyway. It's like knowing your job is basically pointless but deciding to rock it anyway, just because you can.</p>
+
+  <h3>What This Means for Us</h3>
+
+  <p>This is where it gets personal. Think about all the repetitive things we do:</p>
+  <ul>
+    <li>Doing laundry (it'll just get dirty again)</li>
+    <li>Answering emails (they never stop coming)</li>
+    <li>Making our bed (we'll just mess it up tonight)</li>
+  </ul>
+
+  <p>Camus suggests that true happiness comes not from pretending these tasks have some cosmic significance, but from fully embracing their pointlessness and doing them anyway. It's a weird kind of freedom – once you stop expecting life to be meaningful, you can start appreciating it for what it is.</p>
+
+  <h3>Finding Joy in the Meaningless</h3>
+
+  <p>Here's the real kicker: Camus isn't telling us to be miserable because life is meaningless. Instead, he's suggesting that embracing the absurdity of life can make us happier. It's like finally admitting that your favorite reality TV show is completely ridiculous – and loving it even more because of that.</p>
+
+  <h3>The Takeaway</h3>
+
+  <p>So next time you're stuck in a seemingly meaningless situation (hello, compilation timez), remember Sisyphus. You might not be pushing a boulder up a hill, but you're engaged in your own absurd task. And maybe, just maybe, there's something liberating about that.</p>
+
+  <p>The beauty of Camus' message isn't that he solves the meaning of life. It's that he suggests we can be happy without one. It's like realizing you can enjoy the party without knowing why it was thrown in the first place.</p>
+
+  <p>Life might be meaningless, but that doesn't mean it can't be wonderful. And there's something kind of perfect about that.</p>
+            </div>
+        </main>
+
+        <footer>
+            <div class="social-links">
+                <a href="https://twitter.com/yourusername" target="_blank">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://github.com/yourusername" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Theme Toggle
+        const body = document.body;
+        const themeToggle = document.querySelector('.toggle-slider');
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+            localStorage.setItem('theme', body.classList.contains('light-mode') ? 'light' : 'dark');
+        });
+
+        // Load saved theme
+        if (localStorage.getItem('theme') === 'light') {
+            body.classList.add('light-mode');
+        }
+    </script>
+</body>
+</html>
+
