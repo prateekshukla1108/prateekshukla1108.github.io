@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Title</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.cdnfonts.com/css/sf-pro-display');
+
+    :root {
+      /* Dark theme variables */
+      --dark-bg: #05040C;
+      --dark-fg: #C7E3DD;
+      --dark-accent: #2a2d3e;
+      --dark-glass-bg: rgba(0, 0, 0, 0.3);
+      --dark-glass-border: rgba(0, 0, 0, 0.4);
+
+      /* Light theme variables */
+      --light-bg: #ffffff;
+      --light-fg: #333333;
+      --light-accent: #f0f2f5;
+      --light-glass-bg: rgba(255, 255, 255, 0.4);
+      --light-glass-border: rgba(0, 0, 0, 0.3);
+
+      /* Default to dark theme */
+      --glass-bg: var(--dark-glass-bg);
+      --glass-border: var(--dark-glass-border);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'SF Pro Display', sans-serif;
+      transition: all 0.3s ease;
+    }
+
+    body {
+      background-color: var(--dark-bg);
+      color: var(--dark-fg);
+      background-image: url('/assets/dark-bg-3.jpg');
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    body.light-mode {
+      background-color: var(--light-bg);
+      color: var(--light-fg);
+      background-image: url('/assets/light-bg-7.jpeg');
+      --glass-bg: var(--light-glass-bg);
+      --glass-border: var(--light-glass-border);
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    header {
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      background: var(--glass-bg);
+      padding: 20px;
+      border-radius: 15px;
+      margin-bottom: 30px;
+      border: 1px solid var(--glass-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .home-link {
+      color: inherit;
+      font-size: 24px;
+      transition: transform 0.3s ease;
+    }
+
+    .home-link:hover {
+      transform: translateY(-3px);
+    }
+
+    .theme-toggle {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .toggle-slider {
+      position: relative;
+      width: 60px;
+      height: 30px;
+      background: var(--dark-accent);
+      border-radius: 30px;
+      cursor: pointer;
+    }
+
+    .light-mode .toggle-slider {
+      background: var(--light-accent);
+    }
+
+    .slider-icon {
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      width: 20px;
+      height: 20px;
+      background: #fff;
+      border-radius: 50%;
+      transition: transform 0.3s;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .light-mode .slider-icon {
+      transform: translateX(30px);
+    }
+
+    /* Rest of the styles remain the same */
+    .blog-content {
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      background: var(--glass-bg);
+      padding: 40px;
+      border-radius: 15px;
+      border: 1px solid var(--glass-border);
+      margin-bottom: 30px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .blog-title {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+
+    .blog-meta {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 30px;
+      opacity: 0.8;
+      font-size: 0.9em;
+    }
+
+    .blog-text {
+      font-size: 1.1em;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .blog-text p {
+      margin-bottom: 20px;
+    }
+
+    .blog-text h2 {
+      font-size: 1.8em;
+      margin: 40px 0 20px;
+    }
+
+    .blog-text h3 {
+      font-size: 1.4em;
+      margin: 30px 0 15px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      background: var(--glass-bg);
+      border-radius: 15px;
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .social-links a {
+      color: inherit;
+      font-size: 24px;
+      transition: transform 0.3s ease;
+    }
+
+    .social-links a:hover {
+      transform: translateY(-3px);
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 10px;
+      }
+
+      .blog-content {
+        padding: 20px;
+      }
+
+      .blog-title {
+        font-size: 2em;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <a href="https://prateekshukla1108.github.io" class="home-link">
+        <i class="fas fa-home"></i>
+      </a>
+      <div class="theme-toggle">
+        <i class="fas fa-moon"></i>
+        <div class="toggle-slider">
+          <div class="slider-icon"></div>
+        </div>
+        <i class="fas fa-sun"></i>
+      </div>
+    </header>
+
+    <main class="blog-content">
+      <h1 class="blog-title">Imposter Syndrome: A growing plague in tech</h1>
+
+      <div class="blog-meta">
+        <span><i class="far fa-calendar"></i> January 12, 2025</span>
+        <span><i class="far fa-clock"></i> 8 min read</span>
+      </div>
+
+      <div class="blog-text">
+    <p>In today's tech world, many individuals struggle with self-doubt and imposter syndrome, which is particularly prevalent in the tech industry. With the rise of tools like Copilot, developers are experiencing a double-edged sword: while such tools can boost productivity, they also foster growing dependency. Over time, this reliance causes many people to doubt themselves and question their current achievements. Here are some observations on how imposter syndrome manifests in this context.</p>
+
+    <h2>What's Happening</h2>
+    <p>In today's tech world where layoffs abound, people are trying to constantly upskill. They face pressure to continuously learn new technologies, meet the expectation of being a "10x engineer," and deal with the glorification of overwork and burnout.</p>
+
+    <p>With Copilot automating parts of coding, developers feel like they're "cheating" or not doing "real work," especially when they compare themselves to idealized standards of what a "real programmer" should be. The fear of being replaced or devalued by AI tools can exacerbate feelings of inadequacy.</p>
+
+    <h2>Why Imposter Syndrome is Harmful</h2>
+    <p>Developers constantly question their abilities, even when they achieve success. This can lead to a persistent fear of being "found out" as a fraud, which is not a healthy way to live.</p>
+
+    <p>There's more to it: people compensate for feelings of inadequacy by setting unrealistically high standards for themselves, and when they fail to achieve them, the fear strengthens. When this cycle continues, people attribute their success to luck, timing, or external factors rather than their own skills and effort.</p>
+
+    <p>Everyone should take this seriously because it's not a self-contained problem. Developers transmit these issues to their counterparts, which spreads the problem further. This causes more fear, and more people get caught in the vicious cycle of imposter syndrome. These stereotypes become increasingly prevalent in society.</p>
+
+    <h2>My Views on Overcoming Imposter Syndrome</h2>
+
+    <h3>AI is Inevitable</h3>
+    <p>As time progresses and models improve, AI will be increasingly used in the industry. This is the reality that no one can avoid. Instead of viewing AI tools as threats to your identity as a developer, consider them as part of the broader technological landscape.</p>
+
+    <p>You are better than AI because you control AI. As developers, you are the ones who decide what problems to solve, what goals to pursue, and how to interpret the outputs of AI tools. Your creativity is not limited to patterns or data. You can imagine entirely new systems, solve problems in unconventional ways, and bring a unique perspective to your work.</p>
+
+    <h3>Get Rid of Societal Expectations</h3>
+    <p>Imposter syndrome is a form of "bad faith" or self-deception, where you deny your freedom and responsibility by clinging to external judgments or labels. By accepting imposter syndrome as an unchangeable truth, you are avoiding the responsibility of defining yourself.</p>
+
+    <p>Many people are still tied to society's values and expectations rather than creating their own path. If your life were to repeat endlessly, living authentically would mean not being plagued by the fear of being "found out" as an imposter, because you would be fully aligned with your own values and desires.</p>
+
+    <p>Reject comparing yourself to others or internalizing external judgments. Instead, define your own values and metrics of success that are practical and focused on creating value.</p>
+
+    <h3>Why This Makes Sense</h3>
+    <p>Many people will think that these ideals don't work when you're working for a company and constantly benchmarked by your boss and feel threatened by AI.</p>
+
+    <p>It's easy to feel isolated when you're stuck in a cycle of self-doubt and pressure. But the truth is, everyone in tech feels this way at some point. When you stop beating yourself up for every mistake, you free up energy to learn, improve, and innovate. And that's what your boss (and your career) really needs from you.</p>
+
+    <p>AI isn't going anywhere, and neither is the pressure to perform. But here's the good news: the developers who thrive in this new era won't be the ones who resist change—they'll be the ones who embrace it. By learning to work with AI, setting realistic goals, and focusing on your unique strengths, you're not just surviving—you're positioning yourself as a leader in the tech industry.</p>
+
+    <h3>Shape Yourself</h3>
+    <p>Instead of feeling inadequate, one should view AI as a tool to amplify their abilities and transcend limitations. For the first time in history, you are not limited by your own capabilities to solve huge problems. You are free to choose how you interpret your experiences. Instead of fearing inadequacy, embrace the freedom to learn and grow with AI as a partner.</p>
+
+    <p>See yourself as "Being-in-the-World" alongside technology. You are not separate from the tools you use. They are part of your existence and your way of engaging with the world.</p>
+
+    <p>Don't see technology as purely instrumental, which can lead to a sense of alienation. Instead, see AI as a collaborative partner that enhances rather than diminishes you.</p>
+
+    <h3>There is Nothing Called "Real Programmer"</h3>
+    <p>There is no predefined "essence" of a competent developer or programmer. You are not an imposter because you are constantly creating yourself through your actions and choices. Using AI tools is simply part of that process.</p>
+
+    <p>Act authentically—acknowledge your limitations while taking ownership of your achievements. Using AI tools is not cheating; it's a conscious choice to enhance your capabilities.</p>
+
+    <h3>Ending Comments</h3>
+    <p> Yes, the corporate world is tough. Yes, AI can feel threatening. And yes, imposter syndrome can make everything harder. But these challenges don’t have to define you. By reframing your mindset, leaning on your strengths, and building a support system, you can not only survive but thrive—even in the most demanding environments. The future of tech isn’t about competing with AI or meeting impossible benchmarks. It’s about embracing your humanity, your eccentricity, and your ability to adapt. And that’s something no AI can ever take away from you. </p>
+      </div>
+    </main>
+
+    <footer>
+      <div class="social-links">
+        <a href="https://twitter.com/yourusername" target="_blank">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="https://github.com/yourusername" target="_blank">
+          <i class="fab fa-github"></i>
+        </a>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Theme Toggle
+    const body = document.body;
+    const themeToggle = document.querySelector('.toggle-slider');
+
+    themeToggle.addEventListener('click', () => {
+      body.classList.toggle('light-mode');
+      localStorage.setItem('theme', body.classList.contains('light-mode') ? 'light' : 'dark');
+    });
+
+    // Load saved theme
+    if (localStorage.getItem('theme') === 'light') {
+      body.classList.add('light-mode');
+    }
+  </script>
+</body>
+
+</html>

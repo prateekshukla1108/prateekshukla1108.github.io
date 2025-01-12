@@ -10,7 +10,17 @@
       "excerpt": "A simple note for people who want to start their linux journey",
       "coverImage": "/assets/images/linux-sucks.png"
     },
-    {
+     {
+      "slug": "Imposter Syndrome",
+      "title": "Imposter Syndrome: A Growing Plague in Tech Industry",
+      "date": "2025-01-12",
+      "author": "Prateek Shukla",
+      "readingTime": "8 min read",
+      "tags": ["AI"],
+      "excerpt": "Why is imposter syndrome so dangerous for the tech industry? and how to get out of it",
+      "coverImage": "/assets/images/Imposter.png"
+    },
+   {
       "slug": "AGI",
       "title": "The First days of AGI in human society",
       "date": "2024-12-18",
