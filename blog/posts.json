@@ -11,6 +11,16 @@
       "coverImage": "/assets/images/linux-sucks.png"
     },
     {
+      "slug": "Decisions",
+      "title": "The Value of Time: Choosing What’s Worth Pursuing in a World of Tradeoffs",
+      "date": "2025-02-18",
+      "author": "Prateek Shukla",
+      "readingTime": "8 min read",
+      "tags": ["Philosophy"],
+      "excerpt": "Why to prioritize, Prejudices of modern programmers and finding hope in a World with AI",
+      "coverImage": "/assets/images/priority.png"
+    },
+    {
       "slug": "Existential Crisis",
       "title": "The Unseen Layers: Growing Beyond the Matrix of Comfort",
       "date": "2025-01-26",
