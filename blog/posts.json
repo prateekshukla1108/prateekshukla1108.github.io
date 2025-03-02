@@ -11,6 +11,16 @@
       "coverImage": "/assets/images/linux-sucks.png"
     },
     {
+      "slug": "Career",
+      "title": "Why I don't like the idea of a *Career*",
+      "date": "2025-03-02",
+      "author": "Prateek Shukla",
+      "readingTime": "12 min read",
+      "tags": ["Philosophy"],
+      "excerpt": "Why the idea of career sucks",
+      "coverImage": "/assets/images/career.jpg"
+    },
+    {
       "slug": "Decisions",
       "title": "The Value of Time: Choosing What’s Worth Pursuing in a World of Tradeoffs",
       "date": "2025-02-18",

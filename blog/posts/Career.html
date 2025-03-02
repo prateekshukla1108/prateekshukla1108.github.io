@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Why you don't need a career</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.cdnfonts.com/css/sf-pro-display');
+
+    :root {
+      /* Dark theme variables */
+      --dark-bg: #05040C;
+      --dark-fg: #C7E3DD;
+      --dark-accent: #2a2d3e;
+      --dark-glass-bg: rgba(0, 0, 0, 0.3);
+      --dark-glass-border: rgba(0, 0, 0, 0.4);
+
+      /* Light theme variables */
+      --light-bg: #ffffff;
+      --light-fg: #333333;
+      --light-accent: #f0f2f5;
+      --light-glass-bg: rgba(255, 255, 255, 0.4);
+      --light-glass-border: rgba(0, 0, 0, 0.3);
+
+      /* Default to dark theme */
+      --glass-bg: var(--dark-glass-bg);
+      --glass-border: var(--dark-glass-border);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'SF Pro Display', sans-serif;
+      transition: all 0.3s ease;
+    }
+
+    body {
+      background-color: var(--dark-bg);
+      color: var(--dark-fg);
+      background-image: url('/assets/dark-bg-9.jpg');
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    body.light-mode {
+      background-color: var(--light-bg);
+      color: var(--light-fg);
+      background-image: url('/assets/light-bg-13.png');
+      --glass-bg: var(--light-glass-bg);
+      --glass-border: var(--light-glass-border);
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    header {
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      background: var(--glass-bg);
+      padding: 20px;
+      border-radius: 15px;
+      margin-bottom: 30px;
+      border: 1px solid var(--glass-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .home-link {
+      color: inherit;
+      font-size: 24px;
+      transition: transform 0.3s ease;
+    }
+
+    .home-link:hover {
+      transform: translateY(-3px);
+    }
+
+    .theme-toggle {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .toggle-slider {
+      position: relative;
+      width: 60px;
+      height: 30px;
+      background: var(--dark-accent);
+      border-radius: 30px;
+      cursor: pointer;
+    }
+
+    .light-mode .toggle-slider {
+      background: var(--light-accent);
+    }
+
+    .slider-icon {
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      width: 20px;
+      height: 20px;
+      background: #fff;
+      border-radius: 50%;
+      transition: transform 0.3s;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .light-mode .slider-icon {
+      transform: translateX(30px);
+    }
+
+    /* Rest of the styles remain the same */
+    .blog-content {
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      background: var(--glass-bg);
+      padding: 40px;
+      border-radius: 15px;
+      border: 1px solid var(--glass-border);
+      margin-bottom: 30px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .blog-title {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+
+    .blog-meta {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 30px;
+      opacity: 0.8;
+      font-size: 0.9em;
+    }
+
+    .blog-text {
+      font-size: 1.1em;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .blog-text p {
+      margin-bottom: 20px;
+    }
+
+    .blog-text h2 {
+      font-size: 1.8em;
+      margin: 40px 0 20px;
+    }
+
+    .blog-text h3 {
+      font-size: 1.4em;
+      margin: 30px 0 15px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      background: var(--glass-bg);
+      border-radius: 15px;
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .social-links a {
+      color: inherit;
+      font-size: 24px;
+      transition: transform 0.3s ease;
+    }
+
+    .social-links a:hover {
+      transform: translateY(-3px);
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 10px;
+      }
+
+      .blog-content {
+        padding: 20px;
+      }
+
+      .blog-title {
+        font-size: 2em;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <a href="https://prateekshukla1108.github.io" class="home-link">
+        <i class="fas fa-home"></i>
+      </a>
+      <div class="theme-toggle">
+        <i class="fas fa-moon"></i>
+        <div class="toggle-slider">
+          <div class="slider-icon"></div>
+        </div>
+        <i class="fas fa-sun"></i>
+      </div>
+    </header>
+
+    <main class="blog-content">
+      <h1 class="blog-title">Why I Don't Like the Concept of a "Career"</h1>
+
+      <div class="blog-meta">
+        <span><i class="far fa-calendar"></i> March 2, 2025</span>
+        <span><i class="far fa-clock"></i> 12 min read</span>
+      </div>
+
+      <div class="blog-text">
+
+    <p>A few weeks ago, a 16-year-old kid told me he was feeling sad and depressed because he didn’t know what he wanted to do in life, and everyone around him was pressuring him to choose a career. The idea of a 16-year-old feeling this kind of stress over something that shouldn’t even be a concern at his age just baffled me. It made me realize how so many kids today are expected to have their entire future planned out—as if life is some rigid blueprint they must follow. But that’s crazy! Life isn’t about fitting into a predefined path. It’s about curiosity, freedom, and discovering what truly excites you. So I decided to put everything I think about having a *career* into a blog</p>
+
+
+<h2>Kids Shouldn't Be Stressed About Careers at 16</h2> <p>For many, this anxiety isn't born from their own aspirations but from the heavy expectations placed upon them by well-meaning, yet overzealous, parents. Especially in middle-class families, there's a pervasive fear that if a child doesn't start early, they may never reach their full potential. This fear drives parents to meticulously plan their child’s educational journey, often sending them to the best schools from a very young age in the hope of securing a brighter future.</p> <p>However, this race to excellence comes with its own set of unintended consequences. When millions of kids are thrust into the same competitive environment with nearly identical expectations, something essential gets lost: individuality. The strict discipline and uniformity found in these elite schools can stifle the unique spark that every child possesses. Rather than nurturing innovation, these institutions often promote a herd mentality where conformity overshadows creativity. Kids are trained to follow a predetermined path—a robotic scaling of what has already been discovered—instead of thinking outside the box.</p> <p>The result is a generation conditioned to excel in standardized tests and structured environments but ill-prepared for the unpredictable challenges of real-world innovation. We need a shift in perspective: encouraging kids to explore their passions, embrace uncertainty, and develop a mindset geared towards genuine creativity and problem-solving. By reducing the undue pressure to secure a career early, we allow young minds to thrive, innovate, and eventually contribute in ways that extend far beyond the confines of traditional job roles.</p>
+
+<h2>It’s Okay to Not Know What You’ll Be Doing in 5 Years</h2> <p>The idea that you need a perfect five-year plan is nonsense. Life isn’t an assembly line, and you’re not a machine designed to follow pre-programmed steps. You are human—free to think, change, and carve your own path. So why willingly chain yourself to a rigid plan, pretending you know exactly who you’ll be before you've even become them?</p> <p>The most crucial years of your life shouldn’t be spent executing some lifeless script. Growth isn’t linear, and the world changes faster than any plan can predict. The real tragedy isn’t uncertainty—it’s blindly committing to a future you might not even want when you get there.</p> <p>Let yourself be dynamic. Let curiosity, not fear, guide you. If you don’t know where you’ll be in five years, good. It means you’re still open to becoming something greater than you can currently imagine.</p>
+
+<h2>Learning Should Be Driven by Curiosity and Love, Not Deadlines and Expectations</h2> <p>When I started exploring computers, the reason was not getting some job or competitive edge over my peers but it was about exploring cool stuff and using cool things, from that it became exploring better GUI which transformed into switching to linux and finding best desktop environment which transformed into working on DWM and compiling my own window manager which induced a passion for building stuff that is actually good which caused me to enter programming and taking help from AI which led me to start working on learning about AI.</p> <p>In this whole journey I never got an Idea to actually get a job and I didn’t start out with a roadmap I just followed what excited me. And yet, by doing what I loved, I stumbled into something valuable an ability that mattered, not because someone told me it did, but because it was real, self-earned, and deeply understood.. The thing that mainly drove me was this search for better and more. It’s about finding something that sparks your mind and diving in, not because you have to, but because you can.</p> <p>In countries like India, education isn’t about understanding—it’s about memorizing, regurgitating, and passing exams. Schools don’t teach students to think, create, or adapt; they train them to absorb mountains of information—most of which they’ll never use—just to fit into a predefined career path. The job market today doesn’t reward blind memorization; it values creativity, problem-solving, and the ability to navigate an unpredictable world. Yet, instead of nurturing these qualities, the system produces obedient, instruction-following drones who think like sheep and fear stepping out of line.</p> <p>The greatest tragedy is that the most intelligent students—the ones who were top of the class from an early age—are often the ones who fall deepest into this trap. From childhood, they are showered with praise for academic excellence, funneled into prestigious schools, and placed on a conveyor belt toward elite colleges and high-status degrees. But in this relentless pursuit of external validation, they are rarely given the space to pause and ask: <em>What do I actually want?</em> Instead of exploring, experimenting, and taking risks, they become addicted to societal approval, afraid to do anything unconventional.</p> <p>Worse, most intelligent students <em>embrace</em> this cycle, finding shallow joy in their minor scholastic achievements—high test scores, class ranks, entrance exam results—mistaking these temporary validations for real success. In the process, they slowly kill their individuality, silencing the parts of themselves that might have created something unique. The creativity that could have solved important problems, that could have built something entirely new, is buried under the comfort of conformity.</p> <p>This isn’t just an individual problem—it’s a societal failure. When our brightest minds are too afraid to break the mold, too conditioned to seek approval rather than question the system, we lose out on the inventions, ideas, and breakthroughs they could have created. Intelligence, wasted on playing it safe, is intelligence wasted entirely.</p>
+
+<h2>Education Trains People to be a Machine, Not a Human</h2> <p>Almost all companies don’t care what your education is until you fulfill their needs. What this means is that you don’t even need to have a “career” in order to get a job. The right attitude and a good set of abilities are all you need.</p> <p>This shift is already happening. The world is moving towards meritocracy, where demonstrable skills outweigh formal credentials. The internet has shattered traditional gatekeeping—giving anyone access to knowledge, tools, and networks that were once locked behind expensive degrees. The most successful people today aren’t those who followed a predefined career path but those who forged their own, using curiosity, self-education, and relentless execution as their guiding principles.</p> <p>The problem isn’t just that schools fail to prepare you for the real world; it’s that they actively discourage the mindset required to thrive in it. They teach you to fear failure when, in reality, failing fast and adapting is how real progress happens. They push competition over collaboration, memorization over understanding, and compliance over innovation. They convince you that your worth is tied to external validation when, in reality, true success comes from internal mastery and the ability to create value.</p> <p>If you want to break free from this cycle, stop playing the education game. Stop chasing credentials and start chasing competence. Learn what interests you, build things that matter, and prove your worth through action. The world doesn’t reward those who simply follow instructions—it rewards those who can think, adapt, and create.</p>
+
+<h2>Validation Kills the Joy of Learning and Working</h2> <p>Let me ramble a bit more on validation. I strongly believe that the best work is done when it’s done out of love and not when it’s done out of need for marks, money, or external validation. I can't even recollect how many times I skipped meals, skipped showers, etc., just because I was working on some new CUDA kernel or exploring something new in Linux. All those times when I got the best output, I didn't care about getting external appreciation—my focus was all into my IDE.</p> <p>External validation is bad because it introduces incentives, it adds a new reason to work. It forces people to optimize for approval rather than for actual excellence. The moment you start working for validation, you stop experimenting freely, you stop taking risks, and you start optimizing for what will be accepted rather than what will be revolutionary. It’s no wonder that the greatest breakthroughs often come from those who don’t fit into the system—those who refuse to play by the rules designed to keep them average.</p> <p>This isn’t just about learning; it applies to work as well. The same corporate structure that schools prepare us for is built on similar incentives—promotions, performance reviews, and KPIs that measure obedience rather than real impact. The most passionate creators, thinkers, and builders don’t thrive in environments like these. They thrive in spaces where curiosity drives action, where the joy of solving a problem outweighs the desire for a raise or a certificate of recognition.</p> <p>History proves this again and again. Take Einstein, for example. When he was working a clerical job at the patent office, he didn’t care about the prestige of his work—he was simply lost in his ideas. It was during this period, devoid of any academic incentives, that he developed the three papers that changed the world. He wasn’t chasing titles or validation; he was following his curiosity.</p> <p>Newton is another great example. Although he later sought recognition, his most revolutionary work—calculus, optics, and the laws of motion—was done in isolation during the plague years. He wasn’t motivated by rewards or accolades; he was driven purely by an insatiable desire to understand the universe. His best work came from passion, not pressure.</p> <p>The sooner you stop chasing validation and start focusing on real learning and meaningful work, the freer you become. You no longer need permission to be great. You don’t have to wait for someone to tell you that you’re ready. The world doesn’t need more people who are good at following rules—it needs more people who dare to break them and redefine what’s possible.</p>
+
+<h2>Humans Aren’t Meant to Be Good at Just One Thing</h2> <p>The idea that you should master only one skill and do it for the rest of your life is deeply unnatural and idiotic. Humans are naturally curious beings, capable of learning multiple things and excelling in different areas. Yet, society forces us to specialize too early, limiting our potential. The greatest innovators in history were polymaths—people who excelled in multiple fields, not just one.</p> <p>Leonardo da Vinci was not just a painter—he was an engineer, scientist, anatomist, and inventor. His curiosity knew no bounds, and that’s what made him a genius. Had he been forced to specialize in just one area, the world might never have seen his contributions to so many different fields.</p> <p>Even in modern times, polymathy is what allows people to create groundbreaking innovations. Elon Musk didn’t just stick to Software he applied his knowledge to material science, rocketry, and AI. Steve Jobs combined his love for technology with design and calligraphy to revolutionize personal computing. The most impactful individuals are those who refuse to be confined to a single lane.</p> <p>The world rewards adaptability, creativity, and interdisciplinary thinking. Sticking to just one skill not only limits personal growth but also prevents innovation. The most exciting discoveries happen at the intersection of different fields. If you embrace your curiosity and explore multiple domains, you won’t just be good at one thing—you’ll be unstoppable.</p>
+
+<h2>The World Needs People Who Can Think Beyond a Career</h2> <p>The world is changing too fast for the traditional concept of a career to keep up. The most impactful people aren’t the ones who simply climb the corporate ladder but those who think beyond it—who experiment, explore, and redefine what work even means. Instead of focusing on a career, focus on growing as a person, learning new things, and making an impact in ways that actually matter to you.</p> <p>Look at people like Richard Feynman—he wasn’t just a physicist; he was a storyteller, an artist, and a bongo drummer. His ability to think beyond labels made him not only a great scientist but a great human being. Or consider Buckminster Fuller, who refused to limit himself to one discipline and instead became an architect, designer, and inventor—all because he followed curiosity rather than a predefined career path.</p> <p>The future belongs to those who can adapt, innovate, and think independently. Careers are becoming obsolete. The people who thrive will be those who build things, solve problems, and create value outside of job descriptions. The question isn’t “What career should I pursue?” but rather, “What problems do I want to solve? What knowledge excites me? What impact do I want to make?”</p> <p>Once you start thinking in those terms, your options expand infinitely. You’re no longer trapped in a system designed to limit you—you’re free to shape your own destiny. The world doesn’t need more careerists; it needs more thinkers, builders, and explorers. So go be one.</p>
+
+<h2>Just Live Your Life</h2> <p>At the end of the day, the takeaway is simple—just live your life. It sounds obvious, yet so many people forget it. They get caught up in the expectations of society, in the pressure to prove something to others, in the race to fit into a mold they never even chose. But life isn’t a script you have to follow. You don’t owe anyone an explanation for how you choose to live—except yourself.</p> <p>If you genuinely love learning, then learn. Dive deep, explore, experiment—do it because it excites you, not because you’re afraid of falling behind. But if you don’t love learning in the traditional sense, that’s fine too. You don’t need to force yourself into a system that doesn’t align with who you are. Growth doesn’t only come from textbooks and classrooms—it comes from experiences, from conversations, from simply being present in the world.</p> <p>Don’t let societal pressure dictate your path. If you’re worried that living life on your own terms means you won’t have the same car, the same house, or the same status as your friend, then maybe you need new friends—or maybe you need to change your own mindset. A car isn’t happiness. A title isn’t success. People found joy long before luxury brands existed, and many who own everything they ever wanted still feel empty inside.</p> <p>You can live with minimal technology, spend less, and still experience more. Joy isn’t tied to material possessions; it’s tied to the freedom of choosing how you live. True fulfillment doesn’t come from endlessly chasing worldly pleasures—it comes from curiosity, from meaningful experiences, from pursuing what genuinely excites you.</p> <p>The happiest people aren’t the ones ticking off society’s checklist. They’re the ones who step away from artificial expectations and embrace life as an open adventure. The ones who find beauty in simplicity, who create rather than just consume, who stay curious instead of settling for comfort.</p> <p>So let go of the noise. Strip away the unnecessary. You don’t need permission to live life your way. Just start living.</p>
+      </div>
+    </main>
+
+    <footer>
+      <div class="social-links">
+        <a href="https://twitter.com/yourusername" target="_blank">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="https://github.com/yourusername" target="_blank">
+          <i class="fab fa-github"></i>
+        </a>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Theme Toggle
+    const body = document.body;
+    const themeToggle = document.querySelector('.toggle-slider');
+
+    themeToggle.addEventListener('click', () => {
+      body.classList.toggle('light-mode');
+      localStorage.setItem('theme', body.classList.contains('light-mode') ? 'light' : 'dark');
+    });
+
+    // Load saved theme
+    if (localStorage.getItem('theme') === 'light') {
+      body.classList.add('light-mode');
+    }
+  </script>
+</body>
+
+</html>
