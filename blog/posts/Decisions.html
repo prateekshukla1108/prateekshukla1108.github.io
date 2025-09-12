@@ -4,233 +4,62 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Prioritizing Life</title>
+  <title>The Value of Time: Choosing What’s Worth Pursuing in a World of Tradeoffs • Prateek's Blog</title>
+  <meta property="og:title" content="The Value of Time: Choosing What’s Worth Pursuing in a World of Tradeoffs • Prateek's Blog">
+  <meta property="og:description" content="The Value of Time: Choosing What’s Worth Pursuing in a World of Tradeoffs - Read more on Prateek's Blog">
+  <meta property="og:type" content="article">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The Value of Time: Choosing What’s Worth Pursuing in a World of Tradeoffs • Prateek's Blog">
+  <meta name="author" content="Prateek">
+  <meta name="description" content="Personal blog by Prateek - thoughts on technology, philosophy, and life">
+  <link rel="stylesheet" href="/blog/post.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <style>
-    @import url('https://fonts.cdnfonts.com/css/sf-pro-display');
-
-    :root {
-      /* Dark theme variables */
-      --dark-bg: #05040C;
-      --dark-fg: #C7E3DD;
-      --dark-accent: #2a2d3e;
-      --dark-glass-bg: rgba(0, 0, 0, 0.3);
-      --dark-glass-border: rgba(0, 0, 0, 0.4);
-
-      /* Light theme variables */
-      --light-bg: #ffffff;
-      --light-fg: #333333;
-      --light-accent: #f0f2f5;
-      --light-glass-bg: rgba(255, 255, 255, 0.4);
-      --light-glass-border: rgba(0, 0, 0, 0.3);
-
-      /* Default to dark theme */
-      --glass-bg: var(--dark-glass-bg);
-      --glass-border: var(--dark-glass-border);
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'SF Pro Display', sans-serif;
-      transition: all 0.3s ease;
-    }
-
-    body {
-      background-color: var(--dark-bg);
-      color: var(--dark-fg);
-      background-image: url('/assets/dark-bg-8.png');
-      min-height: 100vh;
-      line-height: 1.6;
-    }
-
-    body.light-mode {
-      background-color: var(--light-bg);
-      color: var(--light-fg);
-      background-image: url('/assets/light-bg-12.png');
-      --glass-bg: var(--light-glass-bg);
-      --glass-border: var(--light-glass-border);
-    }
-
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-
-    header {
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      background: var(--glass-bg);
-      padding: 20px;
-      border-radius: 15px;
-      margin-bottom: 30px;
-      border: 1px solid var(--glass-border);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    .home-link {
-      color: inherit;
-      font-size: 24px;
-      transition: transform 0.3s ease;
-    }
-
-    .home-link:hover {
-      transform: translateY(-3px);
-    }
-
-    .theme-toggle {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .toggle-slider {
-      position: relative;
-      width: 60px;
-      height: 30px;
-      background: var(--dark-accent);
-      border-radius: 30px;
-      cursor: pointer;
-    }
-
-    .light-mode .toggle-slider {
-      background: var(--light-accent);
-    }
-
-    .slider-icon {
-      position: absolute;
-      top: 5px;
-      left: 5px;
-      width: 20px;
-      height: 20px;
-      background: #fff;
-      border-radius: 50%;
-      transition: transform 0.3s;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    }
-
-    .light-mode .slider-icon {
-      transform: translateX(30px);
-    }
-
-    /* Rest of the styles remain the same */
-    .blog-content {
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      background: var(--glass-bg);
-      padding: 40px;
-      border-radius: 15px;
-      border: 1px solid var(--glass-border);
-      margin-bottom: 30px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    .blog-title {
-      font-size: 2.5em;
-      margin-bottom: 20px;
-      font-weight: 700;
-    }
-
-    .blog-meta {
-      display: flex;
-      gap: 20px;
-      margin-bottom: 30px;
-      opacity: 0.8;
-      font-size: 0.9em;
-    }
-
-    .blog-text {
-      font-size: 1.1em;
-      line-height: 1.8;
-      margin-bottom: 20px;
-    }
-
-    .blog-text p {
-      margin-bottom: 20px;
-    }
-
-    .blog-text h2 {
-      font-size: 1.8em;
-      margin: 40px 0 20px;
-    }
-
-    .blog-text h3 {
-      font-size: 1.4em;
-      margin: 30px 0 15px;
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      background: var(--glass-bg);
-      border-radius: 15px;
-      border: 1px solid var(--glass-border);
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    .social-links {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-    }
-
-    .social-links a {
-      color: inherit;
-      font-size: 24px;
-      transition: transform 0.3s ease;
-    }
-
-    .social-links a:hover {
-      transform: translateY(-3px);
-    }
-
-    @media (max-width: 768px) {
-      .container {
-        padding: 10px;
-      }
-
-      .blog-content {
-        padding: 20px;
-      }
-
-      .blog-title {
-        font-size: 2em;
-      }
-    }
-  </style>
 </head>
 
 <body>
+  <div class="progress" id="progress"></div>
+
+  <div class="bg-layers" aria-hidden="true">
+    <div class="grid"></div>
+    <div class="scan"></div>
+    <div class="cursor" id="cursorGlow"></div>
+  </div>
+
   <div class="container">
     <header>
-      <a href="https://prateekshukla1108.github.io" class="home-link">
-        <i class="fas fa-home"></i>
-      </a>
-      <div class="theme-toggle">
-        <i class="fas fa-moon"></i>
-        <div class="toggle-slider">
-          <div class="slider-icon"></div>
+      <div class="header-row">
+        <div class="header-left">
+          <a href="/" class="home-button" title="Back to Home (Ctrl/Cmd + H)">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+          </a>
+          <button class="toc-toggle" id="tocToggle" title="Toggle Table of Contents">
+            <i class="fas fa-list"></i>
+          </button>
         </div>
-        <i class="fas fa-sun"></i>
+        <div class="header-right">
+          <div class="theme-toggle" id="themeToggle">
+            <i class="fas fa-moon"></i>
+            <div class="toggle-slider"><div class="slider-icon"></div></div>
+            <i class="fas fa-sun"></i>
+          </div>
+        </div>
+      </div>
+      <h1 class="title" id="postTitle">The Value of Time: Choosing What’s Worth Pursuing in a World of Tradeoffs</h1>
+      <div class="meta">
+        <span><i class="far fa-calendar"></i> <time id="postDate">February 18, 2025</time></span>
+        <span><i class="far fa-user"></i> <span id="postAuthor">Prateek</span></span>
+        <span><i class="far fa-clock"></i> <span id="postReading">8 min read</span></span>
       </div>
     </header>
 
-    <main class="blog-content">
-      <h1 class="blog-title">The Value of Time: Choosing What’s Worth Pursuing in a World of Tradeoffs</h1>
+    <div class="layout">
+      <aside class="toc">
+        <h3>On this page</h3>
+        <ul id="tocList"></ul>
+      </aside>
 
-      <div class="blog-meta">
-        <span><i class="far fa-calendar"></i> February 18, 2025</span>
-        <span><i class="far fa-clock"></i> 8 min read</span>
-      </div>
-
-      <div class="blog-text">
+      <article id="postContent">
 
         <p>In our fast-paced, distraction-laden world, time is our most precious resource. Every moment spent is a choice—a tradeoff between what we could learn, achieve, or simply experience. How do we decide what is worth our time? Should we invest in learning skills that pay off immediately, or is it wise to dabble in knowledge that might someday become useful? This blog explores these questions, drawing inspiration from historical figures, modern technology trends, and the shifting landscape of work in the age of AI.</p>
 
@@ -270,36 +99,208 @@
 
 <p>In a world where digital devices and AI promise to transform every aspect of our lives, remember that nothing beats the originality, passion, and resilience of a human mind that chooses to spend its time wisely. Choose action over procrastination, practical skills over uncertain knowledge, and stay vigilant against the allure of passive consumption. Your future self will thank you for every deliberate, purposeful moment invested in creating something of value today.</p>
 
-      </div>
-    </main>
+      </article>
+    </div>
 
-    <footer>
-      <div class="social-links">
-        <a href="https://twitter.com/yourusername" target="_blank">
+    <!-- Social Sharing -->
+    <div class="social-share">
+      <h4>Share this post</h4>
+      <div class="share-buttons">
+        <a href="#" class="share-btn twitter" onclick="shareOnTwitter()">
           <i class="fab fa-twitter"></i>
+          <span>Twitter</span>
         </a>
-        <a href="https://github.com/yourusername" target="_blank">
-          <i class="fab fa-github"></i>
+        <a href="#" class="share-btn linkedin" onclick="shareOnLinkedIn()">
+          <i class="fab fa-linkedin"></i>
+          <span>LinkedIn</span>
         </a>
+        <a href="#" class="share-btn copy" onclick="copyLink()">
+          <i class="fas fa-link"></i>
+          <span>Copy Link</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="post-footer">
+      <div class="footer-content">
+        <p>© 2024 Prateek's Blog. Built with ❤️ and cyberpunk aesthetics.</p>
+        <div class="footer-links">
+          <a href="/">Home</a>
+          <a href="#top" onclick="scrollToTop()">Back to Top</a>
+        </div>
       </div>
     </footer>
   </div>
 
   <script>
-    // Theme Toggle
     const body = document.body;
-    const themeToggle = document.querySelector('.toggle-slider');
+    const themeToggle = document.getElementById('themeToggle');
+    const progress = document.getElementById('progress');
+    const tocList = document.getElementById('tocList');
+    const cursorGlow = document.getElementById('cursorGlow');
+    const tocToggle = document.getElementById('tocToggle');
+    const toc = document.querySelector('.toc');
 
+    // Theme toggle
+    if (localStorage.getItem('theme') === 'light') body.classList.add('light-mode');
     themeToggle.addEventListener('click', () => {
       body.classList.toggle('light-mode');
       localStorage.setItem('theme', body.classList.contains('light-mode') ? 'light' : 'dark');
+      showToast(body.classList.contains('light-mode') ? 'Switched to light mode' : 'Switched to dark mode');
     });
 
-    // Load saved theme
-    if (localStorage.getItem('theme') === 'light') {
-      body.classList.add('light-mode');
+    // Progress bar
+    const onScroll = () => {
+      const h = document.documentElement;
+      const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight);
+      progress.style.width = (scrolled * 100) + '%';
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // TOC toggle for mobile
+    if (tocToggle) {
+      tocToggle.addEventListener('click', () => {
+        toc.classList.toggle('visible');
+        const icon = tocToggle.querySelector('i');
+        icon.className = toc.classList.contains('visible') ? 'fas fa-times' : 'fas fa-list';
+      });
     }
+
+    // TOC generation
+    function buildTOC() {
+      const headings = document.querySelectorAll('#postContent h2, #postContent h3');
+      tocList.innerHTML = '';
+      const items = [];
+      headings.forEach((h, i) => {
+        const id = h.id || `h-${i}`;
+        h.id = id;
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.href = `#${id}`;
+        a.textContent = h.textContent;
+        if (h.tagName === 'H3') a.style.paddingLeft = '12px';
+        li.appendChild(a);
+        tocList.appendChild(li);
+        items.push({ id, el: h, a });
+      });
+
+      // Active section observer
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          const item = items.find(x => x.el === entry.target);
+          if (!item) return;
+          if (entry.isIntersecting) {
+            items.forEach(i => i.a.classList.remove('active'));
+            item.a.classList.add('active');
+          }
+        });
+      }, { rootMargin: '0px 0px -70% 0px', threshold: 0.1 });
+
+      items.forEach(item => obs.observe(item.el));
+    }
+
+    buildTOC();
+
+    // Keyboard shortcuts
+    document.addEventListener('keydown', (e) => {
+      switch(e.key.toLowerCase()) {
+        case 'h':
+          if (e.ctrlKey || e.metaKey) {
+            e.preventDefault();
+            window.location.href = '/';
+          }
+          break;
+        case 'home':
+          if (e.ctrlKey || e.metaKey) {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }
+          break;
+        case 'end':
+          if (e.ctrlKey || e.metaKey) {
+            e.preventDefault();
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+          }
+          break;
+        case 't':
+          if (e.ctrlKey || e.metaKey) {
+            e.preventDefault();
+            tocToggle.click();
+          }
+          break;
+      }
+    });
+
+    // Social sharing functions
+    function shareOnTwitter() {
+      const url = encodeURIComponent(window.location.href);
+      const text = encodeURIComponent(document.title);
+      window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
+    }
+
+    function shareOnLinkedIn() {
+      const url = encodeURIComponent(window.location.href);
+      window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');
+    }
+
+    function copyLink() {
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        showToast('Link copied to clipboard!');
+      });
+    }
+
+    // Scroll to top function
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Toast notifications
+    function showToast(message) {
+      let toast = document.querySelector('.toast');
+      if (!toast) {
+        toast = document.createElement('div');
+        toast.className = 'toast';
+        document.body.appendChild(toast);
+      }
+      toast.textContent = message;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3000);
+    }
+
+    // Cursor-follow glow
+    window.addEventListener('mousemove', (e) => {
+      if (!cursorGlow) return;
+      cursorGlow.style.setProperty('--mx', e.clientX + 'px');
+      cursorGlow.style.setProperty('--my', e.clientY + 'px');
+    }, { passive: true });
+
+    // Smooth loading animation
+    document.addEventListener('DOMContentLoaded', () => {
+      document.body.classList.add('loaded');
+    });
+
+    // Reading time calculation
+    function updateReadingTime() {
+      const wordsPerMinute = 200;
+      const words = document.querySelectorAll('#postContent p, #postContent li');
+      let wordCount = 0;
+      words.forEach(element => {
+        wordCount += element.textContent.split(' ').length;
+      });
+      const readingTime = Math.ceil(wordCount / wordsPerMinute);
+      const readingElement = document.getElementById('postReading');
+      if (readingElement) {
+        readingElement.textContent = `${readingTime} min read`;
+      }
+    }
+
+    updateReadingTime();
   </script>
+
 </body>
 
 </html>
+
+

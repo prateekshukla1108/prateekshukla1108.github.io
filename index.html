@@ -5,282 +5,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Prateek's Blog</title>
+  <link rel="stylesheet" href="/blog/post.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.0.2/marked.min.js"></script>
-  <style>
-    @import url('https://fonts.cdnfonts.com/css/sf-pro-display');
-
-    :root {
-      --dark-bg: #05040C;
-      --dark-fg: #a8c1f2;
-      --light-bg: #ffffff;
-      --light-fg: #333333;
-      --glass-bg: rgba(0, 0, 0, 0.2);
-      --glass-border: rgba(0, 0, 0, 0.3);
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'SF Pro Display', sans-serif;
-      transition: all 0.3s ease;
-    }
-
-    body {
-      background-color: var(--dark-bg);
-      color: var(--dark-fg);
-      background-image: url('/assets/dark-bg.png');
-      background-size: cover;
-      background-attachment: fixed;
-      min-height: 100vh;
-    }
-
-    body.light-mode {
-      background-color: var(--light-bg);
-      color: var(--light-fg);
-      background-image: url('/assets/light-bg-6.jpeg');
-      --glass-bg: rgba(255, 255, 255, 0.4);
-      --glass-border: rgba(255, 255, 255, 0.5);
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-
-    header {
-      backdrop-filter: blur(10px);
-      background: var(--glass-bg);
-      padding: 20px;
-      border-radius: 15px;
-      margin-bottom: 30px;
-      border: 1px solid var(--glass-border);
-    }
-
-    .header-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-    }
-
-    .home-icon {
-      font-size: 24px;
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .theme-toggle {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .toggle-slider {
-      position: relative;
-      width: 60px;
-      height: 30px;
-      background: #333;
-      border-radius: 30px;
-      cursor: pointer;
-    }
-
-    .slider-icon {
-      position: absolute;
-      top: 5px;
-      left: 5px;
-      width: 20px;
-      height: 20px;
-      background: #fff;
-      border-radius: 50%;
-      transition: transform 0.3s;
-    }
-
-    .light-mode .slider-icon {
-      transform: translateX(30px);
-    }
-
-    .labels {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .post-link {
-      text-decoration: none;
-      color: inherit;
-      display: block;
-      transition: transform 0.2s ease;
-    }
-
-    .post-link:hover {
-      transform: scale(1.02);
-    }
-
-    .label {
-      padding: 5px 15px;
-      border-radius: 20px;
-      backdrop-filter: blur(10px);
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
-      cursor: pointer;
-      animation: fadeIn 0.5s ease;
-    }
-
-    .label.active {
-      background: var(--dark-fg);
-      color: var(--dark-bg);
-    }
-
-    .posts {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
-    }
-
-    .post {
-      backdrop-filter: blur(10px);
-      background: var(--glass-bg);
-      padding: 20px;
-      border-radius: 15px;
-      border: 1px solid var(--glass-border);
-      animation: slideUp 0.5s ease;
-    }
-
-    .post-header {
-      margin-bottom: 15px;
-    }
-
-    .post-cover {
-      width: 100%;
-      height: 200px;
-      object-fit: contain;
-      border-radius: 10px;
-      margin-bottom: 15px;
-    }
-
-    .post-title {
-      font-size: 1.5em;
-      margin-bottom: 10px;
-    }
-
-    .post-meta {
-      display: flex;
-      gap: 15px;
-      font-size: 0.9em;
-      color: inherit;
-      opacity: 0.8;
-    }
-
-    .post-tags {
-      display: flex;
-      gap: 8px;
-      margin: 10px 0;
-    }
-
-    .tag {
-      font-size: 0.8em;
-      padding: 3px 8px;
-      border-radius: 12px;
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
-    }
-
-    .post-excerpt {
-      margin: 15px 0;
-      line-height: 1.6;
-    }
-
-    .read-more {
-      display: inline-block;
-      color: inherit;
-      text-decoration: none;
-      padding: 8px 16px;
-      border-radius: 20px;
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
-      transition: all 0.3s ease;
-    }
-
-    .read-more:hover {
-      background: var(--dark-fg);
-      color: var(--dark-bg);
-    }
-
-    footer {
-      margin-top: 50px;
-      text-align: center;
-      padding: 20px;
-      backdrop-filter: blur(10px);
-      background: var(--glass-bg);
-      border-radius: 15px;
-      border: 1px solid var(--glass-border);
-    }
-
-    .social-links {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-    }
-
-    .social-links a {
-      color: inherit;
-      font-size: 24px;
-      transition: transform 0.3s ease;
-    }
-
-    .social-links a:hover {
-      transform: translateY(-3px);
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-      }
-
-      to {
-        opacity: 1;
-      }
-    }
-
-    @keyframes slideUp {
-      from {
-        transform: translateY(20px);
-        opacity: 0;
-      }
-
-      to {
-        transform: translateY(0);
-        opacity: 1;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .container {
-        padding: 10px;
-      }
-
-      .header-content {
-        flex-direction: column;
-        gap: 15px;
-        align-items: flex-start;
-      }
-
-      .post {
-        margin-bottom: 15px;
-      }
-
-      .post-meta {
-        flex-wrap: wrap;
-      }
-    }
-  </style>
 </head>
 
 <body>
   <div class="container">
+  <div class="bg-layers" aria-hidden="true">
+    <div class="grid"></div>
+    <div class="scan"></div>
+    <div class="cursor" id="cursorGlow"></div>
+    <div class="data-stream"></div>
+    <div class="data-stream"></div>
+  </div>
     <header>
       <div class="header-content">
         <a href="/" class="home-icon">
@@ -294,7 +31,7 @@
           <i class="fas fa-sun"></i>
         </div>
       </div>
-      <div class="labels">
+      <div class="labels" id="labels">
         <span class="label active" data-tag="all">All</span>
         <span class="label" data-tag="AI">AI</span>
         <span class="label" data-tag="Philosophy">Philosophy</span>
@@ -304,7 +41,21 @@
       </div>
     </header>
 
-    <main>
+    <section class="hero">
+      <h1 class="glitch" data-text="Prateek's Blog">Prateek's Blog</h1>
+      <p class="subtitle">AI • Philosophy • Life • Neuroscience</p>
+      <p class="intro">Welcome to my brain where ideas spark, clash, and sometimes make sense.</p>
+      <div class="cta-group">
+        <a href="#posts" class="btn primary"><i class="fas fa-bolt"></i> Read Latest</a>
+        <a href="#labels" class="btn ghost"><i class="fas fa-layer-group"></i> Explore Tags</a>
+      </div>
+      <div class="search-bar">
+        <i class="fas fa-magnifying-glass"></i>
+        <input id="searchInput" type="text" placeholder="Search posts by title, tag, or summary" aria-label="Search posts">
+      </div>
+    </section>
+
+    <main id="posts">
       <div class="posts">
         <div class="loading">Loading posts...</div>
       </div>
@@ -312,21 +63,22 @@
 
     <footer>
       <div class="social-links">
-        <a href="https://twitter.com/yourusername" target="_blank">
-          <i class="fab fa-twitter"></i>
-        </a>
-        <a href="https://github.com/yourusername" target="_blank">
-          <i class="fab fa-github"></i>
-        </a>
+        
       </div>
     </footer>
   </div>
+
+  <button class="back-to-top" id="backToTop" aria-label="Back to top" title="Back to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
 
   <script>
 // Global state
 let allPosts = [];
 let currentTag = 'all';
 let lastModified = null; // To store the last modified time
+let searchQuery = '';
+let reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 // Theme Toggle
 const body = document.body;
@@ -342,48 +94,67 @@ if (localStorage.getItem('theme') === 'light') {
   body.classList.add('light-mode');
 }
 
-// Handle post click and load markdown content
-async function handlePostClick(slug) {
-  try {
-    const response = await fetch(`/blog/posts/${slug}.md`, { cache: 'no-cache' });
-    if (!response.ok) throw new Error('Failed to load post');
-    const markdown = await response.text();
-    const htmlContent = marked.parse(markdown);
-    const tempContainer = document.createElement('div');
-    tempContainer.innerHTML = htmlContent;
+// Note: Removed dynamic markdown rendering to reduce JS size and work; static HTML posts are linked
 
-    document.body.innerHTML = `
-      <div class="container">
-          <header>
-              <div class="header-content">
-                  <a href="/" class="home-icon">
-                      <i class="fas fa-home"></i>
-                  </a>
-              </div>
-          </header>
-          <main>
-              <div class="post">${tempContainer.innerHTML}</div>
-          </main>
-      </div>`;
-  } catch (error) {
-    console.error('Error loading post:', error);
-    alert('Error loading post. Please try again later.');
-  }
+// URL state helpers
+function getStateFromURL() {
+  const params = new URLSearchParams(location.search);
+  return {
+    tag: params.get('tag') || 'all',
+    q: params.get('q') || ''
+  };
+}
+
+function updateURLState(tag, q) {
+  const params = new URLSearchParams(location.search);
+  if (tag && tag !== 'all') params.set('tag', tag); else params.delete('tag');
+  if (q && q.trim()) params.set('q', q.trim()); else params.delete('q');
+  const newUrl = params.toString() ? `${location.pathname}?${params.toString()}` : location.pathname;
+  history.replaceState(null, '', newUrl);
+}
+
+// Debounce utility
+function debounce(fn, delay = 150) {
+  let t;
+  return (...args) => {
+    clearTimeout(t);
+    t = setTimeout(() => fn.apply(null, args), delay);
+  };
 }
 
 // Filter posts by tag
 function filterPosts(tag) {
   currentTag = tag;
-
-  const filteredPosts = tag === 'all' ? allPosts :
-    allPosts.filter(post => post.tags.includes(tag));
-
-  displayPosts(filteredPosts);
+  applyFilters();
 
   // Update active label
   document.querySelectorAll('.label').forEach(label => {
     label.classList.toggle('active', label.dataset.tag === tag);
   });
+  updateURLState(currentTag, searchQuery);
+  localStorage.setItem('currentTag', currentTag);
+}
+
+function applyFilters() {
+  const filteredByTag = currentTag === 'all' ? allPosts : allPosts.filter(post => post.tags.includes(currentTag));
+  const q = searchQuery.trim().toLowerCase();
+  const filtered = q
+    ? filteredByTag.filter(post =>
+        post.title.toLowerCase().includes(q) ||
+        post.excerpt.toLowerCase().includes(q) ||
+        (post.tags || []).join(' ').toLowerCase().includes(q)
+      )
+    : filteredByTag;
+  displayPosts(filtered);
+}
+
+function rebuildLabelsFromPosts(posts) {
+  const container = document.getElementById('labels');
+  if (!container) return;
+  const tagSet = new Set();
+  posts.forEach(p => (p.tags || []).forEach(t => tagSet.add(t)));
+  const tags = ['all', ...Array.from(tagSet).sort((a,b)=>a.localeCompare(b))];
+  container.innerHTML = tags.map(t => `<span class="label ${t === currentTag ? 'active' : ''}" data-tag="${t}">${t}</span>`).join('');
 }
 
 // Display posts function
@@ -396,27 +167,62 @@ function displayPosts(posts) {
   }
 
   postsContainer.innerHTML = posts.map(post => `
-    <a href="/blog/posts/${post.slug}.html" class="post-link">
-        <article class="post">
-            <div class="post-header">
-                ${post.coverImage ? `<img src="${post.coverImage}" alt="${post.title}" class="post-cover">` : ''}
-                <h2 class="post-title">${post.title}</h2>
-                <div class="post-meta">
-                    <span class="post-date"><i class="far fa-calendar"></i> ${new Date(post.date).toLocaleDateString()}</span>
-                    <span class="post-author"><i class="far fa-user"></i> ${post.author}</span>
-                    <span class="post-reading-time"><i class="far fa-clock"></i> ${post.readingTime}</span>
-                </div>
+    <article class="post" data-slug="${post.slug}">
+        <div class="post-header">
+            ${post.coverImage ? `<img src="${post.coverImage}" alt="${post.title}" class="post-cover" loading="lazy" decoding="async" referrerpolicy="no-referrer">` : ''}
+            <h2 class="post-title">${post.title}</h2>
+            <div class="post-meta">
+                <span class="post-date"><i class="far fa-calendar"></i> ${new Date(post.date).toLocaleDateString()}</span>
+                <span class="post-author"><i class="far fa-user"></i> ${post.author}</span>
+                <span class="post-reading-time"><i class="far fa-clock"></i> ${post.readingTime}</span>
             </div>
+        </div>
 
-            <div class="post-tags">
-                ${post.tags.map(tag => `<span class="tag" onclick="filterPosts('${tag}')">${tag}</span>`).join('')}
-            </div>
+        <div class="post-tags">
+            ${(post.tags || []).map(tag => `<span class="tag" onclick="event.preventDefault(); event.stopPropagation(); filterPosts('${tag}')">${tag}</span>`).join('')}
+        </div>
 
-            <p class="post-excerpt">${post.excerpt}</p>
+        <p class="post-excerpt">${post.excerpt}</p>
 
-            <div class="read-more">Read More</div>
-        </article>
-    </a>`).join('');
+        <a class="read-more" href="/blog/posts/${post.slug}.html">Read More</a>
+    </article>`).join('');
+
+  enableCardInteractions();
+}
+
+function enableCardInteractions() {
+  if (reduceMotion) return;
+  const cards = document.querySelectorAll('.post');
+  cards.forEach(card => {
+    const slug = card.getAttribute('data-slug');
+    let rafId = 0;
+    let lastX = 0, lastY = 0, rect = null;
+    const onMove = (e) => {
+      lastX = e.clientX; lastY = e.clientY;
+      if (!rafId) {
+        rafId = requestAnimationFrame(() => {
+          rect = rect || card.getBoundingClientRect();
+          const x = lastX - rect.left;
+          const y = lastY - rect.top;
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+          const rotateY = ((x - centerX) / centerX) * 6;
+          const rotateX = -((y - centerY) / centerY) * 6;
+          card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+          rafId = 0;
+        });
+      }
+    };
+    card.addEventListener('mousemove', onMove);
+    card.addEventListener('mouseleave', () => {
+      rect = null;
+      card.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg)';
+    });
+    card.addEventListener('click', (e) => {
+      if (e.target.closest('.tag') || e.target.closest('.read-more')) return;
+      if (slug) window.location.href = `/blog/posts/${slug}.html`;
+    });
+  });
 }
 
 // Load blog posts
@@ -429,7 +235,13 @@ async function loadBlogPosts() {
       headers = { 'If-Modified-Since': lastModified };
     }
 
-    const response = await fetch('/blog/posts.json', { headers, cache: 'no-cache' });
+    // Show skeletons while loading
+    renderSkeletons();
+
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 8000);
+    const response = await fetch('/blog/posts.json', { headers, cache: 'no-cache', signal: controller.signal }).catch((e) => { throw e; });
+    clearTimeout(timeout);
 
     if (response.status === 304) {
       // Not modified, do nothing
@@ -441,16 +253,41 @@ async function loadBlogPosts() {
       // Get the new Last-Modified header
       lastModified = response.headers.get('Last-Modified');
 
+      // Cache locally for offline
+      try { localStorage.setItem('postsCache', JSON.stringify({ ts: Date.now(), posts: allPosts })); } catch (_) {}
+
       // Sort posts by date (newest first)
       allPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-      // Display all posts initially
-      filterPosts('all');
+      // Restore state from URL/localStorage
+      const state = getStateFromURL();
+      const storedTag = localStorage.getItem('currentTag');
+      currentTag = state.tag || storedTag || 'all';
+      const input = document.getElementById('searchInput');
+      searchQuery = state.q || '';
+      if (input) input.value = searchQuery;
+
+      // Build dynamic tags
+      rebuildLabelsFromPosts(allPosts);
+
+      // Display posts
+      applyFilters();
     } else {
       throw new Error('Failed to load blog posts');
     }
   } catch (error) {
     console.error('Error loading blog posts:', error);
+    // Try cache
+    try {
+      const cached = JSON.parse(localStorage.getItem('postsCache'));
+      if (cached && Array.isArray(cached.posts)) {
+        allPosts = cached.posts;
+        allPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+        rebuildLabelsFromPosts(allPosts);
+        applyFilters();
+        return;
+      }
+    } catch (_) {}
     document.querySelector('.posts').innerHTML = `
       <div class="error">
           <p>Error loading posts. Please try again later.</p>
@@ -459,16 +296,78 @@ async function loadBlogPosts() {
   }
 }
 
+function renderSkeletons(count = 6) {
+  const postsContainer = document.querySelector('.posts');
+  if (!postsContainer) return;
+  postsContainer.innerHTML = Array.from({ length: count }).map(() => `
+    <article class="post skeleton">
+      <div class="image"></div>
+      <div class="line" style="width: 60%"></div>
+      <div class="line" style="width: 40%"></div>
+      <div class="line" style="width: 90%"></div>
+    </article>
+  `).join('');
+}
+
 // Load posts when the page loads
-document.addEventListener('DOMContentLoaded', loadBlogPosts);
+document.addEventListener('DOMContentLoaded', () => {
+  renderSkeletons();
+  loadBlogPosts();
+  const input = document.getElementById('searchInput');
+  const cursorGlow = document.getElementById('cursorGlow');
+  if (input) {
+    const onInput = debounce((e) => {
+      searchQuery = e.target.value || '';
+      updateURLState(currentTag, searchQuery);
+      applyFilters();
+    }, 200);
+    input.addEventListener('input', onInput);
+  }
+  // Label clicks via delegation
+  const labelsContainer = document.getElementById('labels');
+  if (labelsContainer) {
+    labelsContainer.addEventListener('click', (e) => {
+      const el = e.target.closest('.label');
+      if (!el) return;
+      filterPosts(el.dataset.tag);
+    });
+  }
+  // Keyboard shortcut to focus search
+  window.addEventListener('keydown', (e) => {
+    if (e.key === '/' && !(e.target instanceof HTMLInputElement)) {
+      e.preventDefault();
+      input && input.focus();
+    }
+  });
+  // Back to top button
+  const backBtn = document.getElementById('backToTop');
+  const onScroll = () => {
+    if (!backBtn) return;
+    if (window.scrollY > 400) backBtn.classList.add('visible'); else backBtn.classList.remove('visible');
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  backBtn && backBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-// Set interval to check for updates every 60 seconds
-setInterval(loadBlogPosts, 60000);
+  // Cursor-follow glow (throttled)
+  let lastX = 0, lastY = 0, rafPending = false;
+  window.addEventListener('mousemove', (e) => {
+    if (!cursorGlow) return;
+    lastX = e.clientX; lastY = e.clientY;
+    if (!rafPending) {
+      rafPending = true;
+      requestAnimationFrame(() => {
+        cursorGlow.style.setProperty('--mx', lastX + 'px');
+        cursorGlow.style.setProperty('--my', lastY + 'px');
+        rafPending = false;
+      });
+    }
+  }, { passive: true });
+});
 
-// Add click handlers to labels
-document.querySelectorAll('.label').forEach(label => {
-  label.addEventListener('click', () => filterPosts(label.dataset.tag));
-}); 
+// Set interval to check for updates every 5 minutes
+setInterval(loadBlogPosts, 300000);
+
+// (Replaced by delegated listener on #labels)
 
 </script>
 
