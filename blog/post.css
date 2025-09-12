@@ -1,5 +1,4 @@
-@import url('https://fonts.cdnfonts.com/css/sf-pro-display');
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400;700&display=swap');
+/* System fonts only - no external dependencies */
 
 :root {
   --dark-bg: #05040C;
@@ -30,13 +29,10 @@ html, body {
 }
 
 body {
-  font-family: 'Inter', 'SF Pro Display', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   color: var(--dark-fg);
   background-color: var(--dark-bg);
-  background-image:
-    radial-gradient(1200px 600px at 20% 10%, rgba(0, 245, 255, 0.08), transparent 50%),
-    radial-gradient(1000px 600px at 80% 30%, rgba(255, 27, 107, 0.08), transparent 60%),
-    radial-gradient(800px 500px at 50% 100%, rgba(138, 43, 226, 0.06), transparent 70%);
+  background-image: linear-gradient(135deg, rgba(0, 245, 255, 0.03), rgba(138, 43, 226, 0.02));
   background-attachment: scroll;
 }
 
@@ -47,11 +43,9 @@ body {
 .bg-layers .cursor { position: absolute; inset: 0; }
 
 .bg-layers .grid {
-  background:
-    linear-gradient(transparent 99%, rgba(0, 245, 255, 0.06) 100%),
-    linear-gradient(90deg, transparent 99%, rgba(255, 27, 107, 0.05) 100%);
-  background-size: 100% 24px, 24px 100%;
-  opacity: 0.2;
+  background: linear-gradient(90deg, rgba(0, 245, 255, 0.02) 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0.15;
 }
 
 .bg-layers .scan { background: linear-gradient(180deg, transparent 0%, rgba(0, 245, 255, 0.02) 50%, transparent 100%); }
@@ -70,7 +64,7 @@ header { background: rgba(12, 6, 26, 0.8); border: 1px solid var(--glass-border)
 .header-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .back-link { display: inline-flex; align-items: center; gap: 8px; color: inherit; text-decoration: none; text-shadow: 0 0 8px rgba(0, 245, 255, 0.5); }
 .theme-toggle { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; }
-.toggle-slider { position: relative; width: 56px; height: 28px; border-radius: 999px; background: linear-gradient(90deg, rgba(0, 245, 255, 0.2), rgba(255, 27, 107, 0.2)); border: 1px solid var(--glass-border); box-shadow: inset 0 0 10px rgba(0,0,0,0.3); }
+.toggle-slider { position: relative; width: 56px; height: 28px; border-radius: 999px; background: rgba(0, 245, 255, 0.15); border: 1px solid var(--glass-border); box-shadow: inset 0 0 8px rgba(0,0,0,0.2); }
 .slider-icon { position: absolute; top: 4px; left: 4px; width: 20px; height: 20px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent-2)); box-shadow: 0 0 10px rgba(0, 245, 255, 0.5); transition: transform 0.25s ease; }
 .light-mode .slider-icon { transform: translateX(28px); }
 
@@ -103,7 +97,7 @@ article a:hover { text-decoration: underline; }
 article blockquote { margin: 16px 0; padding: 12px 14px; border-left: 3px solid var(--accent); background: rgba(0, 245, 255, 0.06); border-radius: 8px; }
 
 /* Code */
-pre, code { font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+pre, code { font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', 'Droid Sans Mono', 'Source Code Pro', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
 code { background: rgba(0,0,0,0.35); border: 1px solid rgba(0, 245, 255, 0.25); padding: 2px 6px; border-radius: 6px; font-size: 0.95em; }
 pre { background: rgba(0,0,0,0.45); border: 1px solid rgba(0, 245, 255, 0.25); padding: 14px; border-radius: 10px; overflow: auto; box-shadow: inset 0 0 12px rgba(0, 245, 255, 0.08); }
 pre code { background: transparent; border: none; padding: 0; }
@@ -600,7 +594,7 @@ footer {
 }
 
 .glitch {
-  font-family: 'Orbitron', sans-serif;
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', 'Droid Sans Mono', 'Source Code Pro', monospace;
   font-size: clamp(28px, 6vw, 64px);
   font-weight: 900;
   letter-spacing: 1px;
@@ -731,13 +725,13 @@ footer {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Inter', 'SF Pro Display', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   transition: none;
 }
 
 /* Body and background */
 body {
-  font-family: 'Inter', 'SF Pro Display', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   color: var(--dark-fg);
   background-color: var(--dark-bg);
   background-image:
@@ -916,26 +910,13 @@ body::after {
 body.light-mode {
   background-color: var(--light-bg);
   color: var(--light-fg);
-  background-image:
-    radial-gradient(1200px 600px at 20% 10%, rgba(0, 245, 255, 0.15), transparent 50%),
-    radial-gradient(1000px 600px at 80% 30%, rgba(255, 27, 107, 0.15), transparent 60%),
-    radial-gradient(800px 500px at 50% 100%, rgba(138, 43, 226, 0.12), transparent 70%),
-    /* Matrix-style grid overlay */
-    linear-gradient(90deg, rgba(57, 255, 20, 0.03) 1px, transparent 1px),
-    linear-gradient(rgba(57, 255, 20, 0.03) 1px, transparent 1px);
-  background-size:
-    cover,
-    cover,
-    cover,
-    50px 50px,
-    50px 50px;
+  background-image: linear-gradient(135deg, rgba(0, 245, 255, 0.04), rgba(138, 43, 226, 0.02));
   background-attachment: scroll;
 }
 
 body.light-mode::before {
-  background: linear-gradient(rgba(0,0,0,0) 0%, rgba(0, 245, 255, 0.08) 50%, rgba(0,0,0,0) 100%),
-    linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(255, 27, 107, 0.08) 50%, rgba(0,0,0,0) 100%);
-  background-size: 100% 3px, 3px 100%;
+  background: linear-gradient(rgba(0,0,0,0) 0%, rgba(0, 245, 255, 0.03) 50%, rgba(0,0,0,0) 100%);
+  background-size: 100% 2px;
   opacity: 0.4;
 }
 
@@ -1133,7 +1114,7 @@ body.light-mode .data-stream:nth-child(4) { left: 75%; }
 
 /* Cyberpunk Terminal Style */
 .terminal {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', 'Droid Sans Mono', 'Source Code Pro', monospace;
   background: rgba(0, 5, 10, 0.9);
   border: 2px solid var(--accent);
   border-radius: 8px;

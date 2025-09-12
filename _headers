@@ -1,0 +1,36 @@
+# Enable gzip compression and caching headers
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+
+# HTML files
+/*.html
+  Content-Encoding: gzip
+  Cache-Control: public, max-age=3600
+
+# CSS files
+/*.css
+  Content-Encoding: gzip
+  Cache-Control: public, max-age=2592000
+
+# JavaScript (inline in HTML, but good practice)
+/*
+  Content-Encoding: gzip
+
+# Images - cache for 1 year since they're optimized
+/*.webp
+  Content-Encoding: gzip
+  Cache-Control: public, max-age=31536000
+
+/*.png
+  Content-Encoding: gzip
+  Cache-Control: public, max-age=31536000
+
+/*.jpg
+  Content-Encoding: gzip
+  Cache-Control: public, max-age=31536000
+
+/*.svg
+  Content-Encoding: gzip
+  Cache-Control: public, max-age=31536000

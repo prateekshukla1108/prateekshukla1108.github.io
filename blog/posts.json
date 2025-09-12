@@ -8,7 +8,7 @@
       "readingTime": "5 min read",
       "tags": ["Others"],
       "excerpt": "A simple note for people who want to start their linux journey",
-      "coverImage": "/assets/images/linux-sucks.png"
+      "coverImage": "/assets/images/linux-sucks.webp"
     },
     {
       "slug": "Career",
@@ -18,7 +18,7 @@
       "readingTime": "12 min read",
       "tags": ["Philosophy"],
       "excerpt": "Why the idea of career sucks",
-      "coverImage": "/assets/images/career.jpg"
+      "coverImage": "/assets/images/career.webp"
     },
     {
       "slug": "Decisions",
@@ -28,7 +28,7 @@
       "readingTime": "8 min read",
       "tags": ["Philosophy"],
       "excerpt": "Why to prioritize, Prejudices of modern programmers and finding hope in a World with AI",
-      "coverImage": "/assets/images/priority.png"
+      "coverImage": "/assets/images/priority.webp"
     },
     {
       "slug": "Existential Crisis",
@@ -38,7 +38,7 @@
       "readingTime": "5 min read",
       "tags": ["Philosophy"],
       "excerpt": "I reflect on the irreversible journey of stepping out of the 'Matrix'—a life once filled with simplicity, nostalgia, and shared connections. Awakening to a deeper understanding of myself and the world",
-      "coverImage": "/assets/images/Thinker.JPG"
+      "coverImage": "/assets/images/Thinker.webp"
     },
 
     {
@@ -49,7 +49,7 @@
       "readingTime": "8 min read",
       "tags": ["AI"],
       "excerpt": "Why is imposter syndrome so dangerous for the tech industry? and how to get out of it",
-      "coverImage": "/assets/images/Imposter.png"
+      "coverImage": "/assets/images/Imposter.webp"
     },
    {
       "slug": "AGI",
@@ -59,7 +59,7 @@
       "readingTime": "8 min read",
       "tags": ["AI"],
       "excerpt": "AGI emerges subtly in 2028, transforming economics, governance, and human psychology through distributed intelligence that solves complex problems beyond human capability",
-      "coverImage": "/assets/images/AGI.png"
+      "coverImage": "/assets/images/AGI.webp"
     },
     {
       "slug": "camus",
@@ -69,7 +69,7 @@
       "readingTime": "8 min read",
       "tags": ["Philosophy"],
       "excerpt": "If life is meaningless, then how to make it wonderful?",
-      "coverImage": "/assets/images/camus.jpg"
+      "coverImage": "/assets/images/camus.webp"
     },
 
 
@@ -81,7 +81,7 @@
       "readingTime": "8 min read",
       "tags": ["Life"],
       "excerpt": "A surviving strategy for working hardcore alone",
-      "coverImage": "/assets/images/zarathustra.jpeg"
+      "coverImage": "/assets/images/zarathustra.webp"
     },
 
     {
@@ -92,7 +92,7 @@
       "readingTime": "8 min read",
       "tags": ["Philosophy"],
       "excerpt": "Nietzsche's Fantasy of Free Spirits and future Philosophers",
-      "coverImage": "/assets/images/Free-Spirit.jpg"
+      "coverImage": "/assets/images/Free-Spirit.webp"
     },
     {
       "slug": "Heidegger's Being",
@@ -102,7 +102,7 @@
       "readingTime": "10 min read",
       "tags": ["Philosophy"],
       "excerpt": "Nietzsche's thoughts on true independence",
-      "coverImage": "/assets/images/heidegger.jpg"
+      "coverImage": "/assets/images/heidegger.webp"
     },
 
     {
@@ -113,7 +113,7 @@
       "readingTime": "8 min read",
       "tags": ["Philosophy"],
       "excerpt": "Nietzsche's thoughts on true independence",
-      "coverImage": "/assets/images/Nietzsche.jpg"
+      "coverImage": "/assets/images/Nietzsche.webp"
     },
     {
       "slug": "Setting up WSL and Python",
@@ -123,7 +123,7 @@
       "readingTime": "15 min read",
       "tags": ["AI"],
       "excerpt": "How to setup WSL and python to get ready for Fast AI",
-      "coverImage": "/assets/images/Python.png"
+      "coverImage": "/assets/images/Python.webp"
     }
   ]
 }
