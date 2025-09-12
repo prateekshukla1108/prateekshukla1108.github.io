@@ -5,7 +5,62 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Prateek's Blog</title>
+  <meta name="description" content="Personal blog by Prateek Shukla - exploring AI, philosophy, life, and neuroscience through thoughtful writing and analysis.">
+  <meta name="author" content="Prateek Shukla">
+  <meta name="keywords" content="AI, artificial intelligence, philosophy, neuroscience, technology, personal development, blog">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://prateekshukla1108.github.io/">
+  <meta property="og:title" content="Prateek's Blog">
+  <meta property="og:description" content="Personal blog exploring AI, philosophy, life, and neuroscience through thoughtful writing and analysis.">
+  <meta property="og:image" content="https://prateekshukla1108.github.io/assets/images/ai-cover.webp">
+  <meta property="og:site_name" content="Prateek's Blog">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://prateekshukla1108.github.io/">
+  <meta property="twitter:title" content="Prateek's Blog">
+  <meta property="twitter:description" content="Personal blog exploring AI, philosophy, life, and neuroscience through thoughtful writing and analysis.">
+  <meta property="twitter:image" content="https://prateekshukla1108.github.io/assets/images/ai-cover.webp">
+
+  <!-- Additional SEO -->
+  <link rel="canonical" href="https://prateekshukla1108.github.io/">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="English">
+  <link rel="preload" href="/blog/post.min.css" as="style">
+  <link rel="preload" href="/blog/posts.json" as="fetch" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@400;500;700;900&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/blog/post.min.css">
+
+  <!-- Structured Data for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "Prateek's Blog",
+    "description": "Personal blog exploring AI, philosophy, life, and neuroscience through thoughtful writing and analysis.",
+    "url": "https://prateekshukla1108.github.io/",
+    "author": {
+      "@type": "Person",
+      "name": "Prateek Shukla",
+      "url": "https://prateekshukla1108.github.io/"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Prateek Shukla"
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://prateekshukla1108.github.io/"
+    },
+    "keywords": ["AI", "artificial intelligence", "philosophy", "neuroscience", "technology", "personal development"]
+  }
+  </script>
+
   <!-- Inline SVG icons for better performance - no external dependencies -->
 </head>
 
@@ -46,39 +101,37 @@
     </defs>
   </svg>
 
+  <a href="/" class="home-icon" aria-label="Go to home page">
+    <svg width="20" height="20" aria-hidden="true"><use href="#icon-home"></use></svg>
+  </a>
+
   <div class="container">
   <div class="bg-layers" aria-hidden="true">
     <div class="grid"></div>
     <div class="scan"></div>
-    <div class="cursor" id="cursorGlow"></div>
     <div class="data-stream"></div>
     <div class="data-stream"></div>
+    <!-- Additional Cyberpunk Decorative Elements -->
+    <div class="cyber-circuit"></div>
+    <div class="cyber-circuit"></div>
+    <div class="neon-pulse"></div>
   </div>
     <header>
       <div class="header-content">
-        <a href="/" class="home-icon">
-          <svg width="20" height="20" aria-hidden="true"><use href="#icon-home"></use></svg>
-        </a>
-        <div class="theme-toggle">
-          <svg width="16" height="16" aria-hidden="true"><use href="#icon-moon"></use></svg>
-          <div class="toggle-slider">
-            <div class="slider-icon"></div>
-          </div>
-          <svg width="16" height="16" aria-hidden="true"><use href="#icon-sun"></use></svg>
-        </div>
+        <!-- Home icon is now positioned fixed -->
       </div>
-      <div class="labels" id="labels">
-        <span class="label active" data-tag="all">All</span>
-        <span class="label" data-tag="AI">AI</span>
-        <span class="label" data-tag="Philosophy">Philosophy</span>
-        <span class="label" data-tag="Life">Life</span>
-        <span class="label" data-tag="Others">Others</span>
-        <span class="label" data-tag="Neuroscience">Neuroscience</span>
-      </div>
+      <nav class="labels" id="labels" role="navigation" aria-label="Blog post categories">
+        <span class="label active" data-tag="all" role="button" tabindex="0" aria-pressed="true">All</span>
+        <span class="label" data-tag="AI" role="button" tabindex="0" aria-pressed="false">AI</span>
+        <span class="label" data-tag="Philosophy" role="button" tabindex="0" aria-pressed="false">Philosophy</span>
+        <span class="label" data-tag="Life" role="button" tabindex="0" aria-pressed="false">Life</span>
+        <span class="label" data-tag="Others" role="button" tabindex="0" aria-pressed="false">Others</span>
+        <span class="label" data-tag="Neuroscience" role="button" tabindex="0" aria-pressed="false">Neuroscience</span>
+      </nav>
     </header>
 
     <section class="hero">
-      <h1 class="glitch" data-text="Prateek's Blog">Prateek's Blog</h1>
+      <h1 class="glitch title" data-text="Prateek's Blog">Prateek's Blog</h1>
       <p class="subtitle">AI • Philosophy • Life • Neuroscience</p>
       <p class="intro">Welcome to my brain where ideas spark, clash, and sometimes make sense.</p>
       <div class="cta-group">
@@ -87,12 +140,12 @@
       </div>
       <div class="search-bar">
         <svg width="16" height="16" aria-hidden="true"><use href="#icon-search"></use></svg>
-        <input id="searchInput" type="text" placeholder="Search posts by title, tag, or summary" aria-label="Search posts">
+        <input id="searchInput" type="text" placeholder="Search posts by title, tag, or summary" aria-label="Search posts" role="searchbox" autocomplete="off">
       </div>
     </section>
 
-    <main id="posts">
-      <div class="posts">
+    <main id="posts" role="main" aria-label="Blog posts">
+      <div class="posts" role="feed" aria-label="List of blog posts">
         <div class="loading">Loading posts...</div>
       </div>
     </main>
@@ -114,21 +167,10 @@ let allPosts = [];
 let currentTag = 'all';
 let lastModified = null; // To store the last modified time
 let searchQuery = '';
+let labelsRebuilt = false; // Track if labels have been rebuilt
 let reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const dateFormatter = new Intl.DateTimeFormat(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
 
-// Theme Toggle
-const body = document.body;
-
-const themeToggle = document.querySelector('.toggle-slider');
-themeToggle.addEventListener('click', () => {
-  body.classList.toggle('light-mode');
-  localStorage.setItem('theme', body.classList.contains('light-mode') ? 'light' : 'dark');
-});
-
-// Load saved theme
-if (localStorage.getItem('theme') === 'light') {
-  body.classList.add('light-mode');
-}
 
 // Note: Removed dynamic markdown rendering to reduce JS size and work; static HTML posts are linked
 
@@ -168,7 +210,6 @@ function filterPosts(tag) {
     label.classList.toggle('active', label.dataset.tag === tag);
   });
   updateURLState(currentTag, searchQuery);
-  localStorage.setItem('currentTag', currentTag);
 }
 
 function applyFilters() {
@@ -208,58 +249,22 @@ function displayPosts(posts) {
             ${post.coverImage ? `<img src="${post.coverImage}" alt="${post.title}" class="post-cover" loading="lazy" decoding="async" referrerpolicy="no-referrer">` : ''}
             <h2 class="post-title">${post.title}</h2>
             <div class="post-meta">
-                <span class="post-date"><svg width="14" height="14" aria-hidden="true"><use href="#icon-calendar"></use></svg> ${new Date(post.date).toLocaleDateString()}</span>
+                <span class="post-date"><svg width="14" height="14" aria-hidden="true"><use href="#icon-calendar"></use></svg> ${dateFormatter.format(new Date(post.date))}</span>
                 <span class="post-author"><svg width="14" height="14" aria-hidden="true"><use href="#icon-user"></use></svg> ${post.author}</span>
                 <span class="post-reading-time"><svg width="14" height="14" aria-hidden="true"><use href="#icon-clock"></use></svg> ${post.readingTime}</span>
             </div>
         </div>
 
         <div class="post-tags">
-            ${(post.tags || []).map(tag => `<span class="tag" onclick="event.preventDefault(); event.stopPropagation(); filterPosts('${tag}')">${tag}</span>`).join('')}
+            ${(post.tags || []).map(tag => `<span class="tag" data-tag="${tag}">${tag}</span>`).join('')}
         </div>
 
         <p class="post-excerpt">${post.excerpt}</p>
 
         <a class="read-more" href="/blog/posts/${post.slug}.html">Read More</a>
     </article>`).join('');
-
-  enableCardInteractions();
 }
 
-function enableCardInteractions() {
-  if (reduceMotion) return;
-  const cards = document.querySelectorAll('.post');
-  cards.forEach(card => {
-    const slug = card.getAttribute('data-slug');
-    let rafId = 0;
-    let lastX = 0, lastY = 0, rect = null;
-    const onMove = (e) => {
-      lastX = e.clientX; lastY = e.clientY;
-      if (!rafId) {
-        rafId = requestAnimationFrame(() => {
-          rect = rect || card.getBoundingClientRect();
-          const x = lastX - rect.left;
-          const y = lastY - rect.top;
-          const centerX = rect.width / 2;
-          const centerY = rect.height / 2;
-          const rotateY = ((x - centerX) / centerX) * 6;
-          const rotateX = -((y - centerY) / centerY) * 6;
-          card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-          rafId = 0;
-        });
-      }
-    };
-    card.addEventListener('mousemove', onMove);
-    card.addEventListener('mouseleave', () => {
-      rect = null;
-      card.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg)';
-    });
-    card.addEventListener('click', (e) => {
-      if (e.target.closest('.tag') || e.target.closest('.read-more')) return;
-      if (slug) window.location.href = `/blog/posts/${slug}.html`;
-    });
-  });
-}
 
 // Load blog posts
 async function loadBlogPosts() {
@@ -271,8 +276,7 @@ async function loadBlogPosts() {
       headers = { 'If-Modified-Since': lastModified };
     }
 
-    // Show skeletons while loading
-    renderSkeletons();
+    // Simple loading state
 
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 8000);
@@ -303,8 +307,11 @@ async function loadBlogPosts() {
       searchQuery = state.q || '';
       if (input) input.value = searchQuery;
 
-      // Build dynamic tags
-      rebuildLabelsFromPosts(allPosts);
+      // Build dynamic tags (only once)
+      if (!labelsRebuilt) {
+        rebuildLabelsFromPosts(allPosts);
+        labelsRebuilt = true;
+      }
 
       // Display posts
       applyFilters();
@@ -313,44 +320,70 @@ async function loadBlogPosts() {
     }
   } catch (error) {
     console.error('Error loading blog posts:', error);
-    // Try cache
+
+    // Try cache first
+    let cacheLoaded = false;
     try {
       const cached = JSON.parse(localStorage.getItem('postsCache'));
-      if (cached && Array.isArray(cached.posts)) {
+      if (cached && Array.isArray(cached.posts) && cached.posts.length > 0) {
         allPosts = cached.posts;
         allPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
-        rebuildLabelsFromPosts(allPosts);
+        if (!labelsRebuilt) {
+          rebuildLabelsFromPosts(allPosts);
+          labelsRebuilt = true;
+        }
         applyFilters();
-        return;
+        cacheLoaded = true;
+        console.log('Loaded posts from cache');
       }
-    } catch (_) {}
-    document.querySelector('.posts').innerHTML = `
-      <div class="error">
-          <p>Error loading posts. Please try again later.</p>
-          <p>Error details: ${error.message}</p>
-      </div>`;
+    } catch (cacheError) {
+      console.warn('Failed to load from cache:', cacheError);
+    }
+
+    // Show appropriate error message
+    const postsContainer = document.querySelector('.posts');
+    if (!cacheLoaded) {
+      const errorMessage = error.name === 'AbortError'
+        ? 'Request timed out. Please check your connection.'
+        : error.message.includes('fetch')
+        ? 'Network error. Please check your internet connection.'
+        : 'Unable to load blog posts. Please try refreshing the page.';
+
+      postsContainer.innerHTML = `
+        <div class="error" role="alert">
+            <h3>⚠️ Unable to Load Posts</h3>
+            <p>${errorMessage}</p>
+            <button onclick="location.reload()" class="btn primary">Refresh Page</button>
+        </div>`;
+    } else {
+      // Show a subtle notification that we're using cached data
+      const notification = document.createElement('div');
+      notification.className = 'cache-notification';
+      notification.innerHTML = '📶 Showing cached posts (connection issues)';
+      notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: var(--neon-pink);
+        color: #000;
+        padding: 8px 16px;
+        border-radius: 8px;
+        font-size: 14px;
+        z-index: 1000;
+        box-shadow: 0 2px 12px rgba(255, 0, 98, 0.3);
+      `;
+      document.body.appendChild(notification);
+      setTimeout(() => notification.remove(), 5000);
+    }
   }
 }
 
-function renderSkeletons(count = 6) {
-  const postsContainer = document.querySelector('.posts');
-  if (!postsContainer) return;
-  postsContainer.innerHTML = Array.from({ length: count }).map(() => `
-    <article class="post skeleton">
-      <div class="image"></div>
-      <div class="line" style="width: 60%"></div>
-      <div class="line" style="width: 40%"></div>
-      <div class="line" style="width: 90%"></div>
-    </article>
-  `).join('');
-}
+// Removed skeleton loading for better performance
 
 // Load posts when the page loads
 document.addEventListener('DOMContentLoaded', () => {
-  renderSkeletons();
   loadBlogPosts();
   const input = document.getElementById('searchInput');
-  const cursorGlow = document.getElementById('cursorGlow');
   if (input) {
     const onInput = debounce((e) => {
       searchQuery = e.target.value || '';
@@ -359,13 +392,61 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 200);
     input.addEventListener('input', onInput);
   }
-  // Label clicks via delegation
+  // Label interactions via delegation
   const labelsContainer = document.getElementById('labels');
   if (labelsContainer) {
+    // Click events
     labelsContainer.addEventListener('click', (e) => {
       const el = e.target.closest('.label');
       if (!el) return;
       filterPosts(el.dataset.tag);
+    });
+
+    // Keyboard navigation
+    labelsContainer.addEventListener('keydown', (e) => {
+      const el = e.target.closest('.label');
+      if (!el) return;
+
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        filterPosts(el.dataset.tag);
+      }
+
+      // Arrow key navigation
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+        e.preventDefault();
+        const labels = Array.from(labelsContainer.querySelectorAll('.label'));
+        const currentIndex = labels.indexOf(el);
+        let nextIndex;
+
+        if (e.key === 'ArrowRight') {
+          nextIndex = currentIndex + 1;
+        } else {
+          nextIndex = currentIndex - 1;
+        }
+
+        if (nextIndex >= 0 && nextIndex < labels.length) {
+          labels[nextIndex].focus();
+        }
+      }
+    });
+  }
+  // Posts interactions via delegation (tags + card click + prefetch)
+  const postsContainer = document.querySelector('.posts');
+  if (postsContainer) {
+    postsContainer.addEventListener('click', (e) => {
+      const tagEl = e.target.closest('.tag');
+      if (tagEl) {
+        e.preventDefault();
+        e.stopPropagation();
+        filterPosts(tagEl.dataset.tag || tagEl.textContent.trim());
+        return;
+      }
+      const postEl = e.target.closest('.post');
+      if (postEl && !e.target.closest('a')) {
+        const link = postEl.querySelector('.read-more');
+        if (link) location.href = link.href;
+      }
     });
   }
   // Keyboard shortcut to focus search
@@ -383,25 +464,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   window.addEventListener('scroll', onScroll, { passive: true });
   backBtn && backBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
-  // Cursor-follow glow (throttled)
-  let lastX = 0, lastY = 0, rafPending = false;
-  window.addEventListener('mousemove', (e) => {
-    if (!cursorGlow) return;
-    lastX = e.clientX; lastY = e.clientY;
-    if (!rafPending) {
-      rafPending = true;
-      requestAnimationFrame(() => {
-        cursorGlow.style.setProperty('--mx', lastX + 'px');
-        cursorGlow.style.setProperty('--my', lastY + 'px');
-        rafPending = false;
-      });
-    }
-  }, { passive: true });
 });
-
-// Set interval to check for updates every 5 minutes
-setInterval(loadBlogPosts, 300000);
 
 // (Replaced by delegated listener on #labels)
 

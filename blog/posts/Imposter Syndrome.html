@@ -38,7 +38,6 @@
           </button>
         </div>
         <div class="header-right">
-          <div class="theme-toggle" id="themeToggle">
             <i class="fas fa-moon"></i>
             <div class="toggle-slider"><div class="slider-icon"></div></div>
             <i class="fas fa-sun"></i>
@@ -145,19 +144,12 @@
 
   <script>
     const body = document.body;
-    const themeToggle = document.getElementById('themeToggle');
     const progress = document.getElementById('progress');
     const tocList = document.getElementById('tocList');
     const cursorGlow = document.getElementById('cursorGlow');
     const tocToggle = document.getElementById('tocToggle');
     const toc = document.querySelector('.toc');
 
-    // Theme toggle
-    if (localStorage.getItem('theme') === 'light') body.classList.add('light-mode');
-    themeToggle.addEventListener('click', () => {
-      body.classList.toggle('light-mode');
-      localStorage.setItem('theme', body.classList.contains('light-mode') ? 'light' : 'dark');
-      showToast(body.classList.contains('light-mode') ? 'Switched to light mode' : 'Switched to dark mode');
     });
 
     // Progress bar

@@ -13,7 +13,9 @@
   <meta name="author" content="Prateek">
   <meta name="description" content="Personal blog by Prateek - thoughts on technology, philosophy, and life">
   <link rel="stylesheet" href="/blog/post.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -37,13 +39,6 @@
             <i class="fas fa-list"></i>
           </button>
         </div>
-        <div class="header-right">
-          <div class="theme-toggle" id="themeToggle">
-            <i class="fas fa-moon"></i>
-            <div class="toggle-slider"><div class="slider-icon"></div></div>
-            <i class="fas fa-sun"></i>
-          </div>
-        </div>
       </div>
       <h1 class="title" id="postTitle">Post Title</h1>
       <div class="meta">
@@ -64,53 +59,15 @@
       </article>
     </div>
 
-    <!-- Social Sharing -->
-    <div class="social-share">
-      <h4>Share this post</h4>
-      <div class="share-buttons">
-        <a href="#" class="share-btn twitter" onclick="shareOnTwitter()">
-          <i class="fab fa-twitter"></i>
-          <span>Twitter</span>
-        </a>
-        <a href="#" class="share-btn linkedin" onclick="shareOnLinkedIn()">
-          <i class="fab fa-linkedin"></i>
-          <span>LinkedIn</span>
-        </a>
-        <a href="#" class="share-btn copy" onclick="copyLink()">
-          <i class="fas fa-link"></i>
-          <span>Copy Link</span>
-        </a>
-      </div>
-    </div>
-
-    <!-- Footer -->
-    <footer class="post-footer">
-      <div class="footer-content">
-        <p>© 2024 Prateek's Blog. Built with ❤️ and cyberpunk aesthetics.</p>
-        <div class="footer-links">
-          <a href="/">Home</a>
-          <a href="#top" onclick="scrollToTop()">Back to Top</a>
-        </div>
-      </div>
-    </footer>
   </div>
 
   <script>
     const body = document.body;
-    const themeToggle = document.getElementById('themeToggle');
     const progress = document.getElementById('progress');
     const tocList = document.getElementById('tocList');
     const cursorGlow = document.getElementById('cursorGlow');
     const tocToggle = document.getElementById('tocToggle');
     const toc = document.querySelector('.toc');
-
-    // Theme toggle
-    if (localStorage.getItem('theme') === 'light') body.classList.add('light-mode');
-    themeToggle.addEventListener('click', () => {
-      body.classList.toggle('light-mode');
-      localStorage.setItem('theme', body.classList.contains('light-mode') ? 'light' : 'dark');
-      showToast(body.classList.contains('light-mode') ? 'Switched to light mode' : 'Switched to dark mode');
-    });
 
     // Progress bar
     const onScroll = () => {
@@ -195,40 +152,9 @@
       }
     });
 
-    // Social sharing functions
-    function shareOnTwitter() {
-      const url = encodeURIComponent(window.location.href);
-      const text = encodeURIComponent(document.title);
-      window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
-    }
-
-    function shareOnLinkedIn() {
-      const url = encodeURIComponent(window.location.href);
-      window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');
-    }
-
-    function copyLink() {
-      navigator.clipboard.writeText(window.location.href).then(() => {
-        showToast('Link copied to clipboard!');
-      });
-    }
-
     // Scroll to top function
     function scrollToTop() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    // Toast notifications
-    function showToast(message) {
-      let toast = document.querySelector('.toast');
-      if (!toast) {
-        toast = document.createElement('div');
-        toast.className = 'toast';
-        document.body.appendChild(toast);
-      }
-      toast.textContent = message;
-      toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 3000);
     }
 
     // Cursor-follow glow
