@@ -23,27 +23,20 @@
     <div class="grid"></div>
     <div class="scan"></div>
     <div class="cursor" id="cursorGlow"></div>
-  </div>
+</div>
 
   <div class="container">
     <header>
       <div class="header-row">
-        <div class="header-left">
-          <a href="/" class="home-button" title="Back to Home (Ctrl/Cmd + H)">
-            <i class="fas fa-home"></i>
+                <div class="header-left">
+          <a href="/" class="home-button" title="Back to Home (Ctrl/Cmd + H)" aria-label="Navigate back to home page">
+            <i class="fas fa-home" aria-hidden="true"></i>
             <span>Home</span>
           </a>
-          <button class="toc-toggle" id="tocToggle" title="Toggle Table of Contents">
-            <i class="fas fa-list"></i>
+          <button class="toc-toggle" id="tocToggle" title="Toggle Table of Contents" aria-label="Toggle table of contents" aria-expanded="false">
+            <i class="fas fa-list" aria-hidden="true"></i>
           </button>
         </div>
-        <div class="header-right">
-            <i class="fas fa-moon"></i>
-            <div class="toggle-slider"><div class="slider-icon"></div></div>
-            <i class="fas fa-sun"></i>
-          </div>
-        </div>
-      </div>
       <h1 class="title" id="postTitle">The Value of Time: Choosing What’s Worth Pursuing in a World of Tradeoffs</h1>
       <div class="meta">
         <span><i class="far fa-calendar"></i> <time id="postDate">February 18, 2025</time></span>
@@ -53,14 +46,16 @@
     </header>
 
     <div class="layout">
-      <aside class="toc">
+            <aside class="toc">
         <h3>On this page</h3>
         <ul id="tocList"></ul>
       </aside>
 
       <article id="postContent">
 
-        <p>In our fast-paced, distraction-laden world, time is our most precious resource. Every moment spent is a choice—a tradeoff between what we could learn, achieve, or simply experience. How do we decide what is worth our time? Should we invest in learning skills that pay off immediately, or is it wise to dabble in knowledge that might someday become useful? This blog explores these questions, drawing inspiration from historical figures, modern technology trends, and the shifting landscape of work in the age of AI.</p>
+        <p>In our fast-paced, distraction-laden world, time is our most precious resource. Every moment spent is a choice—a tradeoff between what we could learn, achieve, or simply experience. How do we decide what is worth our time?</p>
+
+<p>Should we invest in learning skills that pay off immediately, or is it wise to dabble in knowledge that might someday become useful? This blog explores these questions, drawing inspiration from historical figures, modern technology trends, and the shifting landscape of work in the age of AI.</p>
 
 <h3>Lessons from History: Alexander vs. Julius Caesar</h3>
 
@@ -105,22 +100,22 @@
     <div class="social-share">
       <h4>Share this post</h4>
       <div class="share-buttons">
-        <a href="#" class="share-btn twitter" onclick="shareOnTwitter()">
-          <i class="fab fa-twitter"></i>
+        <a href="#" class="share-btn twitter" onclick="shareOnTwitter()" aria-label="Share on Twitter">
+          <i class="fab fa-twitter" aria-hidden="true"></i>
           <span>Twitter</span>
         </a>
-        <a href="#" class="share-btn linkedin" onclick="shareOnLinkedIn()">
-          <i class="fab fa-linkedin"></i>
+        <a href="#" class="share-btn linkedin" onclick="shareOnLinkedIn()" aria-label="Share on LinkedIn">
+          <i class="fab fa-linkedin" aria-hidden="true"></i>
           <span>LinkedIn</span>
         </a>
-        <a href="#" class="share-btn copy" onclick="copyLink()">
-          <i class="fas fa-link"></i>
+        <a href="#" class="share-btn copy" onclick="copyLink()" aria-label="Copy link to clipboard">
+          <i class="fas fa-link" aria-hidden="true"></i>
           <span>Copy Link</span>
         </a>
       </div>
-    </div>
 
     <!-- Footer -->
+</div>
     <footer class="post-footer">
       <div class="footer-content">
         <p>© 2024 Prateek's Blog. Built with ❤️ and cyberpunk aesthetics.</p>
@@ -128,7 +123,6 @@
           <a href="/">Home</a>
           <a href="#top" onclick="scrollToTop()">Back to Top</a>
         </div>
-      </div>
     </footer>
   </div>
 
@@ -138,11 +132,7 @@
     const tocList = document.getElementById('tocList');
     const cursorGlow = document.getElementById('cursorGlow');
     const tocToggle = document.getElementById('tocToggle');
-    const toc = document.querySelector('.toc');
-
-    });
-
-    // Progress bar
+    const toc = document.querySelector('.toc');// Progress bar
     const onScroll = () => {
       const h = document.documentElement;
       const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight);
@@ -156,7 +146,9 @@
       tocToggle.addEventListener('click', () => {
         toc.classList.toggle('visible');
         const icon = tocToggle.querySelector('i');
-        icon.className = toc.classList.contains('visible') ? 'fas fa-times' : 'fas fa-list';
+        const isVisible = toc.classList.contains('visible');
+        icon.className = isVisible ? 'fas fa-times' : 'fas fa-list';
+        tocToggle.setAttribute('aria-expanded', isVisible);
       });
     }
 
