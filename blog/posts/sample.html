@@ -1,26 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Post Title • Prateek's Blog</title>
-  <meta property="og:title" content="Post Title • Prateek's Blog">
-  <meta property="og:description" content="Post Title - Read more on Prateek's Blog">
+  <title>sample • Prateek's Blog</title>
+  <meta property="og:title" content="sample • Prateek's Blog">
+  <meta property="og:description" content="blah blah blah">
   <meta property="og:type" content="article">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Post Title • Prateek's Blog">
-  <meta name="author" content="Prateek">
+  <meta name="twitter:title" content="sample • Prateek's Blog">
+  <meta name="author" content="Prateek Shukla">
   <meta name="description" content="Personal blog by Prateek - thoughts on technology, philosophy, and life">
   <link rel="stylesheet" href="/blog/styles.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-
 <body>
   <div class="progress" id="progress"></div>
-
   <div class="bg-layers" aria-hidden="true">
     <div class="grid"></div>
     <div class="scan"></div>
@@ -29,7 +24,7 @@
   <div class="container">
     <header>
       <div class="header-row">
-                <div class="header-left">
+        <div class="header-left">
           <a href="/" class="home-button" title="Back to Home (Ctrl/Cmd + H)" aria-label="Navigate back to home page">
             <i class="fas fa-home" aria-hidden="true"></i>
             <span>Home</span>
@@ -38,61 +33,57 @@
             <i class="fas fa-list" aria-hidden="true"></i>
           </button>
         </div>
-      <h1 class="title" id="postTitle">Post Title</h1>
-      <div class="meta">
-        <span><i class="far fa-calendar"></i> <time id="postDate">2025-01-01</time></span>
-        <span><i class="far fa-user"></i> <span id="postAuthor">Prateek</span></span>
-        <span><i class="far fa-clock"></i> <span id="postReading">5 min read</span></span>
+        <h1 class="title" id="postTitle">sample</h1>
+        <div class="meta">
+          <span><i class="far fa-calendar"></i> <time id="postDate">2025-09-30</time></span>
+          <span><i class="far fa-user"></i> <span id="postAuthor">Prateek Shukla</span></span>
+          <span><i class="far fa-clock"></i> <span id="postReading">8 min read</span></span>
+        </div>
       </div>
     </header>
 
     <div class="layout">
-            <aside class="toc">
+      <aside class="toc">
         <h3>On this page</h3>
         <ul id="tocList"></ul>
       </aside>
 
       <article id="postContent">
-        <!-- Content will be inserted here -->
+        <h2>Introduction</h2>
+        <p>blah blah blah</p>
+        <p><!-- Write your content here --></p>
       </article>
     </div>
 
-    <!-- Social Sharing -->
     <div class="social-share">
       <h4>Share this post</h4>
       <div class="share-buttons">
         <a href="#" class="share-btn twitter" onclick="shareOnTwitter()" aria-label="Share on Twitter">
-          <i class="fab fa-twitter" aria-hidden="true"></i>
+          <svg width="16" height="16" aria-hidden="true"><use href="#icon-twitter"></use></svg>
           <span>Twitter</span>
         </a>
         <a href="#" class="share-btn linkedin" onclick="shareOnLinkedIn()" aria-label="Share on LinkedIn">
-          <i class="fab fa-linkedin" aria-hidden="true"></i>
+          <svg width="16" height="16" aria-hidden="true"><use href="#icon-linkedin"></use></svg>
           <span>LinkedIn</span>
         </a>
         <a href="#" class="share-btn copy" onclick="copyLink()" aria-label="Copy link to clipboard">
-          <i class="fas fa-link" aria-hidden="true"></i>
+          <svg width="16" height="16" aria-hidden="true"><use href="#icon-link"></use></svg>
           <span>Copy Link</span>
         </a>
       </div>
+    </div>
 
-    <!-- Footer -->
-</div>
     <footer class="post-footer">
       <div class="footer-content">
-        <p>© 2024 Prateek's Blog. Built with ❤️ and cyberpunk aesthetics.</p>
+        <p>© 2025 Prateek's Blog. Built with ❤️ and cyberpunk aesthetics.</p>
         <div class="footer-links">
           <a href="/">Home</a>
           <a href="#top" onclick="scrollToTop()">Back to Top</a>
         </div>
+      </div>
     </footer>
   </div>
 
-  
-
   <script src="/blog/scripts.js"></script>
-
 </body>
-
 </html>
-
-

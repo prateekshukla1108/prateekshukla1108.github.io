@@ -12,17 +12,17 @@
   <meta name="twitter:title" content="Installing and setting up WSL and Python for Fast AI • Prateek's Blog">
   <meta name="author" content="Prateek">
   <meta name="description" content="Personal blog by Prateek - thoughts on technology, philosophy, and life">
-  <link rel="stylesheet" href="/blog/post.css">
+  <link rel="stylesheet" href="/blog/styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 
 <body>
+
   <div class="progress" id="progress"></div>
 
   <div class="bg-layers" aria-hidden="true">
     <div class="grid"></div>
     <div class="scan"></div>
-    <div class="cursor" id="cursorGlow"></div>
 </div>
 
   <div class="container">
@@ -341,15 +341,15 @@ ranger
       <h4>Share this post</h4>
       <div class="share-buttons">
         <a href="#" class="share-btn twitter" onclick="shareOnTwitter()" aria-label="Share on Twitter">
-          <i class="fab fa-twitter" aria-hidden="true"></i>
+          <svg width="16" height="16" aria-hidden="true"><use href="#icon-twitter"></use></svg>
           <span>Twitter</span>
         </a>
         <a href="#" class="share-btn linkedin" onclick="shareOnLinkedIn()" aria-label="Share on LinkedIn">
-          <i class="fab fa-linkedin" aria-hidden="true"></i>
+          <svg width="16" height="16" aria-hidden="true"><use href="#icon-linkedin"></use></svg>
           <span>LinkedIn</span>
         </a>
         <a href="#" class="share-btn copy" onclick="copyLink()" aria-label="Copy link to clipboard">
-          <i class="fas fa-link" aria-hidden="true"></i>
+          <svg width="16" height="16" aria-hidden="true"><use href="#icon-link"></use></svg>
           <span>Copy Link</span>
         </a>
       </div>
@@ -366,162 +366,9 @@ ranger
     </footer>
   </div>
 
-  <script>
-    const body = document.body;
-    const progress = document.getElementById('progress');
-    const tocList = document.getElementById('tocList');
-    const cursorGlow = document.getElementById('cursorGlow');
-    const tocToggle = document.getElementById('tocToggle');
-    const toc = document.querySelector('.toc');// Progress bar
-    const onScroll = () => {
-      const h = document.documentElement;
-      const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight);
-      progress.style.width = (scrolled * 100) + '%';
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
+  <script src="/blog/scripts.js"></script>
 
-    // TOC toggle for mobile
-    if (tocToggle) {
-      tocToggle.addEventListener('click', () => {
-        toc.classList.toggle('visible');
-        const icon = tocToggle.querySelector('i');
-        const isVisible = toc.classList.contains('visible');
-        icon.className = isVisible ? 'fas fa-times' : 'fas fa-list';
-        tocToggle.setAttribute('aria-expanded', isVisible);
-      });
-    }
-
-    // TOC generation
-    function buildTOC() {
-      const headings = document.querySelectorAll('#postContent h2, #postContent h3');
-      tocList.innerHTML = '';
-      const items = [];
-      headings.forEach((h, i) => {
-        const id = h.id || `h-${i}`;
-        h.id = id;
-        const li = document.createElement('li');
-        const a = document.createElement('a');
-        a.href = `#${id}`;
-        a.textContent = h.textContent;
-        if (h.tagName === 'H3') a.style.paddingLeft = '12px';
-        li.appendChild(a);
-        tocList.appendChild(li);
-        items.push({ id, el: h, a });
-      });
-
-      // Active section observer
-      const obs = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          const item = items.find(x => x.el === entry.target);
-          if (!item) return;
-          if (entry.isIntersecting) {
-            items.forEach(i => i.a.classList.remove('active'));
-            item.a.classList.add('active');
-          }
-        });
-      }, { rootMargin: '0px 0px -70% 0px', threshold: 0.1 });
-
-      items.forEach(item => obs.observe(item.el));
-    }
-
-    buildTOC();
-
-    // Keyboard shortcuts
-    document.addEventListener('keydown', (e) => {
-      switch(e.key.toLowerCase()) {
-        case 'h':
-          if (e.ctrlKey || e.metaKey) {
-            e.preventDefault();
-            window.location.href = '/';
-          }
-          break;
-        case 'home':
-          if (e.ctrlKey || e.metaKey) {
-            e.preventDefault();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          }
-          break;
-        case 'end':
-          if (e.ctrlKey || e.metaKey) {
-            e.preventDefault();
-            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-          }
-          break;
-        case 't':
-          if (e.ctrlKey || e.metaKey) {
-            e.preventDefault();
-            tocToggle.click();
-          }
-          break;
-      }
-    });
-
-    // Social sharing functions
-    function shareOnTwitter() {
-      const url = encodeURIComponent(window.location.href);
-      const text = encodeURIComponent(document.title);
-      window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
-    }
-
-    function shareOnLinkedIn() {
-      const url = encodeURIComponent(window.location.href);
-      window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');
-    }
-
-    function copyLink() {
-      navigator.clipboard.writeText(window.location.href).then(() => {
-        showToast('Link copied to clipboard!');
-      });
-    }
-
-    // Scroll to top function
-    function scrollToTop() {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    // Toast notifications
-    function showToast(message) {
-      let toast = document.querySelector('.toast');
-      if (!toast) {
-        toast = document.createElement('div');
-        toast.className = 'toast';
-        document.body.appendChild(toast);
-      }
-      toast.textContent = message;
-      toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 3000);
-    }
-
-    // Cursor-follow glow
-    window.addEventListener('mousemove', (e) => {
-      if (!cursorGlow) return;
-      cursorGlow.style.setProperty('--mx', e.clientX + 'px');
-      cursorGlow.style.setProperty('--my', e.clientY + 'px');
-    }, { passive: true });
-
-    // Smooth loading animation
-    document.addEventListener('DOMContentLoaded', () => {
-      document.body.classList.add('loaded');
-    });
-
-    // Reading time calculation
-    function updateReadingTime() {
-      const wordsPerMinute = 200;
-      const words = document.querySelectorAll('#postContent p, #postContent li');
-      let wordCount = 0;
-      words.forEach(element => {
-        wordCount += element.textContent.split(' ').length;
-      });
-      const readingTime = Math.ceil(wordCount / wordsPerMinute);
-      const readingElement = document.getElementById('postReading');
-      if (readingElement) {
-        readingElement.textContent = `${readingTime} min read`;
-      }
-    }
-
-    updateReadingTime();
-  </script>
+  <script src="/blog/scripts.js"></script>
 
 </body>
 
