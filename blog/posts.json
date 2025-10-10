@@ -6,18 +6,22 @@
       "date": "2024-11-11",
       "author": "Prateek Shukla",
       "readingTime": "5 min read",
-      "tags": ["Others"],
+      "tags": [
+        "Others"
+      ],
       "excerpt": "A simple note for people who want to start their linux journey",
       "coverImage": "/assets/images/linux-sucks.webp"
     },
     {
-      "slug": "Career",
-      "title": "Why I don't like the idea of a *Career*",
-      "date": "2025-03-02",
+      "slug": "Choices",
+      "title": "Are you living your life or is life living you",
+      "date": "2025-10-10",
       "author": "Prateek Shukla",
       "readingTime": "12 min read",
-      "tags": ["Philosophy"],
-      "excerpt": "Why the idea of career sucks",
+      "tags": [
+        "Philosophy"
+      ],
+      "excerpt": "What does it mean to live life in a responsible way",
       "coverImage": "/assets/images/career.webp"
     },
     {
@@ -26,7 +30,9 @@
       "date": "2025-02-18",
       "author": "Prateek Shukla",
       "readingTime": "8 min read",
-      "tags": ["Philosophy"],
+      "tags": [
+        "Philosophy"
+      ],
       "excerpt": "Why to prioritize, Prejudices of modern programmers and finding hope in a World with AI",
       "coverImage": "/assets/images/priority.webp"
     },
@@ -36,28 +42,33 @@
       "date": "2025-01-26",
       "author": "Prateek Shukla",
       "readingTime": "5 min read",
-      "tags": ["Philosophy"],
+      "tags": [
+        "Philosophy"
+      ],
       "excerpt": "I reflect on the irreversible journey of stepping out of the 'Matrix'—a life once filled with simplicity, nostalgia, and shared connections. Awakening to a deeper understanding of myself and the world",
       "coverImage": "/assets/images/Thinker.webp"
     },
-
     {
       "slug": "Imposter Syndrome",
       "title": "Imposter Syndrome: A Growing Plague in Tech Industry",
       "date": "2025-01-12",
       "author": "Prateek Shukla",
       "readingTime": "8 min read",
-      "tags": ["AI"],
+      "tags": [
+        "AI"
+      ],
       "excerpt": "Why is imposter syndrome so dangerous for the tech industry? and how to get out of it",
       "coverImage": "/assets/images/Imposter.webp"
     },
-   {
+    {
       "slug": "AGI",
       "title": "The First days of AGI in human society",
       "date": "2024-12-18",
       "author": "Prateek Shukla",
       "readingTime": "8 min read",
-      "tags": ["AI"],
+      "tags": [
+        "AI"
+      ],
       "excerpt": "AGI emerges subtly in 2028, transforming economics, governance, and human psychology through distributed intelligence that solves complex problems beyond human capability",
       "coverImage": "/assets/images/AGI.webp"
     },
@@ -67,30 +78,33 @@
       "date": "2024-12-23",
       "author": "Prateek Shukla",
       "readingTime": "8 min read",
-      "tags": ["Philosophy"],
+      "tags": [
+        "Philosophy"
+      ],
       "excerpt": "If life is meaningless, then how to make it wonderful?",
       "coverImage": "/assets/images/camus.webp"
     },
-
-
     {
       "slug": "Avoid Burnout",
       "title": "How to avoid burnout while working hardcore remotely",
       "date": "2024-12-08",
       "author": "Prateek Shukla",
       "readingTime": "8 min read",
-      "tags": ["Life"],
+      "tags": [
+        "Life"
+      ],
       "excerpt": "A surviving strategy for working hardcore alone",
       "coverImage": "/assets/images/zarathustra.webp"
     },
-
     {
       "slug": "Free-Spirit",
       "title": "The True Nature of Free Spirits: Analyzing Nietzsche's Vision of Future Philosophers",
       "date": "2024-11-16",
       "author": "Prateek Shukla",
       "readingTime": "8 min read",
-      "tags": ["Philosophy"],
+      "tags": [
+        "Philosophy"
+      ],
       "excerpt": "Nietzsche's Fantasy of Free Spirits and future Philosophers",
       "coverImage": "/assets/images/Free-Spirit.webp"
     },
@@ -100,18 +114,21 @@
       "date": "2024-11-22",
       "author": "Prateek Shukla",
       "readingTime": "10 min read",
-      "tags": ["Philosophy"],
+      "tags": [
+        "Philosophy"
+      ],
       "excerpt": "Nietzsche's thoughts on true independence",
       "coverImage": "/assets/images/heidegger.webp"
     },
-
     {
       "slug": "Test of Independence",
       "title": "Embracing the Test of Independence: A Nietzschean Challenge",
       "date": "2024-11-11",
       "author": "Prateek Shukla",
       "readingTime": "8 min read",
-      "tags": ["Philosophy"],
+      "tags": [
+        "Philosophy"
+      ],
       "excerpt": "Nietzsche's thoughts on true independence",
       "coverImage": "/assets/images/Nietzsche.webp"
     },
@@ -121,10 +138,11 @@
       "date": "2024-11-13",
       "author": "Prateek Shukla",
       "readingTime": "15 min read",
-      "tags": ["AI"],
+      "tags": [
+        "AI"
+      ],
       "excerpt": "How to setup WSL and python to get ready for Fast AI",
       "coverImage": "/assets/images/Python.webp"
     }
   ]
 }
-
